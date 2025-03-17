@@ -9,7 +9,7 @@ public class Author {
     private String name;
     private String surname;
     private String country;
-    private Set<Book> books = new HashSet<>();
+    private Set<Book> books;
 
     public Author() {}
 
@@ -18,6 +18,7 @@ public class Author {
         this.name = name;
         this.surname = surname;
         this.country = country;
+        this.books = books;
     }
 
     public int getId() {

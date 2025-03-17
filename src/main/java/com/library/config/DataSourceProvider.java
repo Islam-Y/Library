@@ -1,5 +1,7 @@
 package com.library.config;
 
+import com.library.exception.ConfigurationFileNotFoundException;
+import com.library.exception.ConfigurationLoadException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
@@ -11,10 +13,12 @@ public class DataSourceProvider {
     private static final String PROPERTIES_FILE = "application.properties";
     private static HikariDataSource dataSource;
 
+    private DataSourceProvider() {}
+
     static {
         try (InputStream input = DataSourceProvider.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
             if (input == null) {
-                throw new RuntimeException("Не найден файл конфигурации: " + PROPERTIES_FILE);
+                throw new ConfigurationFileNotFoundException("Не найден файл конфигурации: " + PROPERTIES_FILE);
             }
 
             Properties properties = new Properties();
@@ -36,7 +40,7 @@ public class DataSourceProvider {
 
             dataSource = new HikariDataSource(config);
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка загрузки конфигурации", e);
+            throw new ConfigurationLoadException("Ошибка загрузки конфигурации", e);
         }
     }
 

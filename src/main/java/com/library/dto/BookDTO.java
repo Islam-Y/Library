@@ -48,4 +48,28 @@ public class BookDTO {
     public Set<Integer> getAuthorIds() {
         return authorIds;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setPublisherId(Integer publisherId) {
+        this.publisherId = publisherId;
+    }
+
+    public void setAuthorIds(Set<Integer> authorIds) {
+        this.authorIds = authorIds;
+    }
 }

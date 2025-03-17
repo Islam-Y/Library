@@ -5,6 +5,7 @@ import com.library.model.Author;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.sql.DataSource;
 
 public class AuthorDAO {
@@ -14,7 +15,7 @@ public class AuthorDAO {
         this.dataSource = dataSource;
     }
 
-    public Author getById(int id) throws SQLException {
+    public Optional<Author> getById(int id) throws SQLException {
         String sql = "SELECT id, name, surname, country FROM authors WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -22,36 +23,25 @@ public class AuthorDAO {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Author author = new Author();
-                    author.setId(rs.getInt("id"));
-                    author.setName(rs.getString("name"));
-                    author.setSurname(rs.getString("surname"));
-                    author.setCountry(rs.getString("country"));
-                    // Если необходимо, можно отдельно загрузить книги автора через BookDAO
-                    return author;
+                    return Optional.of(mapRowToAuthor(rs));
                 }
+                return Optional.empty();
             }
         }
-        return null;
     }
 
     public List<Author> getAll() throws SQLException {
-        List<Author> authors = new ArrayList<>();
         String sql = "SELECT id, name, surname, country FROM authors";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
+            List<Author> authors = new ArrayList<>();
             while (rs.next()) {
-                Author author = new Author();
-                author.setId(rs.getInt("id"));
-                author.setName(rs.getString("name"));
-                author.setSurname(rs.getString("surname"));
-                author.setCountry(rs.getString("country"));
-                authors.add(author);
+                authors.add(mapRowToAuthor(rs));
             }
+            return authors;
         }
-        return authors;
     }
 
     public void create(Author author) throws SQLException {
@@ -59,15 +49,9 @@ public class AuthorDAO {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, author.getName());
-            stmt.setString(2, author.getSurname());
-            stmt.setString(3, author.getCountry());
+            setAuthorParameters(stmt, author);
             stmt.executeUpdate();
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    author.setId(generatedKeys.getInt(1));
-                }
-            }
+            setIdFromGeneratedKeys(stmt, author);
         }
     }
 
@@ -76,9 +60,7 @@ public class AuthorDAO {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, author.getName());
-            stmt.setString(2, author.getSurname());
-            stmt.setString(3, author.getCountry());
+            setAuthorParameters(stmt, author);
             stmt.setInt(4, author.getId());
             stmt.executeUpdate();
         }
@@ -93,4 +75,29 @@ public class AuthorDAO {
             stmt.executeUpdate();
         }
     }
+
+    // region Helper Methods
+    private Author mapRowToAuthor(ResultSet rs) throws SQLException {
+        Author author = new Author();
+        author.setId(rs.getInt("id"));
+        author.setName(rs.getString("name"));
+        author.setSurname(rs.getString("surname"));
+        author.setCountry(rs.getString("country"));
+        return author;
+    }
+
+    private void setAuthorParameters(PreparedStatement stmt, Author author) throws SQLException {
+        stmt.setString(1, author.getName());
+        stmt.setString(2, author.getSurname());
+        stmt.setString(3, author.getCountry());
+    }
+
+    private void setIdFromGeneratedKeys(PreparedStatement stmt, Author author) throws SQLException {
+        try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                author.setId(generatedKeys.getInt(1));
+            }
+        }
+    }
+    // endregion
 }

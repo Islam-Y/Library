@@ -42,4 +42,24 @@ public class AuthorDTO {
     public Set<Integer> getBookIds() {
         return bookIds;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setBookIds(Set<Integer> bookIds) {
+        this.bookIds = bookIds;
+    }
 }

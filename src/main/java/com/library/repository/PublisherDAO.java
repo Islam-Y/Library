@@ -6,6 +6,7 @@ import com.library.model.Publisher;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.sql.DataSource;
 
 public class PublisherDAO {
@@ -15,63 +16,54 @@ public class PublisherDAO {
         this.dataSource = dataSource;
     }
 
-    public Publisher getById(int id) throws SQLException {
+    public Optional<Publisher> getById(int id) throws SQLException {
         String sql = "SELECT id, name FROM publishers WHERE id = ?";
-        Publisher publisher = null;
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
-            try (ResultSet rs = stmt.executeQuery()){
-                if (rs.next()){
-                    publisher = new Publisher();
-                    publisher.setId(rs.getInt("id"));
-                    publisher.setName(rs.getString("name"));
-                    // Можно дополнительно загрузить список книг, опубликованных этим издателем
-                    publisher.setBooks(getBooksForPublisher(rs.getInt("id")));
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Publisher publisher = mapRowToPublisher(rs);
+                    publisher.setBooks(getBooksForPublisher(id));
+                    return Optional.of(publisher);
                 }
+                return Optional.empty();
             }
         }
-        return publisher;
     }
 
     public List<Publisher> getAll() throws SQLException {
-        List<Publisher> publishers = new ArrayList<>();
         String sql = "SELECT id, name FROM publishers";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()){
+             ResultSet rs = stmt.executeQuery()) {
 
-            while (rs.next()){
-                Publisher publisher = new Publisher();
-                publisher.setId(rs.getInt("id"));
-                publisher.setName(rs.getString("name"));
-                publisher.setBooks(getBooksForPublisher(rs.getInt("id")));
+            List<Publisher> publishers = new ArrayList<>();
+            while (rs.next()) {
+                Publisher publisher = mapRowToPublisher(rs);
+                publisher.setBooks(getBooksForPublisher(publisher.getId()));
                 publishers.add(publisher);
             }
+            return publishers;
         }
-        return publishers;
     }
 
     public void create(Publisher publisher) throws SQLException {
         String sql = "INSERT INTO publishers (name) VALUES (?)";
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, publisher.getName());
             stmt.executeUpdate();
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()){
-                if (generatedKeys.next()){
-                    publisher.setId(generatedKeys.getInt(1));
-                }
-            }
+            setIdFromGeneratedKeys(stmt, publisher);
         }
     }
 
     public void update(Publisher publisher) throws SQLException {
         String sql = "UPDATE publishers SET name = ? WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, publisher.getName());
             stmt.setInt(2, publisher.getId());
@@ -82,34 +74,53 @@ public class PublisherDAO {
     public void delete(int id) throws SQLException {
         String sql = "DELETE FROM publishers WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
         }
     }
 
-    // Метод для загрузки книг данного издателя
+    // region Helper Methods
+    private Publisher mapRowToPublisher(ResultSet rs) throws SQLException {
+        Publisher publisher = new Publisher();
+        publisher.setId(rs.getInt("id"));
+        publisher.setName(rs.getString("name"));
+        return publisher;
+    }
+
     private List<Book> getBooksForPublisher(int publisherId) throws SQLException {
-        List<Book> books = new ArrayList<>();
         String sql = "SELECT id, title, published_date, genre FROM books WHERE publisher_id = ?";
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, publisherId);
-            try (ResultSet rs = stmt.executeQuery()){
-                while (rs.next()){
-                    Book book = new Book();
-                    book.setId(rs.getInt("id"));
-                    book.setTitle(rs.getString("title"));
-                    Date publishedDate = rs.getDate("published_date");
-                    book.setPublishedDate(publishedDate != null ? publishedDate.toString() : null);
-                    book.setGenre(rs.getString("genre"));
-                    // Издатель уже известен, поэтому не заполняем его снова
-                    books.add(book);
+            try (ResultSet rs = stmt.executeQuery()) {
+                List<Book> books = new ArrayList<>();
+                while (rs.next()) {
+                    books.add(mapRowToBook(rs));
                 }
+                return books;
             }
         }
-        return books;
     }
+
+    private Book mapRowToBook(ResultSet rs) throws SQLException {
+        Book book = new Book();
+        book.setId(rs.getInt("id"));
+        book.setTitle(rs.getString("title"));
+        Date publishedDate = rs.getDate("published_date");
+        book.setPublishedDate(Optional.ofNullable(publishedDate).map(Date::toString).orElse(null));
+        book.setGenre(rs.getString("genre"));
+        return book;
+    }
+
+    private void setIdFromGeneratedKeys(PreparedStatement stmt, Publisher publisher) throws SQLException {
+        try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                publisher.setId(generatedKeys.getInt(1));
+            }
+        }
+    }
+    // endregion
 }

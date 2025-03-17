@@ -10,8 +10,8 @@ public class Book {
     private String title;
     private String publishedDate;
     private String genre;
-    private Publisher publisher; // OneToMany связь (одна книга -> один издатель)
-    private Set<Author> authors = new HashSet<>();
+    private Publisher publisher;
+    private Set<Author> authors;
 
     public Book() {}
 
@@ -21,6 +21,7 @@ public class Book {
         this.publishedDate = publishedDate;
         this.genre = genre;
         this.publisher = publisher;
+        this.authors = authors;
     }
 
     public int getId() {
