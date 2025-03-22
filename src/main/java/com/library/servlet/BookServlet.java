@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 
 @WebServlet("/books/*")
@@ -71,6 +72,10 @@ public class BookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
             BookDTO book = objectMapper.readValue(req.getReader(), BookDTO.class);
+            // Убедитесь, что коллекции инициализированы
+            if (book.getAuthorIds() == null) {
+                book.setAuthorIds(new HashSet<>());
+            }
             bookService.addBook(book);
             resp.setStatus(HttpServletResponse.SC_CREATED);
         } catch (Exception e) {

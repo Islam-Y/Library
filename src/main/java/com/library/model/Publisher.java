@@ -11,9 +11,10 @@ public class Publisher {
 
     public Publisher() {}
 
-    public Publisher(int id, String name) {
+    public Publisher(int id, String name, List<Book> books) {
         this.id = id;
         this.name = name;
+        this.books = books;
     }
 
     public int getId() {

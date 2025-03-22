@@ -34,7 +34,7 @@ public class BookService {
         try {
             return bookDAO.getById(id)
                     .map(bookMapper::toDTO)
-                    .orElseThrow(() -> new RuntimeException("Книга не найдена"));
+                    .orElseThrow(() -> new BookServiceException("Книга не найдена", new RuntimeException()));
         } catch (SQLException e) {
             throw new BookServiceException("Ошибка при получении книги с ID " + id, e);
 

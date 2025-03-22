@@ -33,7 +33,7 @@ public class PublisherService {
         try {
             return publisherDAO.getById(id)
                     .map(publisherMapper::toDTO)
-                    .orElseThrow(() -> new RuntimeException("Издатель не найден"));
+                    .orElseThrow(() -> new PublisherServiceException("Издатель не найден", new RuntimeException()));
         } catch (SQLException e) {
             throw new PublisherServiceException("Ошибка при получении издателя с ID " + id, e);
         }

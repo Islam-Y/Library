@@ -27,9 +27,6 @@ public interface BookMapper {
 
     @Named("mapAuthorsToAuthorIds")
     static Set<Integer> mapAuthorsToAuthorIds(Set<Author> authors) {
-        if (authors == null) {
-            return null;
-        }
         return authors.stream()
                 .map(Author::getId)
                 .collect(Collectors.toSet());

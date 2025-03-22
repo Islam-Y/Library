@@ -13,10 +13,12 @@ public class AuthorDTO {
     private String country;
     private Set<Integer> bookIds;
 
+    public AuthorDTO() {}
+
     public AuthorDTO(Author author) {
         this.id = author.getId();
         this.name = author.getName();
-        this.surname = author.getName();
+        this.surname = author.getSurname();
         this.country = author.getCountry();
         this.bookIds = author.getBooks().stream()
                 .map(Book::getId)

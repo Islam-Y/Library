@@ -2,6 +2,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.Optional;
 
 import javax.sql.DataSource;
@@ -9,11 +10,9 @@ import javax.sql.DataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -30,7 +29,10 @@ class PublisherDAOTest {
             new PostgreSQLContainer<>("postgres:15")
                     .withDatabaseName("test")
                     .withUsername("test")
-                    .withPassword("test");
+                    .withPassword("test")
+                    .waitingFor(Wait.forLogMessage(".*database system is ready to accept connections.*\\n", 2))
+                    .waitingFor(Wait.forListeningPort())
+                    .withStartupTimeout(Duration.ofSeconds(60));
 
     private PublisherDAO publisherDAO;
     private BookDAO bookDAO;
@@ -38,10 +40,32 @@ class PublisherDAOTest {
 
     @BeforeAll
     static void setup() {
-        Flyway.configure()
-                .dataSource(postgres.getJdbcUrl(), postgres.getUsername(), postgres.getPassword())
-                .load()
-                .migrate();
+        postgres.start();
+
+        // 2. Диагностический вывод параметров подключения
+        System.out.println("JDBC URL: " + postgres.getJdbcUrl());
+        System.out.println("Username: " + postgres.getUsername());
+        System.out.println("Password: " + postgres.getPassword());
+
+        // 3. Настройка Flyway с явным указанием схемы
+        Flyway flyway = Flyway.configure()
+                .dataSource(
+                        postgres.getJdbcUrl(),
+                        postgres.getUsername(),
+                        postgres.getPassword()
+                )
+                .schemas("public") // Явное указание схемы
+                .locations("filesystem:src/main/resources/db/migration") // Абсолютный путь
+                .load();
+
+        // 4. Принудительная очистка и миграция
+        flyway.clean();
+        flyway.migrate();
+
+        System.setProperty("testing", "true");
+        System.setProperty("DB_URL", postgres.getJdbcUrl());
+        System.setProperty("DB_USER", postgres.getUsername());
+        System.setProperty("DB_PASS", postgres.getPassword());
     }
 
     @BeforeEach
@@ -51,6 +75,8 @@ class PublisherDAOTest {
         config.setUsername(postgres.getUsername());
         config.setPassword(postgres.getPassword());
         config.setDriverClassName(postgres.getDriverClassName());
+        config.setMaximumPoolSize(2);
+        config.setConnectionTimeout(3000);
 
         this.dataSource = new HikariDataSource(config);
         this.publisherDAO = new PublisherDAO(dataSource);

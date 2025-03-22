@@ -14,6 +14,8 @@ public class BookDTO {
     private Integer publisherId;
     private Set<Integer> authorIds;
 
+    public BookDTO() {}
+
     public BookDTO(Book book) {
         this.id = book.getId();
         this.title = book.getTitle();

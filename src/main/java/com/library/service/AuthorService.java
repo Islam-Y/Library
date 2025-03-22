@@ -35,11 +35,10 @@ public class AuthorService {
         try {
             return authorDAO.getById(id)
                     .map(authorMapper::toDTO)
-                    .orElseThrow(() -> new RuntimeException("Автор не найден"));
+                    .orElseThrow(() -> new AuthorServiceException("Автор не найден", new RuntimeException()));
         } catch (SQLException e) {
             throw new AuthorServiceException("Ошибка при получении автора с ID " + id, e);
         }
-
     }
 
     public void addAuthor(AuthorDTO authorDTO) {

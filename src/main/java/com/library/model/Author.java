@@ -9,7 +9,7 @@ public class Author {
     private String name;
     private String surname;
     private String country;
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
 
     public Author() {}
 

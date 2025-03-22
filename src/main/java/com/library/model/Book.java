@@ -11,7 +11,7 @@ public class Book {
     private String publishedDate;
     private String genre;
     private Publisher publisher;
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();
 
     public Book() {}
 
