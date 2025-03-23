@@ -1,3 +1,5 @@
+package DAOTest;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Connection;
@@ -49,6 +51,7 @@ class PublisherDAOTest {
 
         // 3. Настройка Flyway с явным указанием схемы
         Flyway flyway = Flyway.configure()
+                .cleanDisabled(false)
                 .dataSource(
                         postgres.getJdbcUrl(),
                         postgres.getUsername(),
@@ -56,6 +59,7 @@ class PublisherDAOTest {
                 )
                 .schemas("public") // Явное указание схемы
                 .locations("filesystem:src/main/resources/db/migration") // Абсолютный путь
+                .baselineOnMigrate(true)
                 .load();
 
         // 4. Принудительная очистка и миграция
@@ -156,10 +160,16 @@ class PublisherDAOTest {
         book.setPublisher(publisher);
         bookDAO.create(book);
 
+        // Удаление издателя
         publisherDAO.delete(publisher.getId());
 
+        // Проверка, что книга осталась, а publisher стал null
         Optional<Book> foundBook = bookDAO.getById(book.getId());
-        assertThat(foundBook).isPresent();
-        assertThat(foundBook.get().getPublisher()).isNull();
+        assertThat(foundBook)
+                .isPresent()
+                .get()
+                .extracting(Book::getPublisher)
+                .isNull();
     }
+
 }

@@ -72,6 +72,14 @@ public class PublisherDAO {
     }
 
     public void delete(int id) throws SQLException {
+        // Обнуляем publisher_id у связанных книг
+        String updateSql = "UPDATE books SET publisher_id = NULL WHERE publisher_id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(updateSql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+
         String sql = "DELETE FROM publishers WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

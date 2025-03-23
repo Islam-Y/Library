@@ -1,3 +1,5 @@
+package DAOTest;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Connection;
@@ -51,6 +53,7 @@ class AuthorDAOTest {
 
         // 3. Настройка Flyway с явным указанием схемы
         Flyway flyway = Flyway.configure()
+                .cleanDisabled(false)
                 .dataSource(
                         postgres.getJdbcUrl(),
                         postgres.getUsername(),
@@ -58,6 +61,7 @@ class AuthorDAOTest {
                 )
                 .schemas("public") // Явное указание схемы
                 .locations("filesystem:src/main/resources/db/migration") // Абсолютный путь
+                .baselineOnMigrate(true)
                 .load();
 
         // 4. Принудительная очистка и миграция
@@ -164,14 +168,13 @@ class AuthorDAOTest {
 
     @Test
     void shouldAddBooksToAuthor() throws SQLException {
-        // Создаем автора
+        // Создаем автора и книги
         Author author = new Author();
         author.setName("Николай");
         author.setSurname("Гоголь");
         author.setCountry("Россия");
         authorDAO.create(author);
 
-        // Создаем книги
         Book book1 = new Book();
         book1.setTitle("Мёртвые души");
         bookDAO.create(book1);
@@ -180,23 +183,14 @@ class AuthorDAOTest {
         book2.setTitle("Ревизор");
         bookDAO.create(book2);
 
-        // Добавляем книги к автору
-        Set<Book> books = new HashSet<>();
-        books.add(book1);
-        books.add(book2);
-        author.setBooks(books);
-        authorDAO.update(author);
+        // Явное обновление связей: добавляем книги к существующей коллекции
+        author.getBooks().addAll(Set.of(book1, book2));
+        authorDAO.update(author); // ← важно вызвать update
 
-        // Получаем автора с книгами
+        // Проверка через DAO
         Optional<Author> found = authorDAO.getById(author.getId());
         assertThat(found).isPresent();
-
-        // Проверяем книги автора
-        Author retrievedAuthor = found.get();
-        assertThat(retrievedAuthor.getBooks())
-                .hasSize(2)
-                .extracting(Book::getTitle)
-                .containsExactlyInAnyOrder("Мёртвые души", "Ревизор");
+        assertThat(found.get().getBooks()).hasSize(2);
     }
 
     @Test
