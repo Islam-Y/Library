@@ -51,12 +51,10 @@ class BookDAOTest {
     static void setup() {
         postgres.start();
 
-        // 2. Диагностический вывод параметров подключения
         System.out.println("JDBC URL: " + postgres.getJdbcUrl());
         System.out.println("Username: " + postgres.getUsername());
         System.out.println("Password: " + postgres.getPassword());
 
-        // 3. Настройка Flyway с явным указанием схемы
         Flyway flyway = Flyway.configure()
                 .cleanDisabled(false)
                 .dataSource(
@@ -64,12 +62,11 @@ class BookDAOTest {
                         postgres.getUsername(),
                         postgres.getPassword()
                 )
-                .schemas("public") // Явное указание схемы
+                .schemas("public")
                 .locations("filesystem:src/main/resources/db/migration") // Абсолютный путь
                 .baselineOnMigrate(true)
                 .load();
 
-        // 4. Принудительная очистка и миграция
         flyway.clean();
         flyway.migrate();
 
@@ -175,13 +172,13 @@ class BookDAOTest {
 
         Book book = new Book();
         book.setTitle("Преступление и наказание");
-        book.setPublisher(publisher); // ← явная привязка издателя
+        book.setPublisher(publisher);
         bookDAO.create(book);
 
         Book retrieved = bookDAO.getById(book.getId()).orElseThrow();
         assertThat(retrieved.getPublisher())
+                .isNotNull()
                 .extracting(Publisher::getName)
                 .isEqualTo("Эксмо");
     }
-
 }

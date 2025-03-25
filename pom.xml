@@ -13,6 +13,13 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <db.url>jdbc:postgresql://localhost:5432/library_db</db.url>
+        <db.user>postgres</db.user>
+        <db.password>1395</db.password>
+
+        <flyway.version>11.4.0</flyway.version>
+        <postgresql.version>42.7.5</postgresql.version>
     </properties>
 
     <build>
@@ -58,7 +65,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>11.4.1</version>
+                <version>11.4.0</version>
                 <configuration>
                     <driver>org.postgresql.Driver</driver>
                     <url>${db.url}</url>
@@ -181,7 +188,7 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
-            <version>11.4.1</version>
+            <version>11.4.0</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -216,8 +223,5 @@
             <version>5.16.1</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
-
 </project>

@@ -8,7 +8,6 @@ import com.library.mapper.BookMapper;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BookService {
     private final BookDAO bookDAO;
@@ -23,7 +22,7 @@ public class BookService {
         try {
             return bookDAO.getAll().stream()
                     .map(bookMapper::toDTO)
-                    .collect(Collectors.toList());
+                    .toList();
         } catch (SQLException e) {
             throw new BookServiceException("Ошибка при получении списка книг", e);
 

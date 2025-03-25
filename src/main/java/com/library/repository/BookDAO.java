@@ -17,15 +17,20 @@ public class BookDAO {
     }
 
     public Optional<Book> getById(int id) throws SQLException {
-        String sql = "SELECT id, title, published_date, publisher_id, genre FROM books WHERE id = ?";
+        String sql = """
+        SELECT b.id, b.title, b.published_date, b.genre, 
+               p.id AS publisher_id, p.name AS publisher_name
+        FROM books b
+        LEFT JOIN publishers p ON b.publisher_id = p.id
+        WHERE b.id = ?
+        """;
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Book book = mapRowToBook(rs);
-                    book.setAuthors(getAuthorsForBook(id));
+                    book.setAuthors(getAuthorsForBook(id)); // Загрузка авторов
                     return Optional.of(book);
                 }
                 return Optional.empty();
@@ -33,8 +38,33 @@ public class BookDAO {
         }
     }
 
+    private Book mapRowToBook(ResultSet rs) throws SQLException {
+        Book book = new Book();
+        book.setId(rs.getInt("id"));
+        book.setTitle(rs.getString("title"));
+        Date publishedDate = rs.getDate("published_date");
+        book.setPublishedDate(publishedDate != null ? publishedDate.toString() : null);
+        book.setGenre(rs.getString("genre"));
+
+        // Загрузка издателя
+        int publisherId = rs.getInt("publisher_id");
+        if (!rs.wasNull()) {
+            Publisher publisher = new Publisher();
+            publisher.setId(publisherId);
+            publisher.setName(rs.getString("publisher_name"));
+            book.setPublisher(publisher);
+        }
+
+        return book;
+    }
+
     public List<Book> getAll() throws SQLException {
-        String sql = "SELECT id, title, published_date, publisher_id, genre FROM books";
+        String sql = """
+        SELECT b.id, b.title, b.published_date, b.genre, 
+               p.id AS publisher_id, p.name AS publisher_name
+        FROM books b
+        LEFT JOIN publishers p ON b.publisher_id = p.id
+        """;
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -81,24 +111,6 @@ public class BookDAO {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         }
-    }
-
-    // region Helper Methods
-    private Book mapRowToBook(ResultSet rs) throws SQLException {
-        Book book = new Book();
-        book.setId(rs.getInt("id"));
-        book.setTitle(rs.getString("title"));
-        Date publishedDate = rs.getDate("published_date");
-        book.setPublishedDate(Optional.ofNullable(publishedDate).map(Date::toString).orElse(null));
-        book.setGenre(rs.getString("genre"));
-
-        int publisherId = rs.getInt("publisher_id");
-        if (publisherId > 0) {
-            Publisher publisher = new Publisher();
-            publisher.setId(publisherId);
-            book.setPublisher(publisher);
-        }
-        return book;
     }
 
     private void setBookParameters(PreparedStatement stmt, Book book) throws SQLException {

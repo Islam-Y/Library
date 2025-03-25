@@ -8,7 +8,6 @@ import com.library.mapper.PublisherMapper;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PublisherService {
     private final PublisherDAO publisherDAO;
@@ -23,7 +22,7 @@ public class PublisherService {
         try {
             return publisherDAO.getAll().stream()
                     .map(publisherMapper::toDTO)
-                    .collect(Collectors.toList());
+                    .toList();
         } catch (SQLException e) {
             throw new PublisherServiceException("Ошибка при получении списка издателей", e);
         }

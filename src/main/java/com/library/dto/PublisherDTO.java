@@ -4,7 +4,6 @@ import com.library.model.Book;
 import com.library.model.Publisher;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PublisherDTO {
     private int id;
@@ -18,7 +17,7 @@ public class PublisherDTO {
        this.name = publisher.getName();
        this.bookIds = publisher.getBooks().stream()
                .map(Book::getId)
-               .collect(Collectors.toList());
+               .toList();
     }
 
     public int getId() {

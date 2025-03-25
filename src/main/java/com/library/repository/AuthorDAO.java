@@ -1,11 +1,10 @@
 package com.library.repository;
 
 import com.library.model.Author;
+import com.library.model.Book;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import javax.sql.DataSource;
 
 public class AuthorDAO {
@@ -23,9 +22,31 @@ public class AuthorDAO {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return Optional.of(mapRowToAuthor(rs));
+                    Author author = mapRowToAuthor(rs);
+                    // Загружаем книги автора
+                    author.setBooks(getBooksByAuthorId(conn, id));
+                    return Optional.of(author);
                 }
                 return Optional.empty();
+            }
+        }
+    }
+
+    private Set<Book> getBooksByAuthorId(Connection conn, int authorId) throws SQLException {
+        String sql = "SELECT b.id, b.title FROM books b " +
+                "INNER JOIN book_author ba ON b.id = ba.book_id " +
+                "WHERE ba.author_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, authorId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                Set<Book> books = new HashSet<>();
+                while (rs.next()) {
+                    Book book = new Book();
+                    book.setId(rs.getInt("id"));
+                    book.setTitle(rs.getString("title"));
+                    books.add(book);
+                }
+                return books;
             }
         }
     }
@@ -59,10 +80,36 @@ public class AuthorDAO {
         String sql = "UPDATE authors SET name = ?, surname = ?, country = ? WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            setAuthorParameters(stmt, author);
+            stmt.setString(1, author.getName());
+            stmt.setString(2, author.getSurname());
+            stmt.setString(3, author.getCountry());
             stmt.setInt(4, author.getId());
             stmt.executeUpdate();
+        }
+
+        // Обновление связей с книгами
+        updateBookAuthors(author);
+    }
+
+    private void updateBookAuthors(Author author) throws SQLException {
+        // Удаляем старые связи
+        String deleteSql = "DELETE FROM book_author WHERE author_id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(deleteSql)) {
+            stmt.setInt(1, author.getId());
+            stmt.executeUpdate();
+        }
+
+        // Добавляем новые связи
+        String insertSql = "INSERT INTO book_author (author_id, book_id) VALUES (?, ?)";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(insertSql)) {
+            for (Book book : author.getBooks()) {
+                stmt.setInt(1, author.getId());
+                stmt.setInt(2, book.getId());
+                stmt.addBatch();
+            }
+            stmt.executeBatch();
         }
     }
 

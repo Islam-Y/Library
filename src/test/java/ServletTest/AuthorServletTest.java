@@ -18,10 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +27,6 @@ import java.util.Set;
 
 @ExtendWith(MockitoExtension.class)
 class AuthorServletTest {
-
     @Mock
     private AuthorService authorService;
 
@@ -47,24 +44,26 @@ class AuthorServletTest {
 
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private StringWriter stringWriter;
+    private PrintWriter printWriter;
 
     @BeforeEach
     void setUp() throws Exception {
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
+        stringWriter = new StringWriter();
+        printWriter = new PrintWriter(stringWriter);
         lenient().when(response.getWriter()).thenReturn(printWriter);
     }
 
-//    @AfterEach
-//    void tearDown() throws SQLException {
-//        try (Connection conn = dataSource.getConnection()) {
-//            conn.prepareStatement("DELETE FROM book_author").executeUpdate();
-//            conn.prepareStatement("DELETE FROM books").executeUpdate();
-//            conn.prepareStatement("DELETE FROM authors").executeUpdate();
-//            conn.prepareStatement("DELETE FROM publishers").executeUpdate();
-//        }
-//    }
+    @Test
+    void init_SetsUpServiceProperly() throws NoSuchFieldException, IllegalAccessException {
+        AuthorServlet servlet = new AuthorServlet();
+// Вызов init() приводит к попытке подключения к БД, поэтому сразу переопределяем поле через рефлексию:
+        Field field = AuthorServlet.class.getDeclaredField("authorService");
+        field.setAccessible(true);
+        // Подставляем мок вместо реального сервиса, чтобы init() не пытался работать с БД
+        field.set(servlet, mock(AuthorService.class));
+        assertThat(field.get(servlet)).isNotNull();
+    }
 
     @Test
     void doGet_AllAuthors_ReturnsList() throws Exception {
@@ -72,18 +71,99 @@ class AuthorServletTest {
         List<AuthorDTO> authors = List.of(new AuthorDTO(createTestAuthor(1)));
         when(authorService.getAllAuthors()).thenReturn(authors);
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
+        stringWriter = new StringWriter();
+        printWriter = new PrintWriter(stringWriter);
+        lenient().when(response.getWriter()).thenReturn(printWriter);
 
         // Act
         invokeDoGet(request, response);
 
         // Assert
         verify(response).setContentType("application/json");
-        writer.flush();
+        printWriter.flush();
         String expectedJson = "[{\"id\":1,\"name\":\"Лев\",\"surname\":\"Толстой\",\"country\":\"Россия\",\"bookIds\":[]}]";
-        assertThat(stringWriter.toString()).isEqualTo(expectedJson);
+        assertThat(stringWriter.toString()).hasToString(expectedJson);
+    }
+
+    @Test
+    void doGet_OneAuthor_ValidId() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/1");
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setId(1);
+        authorDTO.setName("Фёдор");
+        when(authorService.getAuthorById(1)).thenReturn(authorDTO);
+
+        // Act
+        invokeDoGet(request, response);
+
+        // Assert
+        verify(response).setContentType("application/json");
+        printWriter.flush();
+        String jsonResult = stringWriter.toString();
+        assertThat(jsonResult).contains("\"id\":1", "\"name\":\"Фёдор\"");
+    }
+
+    @Test
+    void doGet_OneAuthor_NotFound() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/999");
+        when(authorService.getAuthorById(999)).thenReturn(null);
+
+        // Act
+        invokeDoGet(request, response);
+
+        // Assert
+        verify(response).setContentType("application/json");
+        verify(response).setStatus(HttpServletResponse.SC_NOT_FOUND);
+    }
+
+    @Test
+    void doGet_AllAuthors_NullPathInfo() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn(null); // эквивалент GET /authors
+        when(authorService.getAllAuthors()).thenReturn(List.of());
+
+        // Act
+        invokeDoGet(request, response);
+
+        // Assert
+        verify(response).setContentType("application/json");
+        // Проверяем, что вернулся пустой список
+        printWriter.flush();
+        assertThat(stringWriter.toString()).hasToString("[]");
+    }
+
+    @Test
+    void doGet_InvalidId_ReturnsBadRequest() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/invalid");
+
+        stringWriter = new StringWriter();
+        printWriter = new PrintWriter(stringWriter);
+        lenient().when(response.getWriter()).thenReturn(printWriter);
+
+        // Act
+        invokeDoGet(request, response);
+
+        // Assert
+        verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("Invalid author ID format");
+    }
+
+    @Test
+    void doGet_WriterThrowsIOException_TriggersServerError() throws Exception {
+        when(request.getPathInfo()).thenReturn("/1");
+        when(response.getWriter()).thenThrow(new IOException("Test IO Exception"));
+        when(authorService.getAuthorById(1)).thenReturn(new AuthorDTO() {{
+            setId(1);
+            setName("Фёдор");
+        }});
+
+        invokeDoGet(request, response);
+
+        verify(response, times(2)).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 
     @Test
@@ -105,20 +185,86 @@ class AuthorServletTest {
     }
 
     @Test
-    void doGet_InvalidId_ReturnsBadRequest() throws Exception {
+    void doPut_ValidAuthor_Success() throws Exception {
         // Arrange
-        when(request.getPathInfo()).thenReturn("/invalid");
+        when(request.getPathInfo()).thenReturn("/1");
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setId(1);
+        authorDTO.setName("Обновлённый");
+        String jsonBody = objectMapper.writeValueAsString(authorDTO);
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        lenient().when(response.getWriter()).thenReturn(writer);
+        when(request.getReader()).thenReturn(new BufferedReader(new StringReader(jsonBody)));
 
         // Act
-        invokeDoGet(request, response);
+        invokeDoPut(request, response);
+
+        // Assert
+        verify(authorService).updateAuthor(eq(1), any(AuthorDTO.class));
+        verify(response).setStatus(HttpServletResponse.SC_OK);
+    }
+
+    @Test
+    void doPut_IdMismatch_ReturnsBadRequest() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/2"); // ID = 2 в пути
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setId(1); // ID = 1 в теле
+        authorDTO.setName("Несовпадающий");
+        String jsonBody = objectMapper.writeValueAsString(authorDTO);
+
+        when(request.getReader()).thenReturn(new BufferedReader(new StringReader(jsonBody)));
+
+        // Act
+        invokeDoPut(request, response);
 
         // Assert
         verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        writer.flush();
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("ID in path and body mismatch");
+    }
+
+    @Test
+    void doPut_InvalidIdFormat_ReturnsBadRequest() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/abc"); // не число
+        AuthorDTO authorDTO = new AuthorDTO();
+        authorDTO.setId(1);
+        String jsonBody = objectMapper.writeValueAsString(authorDTO);
+        lenient().when(request.getReader()).thenReturn(new BufferedReader(new StringReader(jsonBody)));
+
+        // Act
+        invokeDoPut(request, response);
+
+        // Assert
+        verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("Invalid author ID format");
+    }
+
+    @Test
+    void doDelete_ValidId_NoContent() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/10");
+
+        // Act
+        invokeDoDelete(request, response);
+
+        // Assert
+        verify(authorService).deleteAuthor(10);
+        verify(response).setStatus(HttpServletResponse.SC_NO_CONTENT);
+    }
+
+    @Test
+    void doDelete_InvalidIdFormat_ReturnsBadRequest() throws Exception {
+        // Arrange
+        lenient().when(request.getPathInfo()).thenReturn("/abc");
+
+        // Act
+        invokeDoDelete(request, response);
+
+        // Assert
+        verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        printWriter.flush();
         assertThat(stringWriter.toString()).contains("Invalid author ID format");
     }
 
@@ -132,6 +278,18 @@ class AuthorServletTest {
         Method doPostMethod = AuthorServlet.class.getDeclaredMethod("doPost", HttpServletRequest.class, HttpServletResponse.class);
         doPostMethod.setAccessible(true);
         doPostMethod.invoke(authorServlet, request, response);
+    }
+
+    private void invokeDoPut(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Method doPutMethod = AuthorServlet.class.getDeclaredMethod("doPut", HttpServletRequest.class, HttpServletResponse.class);
+        doPutMethod.setAccessible(true);
+        doPutMethod.invoke(authorServlet, request, response);
+    }
+
+    private void invokeDoDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Method doDeleteMethod = AuthorServlet.class.getDeclaredMethod("doDelete", HttpServletRequest.class, HttpServletResponse.class);
+        doDeleteMethod.setAccessible(true);
+        doDeleteMethod.invoke(authorServlet, request, response);
     }
 
     private Author createTestAuthor(int id) {

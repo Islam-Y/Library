@@ -90,6 +90,33 @@ class PublisherServiceTest {
     }
 
     @Test
+    void getAllPublishers_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        when(publisherDAO.getAll()).thenThrow(new SQLException("DB error"));
+        assertThatThrownBy(() -> publisherService.getAllPublishers())
+                .isInstanceOf(PublisherServiceException.class)
+                .hasMessageContaining("Ошибка при получении списка издателей");
+    }
+
+    @Test
+    void addPublisher_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        PublisherDTO dto = new PublisherDTO(createTestPublisher(0));
+        doThrow(new SQLException("DB error")).when(publisherDAO).create(any());
+        assertThatThrownBy(() -> publisherService.addPublisher(dto))
+                .isInstanceOf(PublisherServiceException.class)
+                .hasMessageContaining("Ошибка при добавлении издателя");
+    }
+
+    @Test
+    void updatePublisher_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        PublisherDTO dto = new PublisherDTO(createTestPublisher(1));
+        when(publisherDAO.getById(1)).thenReturn(Optional.of(createTestPublisher(1)));
+        doThrow(new SQLException("DB error")).when(publisherDAO).update(any());
+        assertThatThrownBy(() -> publisherService.updatePublisher(1, dto))
+                .isInstanceOf(PublisherServiceException.class)
+                .hasMessageContaining("Ошибка при обновлении издателя с ID 1");
+    }
+
+    @Test
     void addPublisher_ShouldMapAndSave() throws SQLException {
         // Arrange
         Publisher publisher = createTestPublisher(0);
@@ -131,6 +158,22 @@ class PublisherServiceTest {
 
         // Assert
         verify(publisherDAO).delete(1);
+    }
+
+    @Test
+    void deletePublisher_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        doThrow(new SQLException("DB error")).when(publisherDAO).delete(1);
+        assertThatThrownBy(() -> publisherService.deletePublisher(1))
+                .isInstanceOf(PublisherServiceException.class)
+                .hasMessageContaining("Ошибка при удалении издателя");
+    }
+
+    @Test
+    void getPublisherById_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        when(publisherDAO.getById(1)).thenThrow(new SQLException("DB error"));
+        assertThatThrownBy(() -> publisherService.getPublisherById(1))
+                .isInstanceOf(PublisherServiceException.class)
+                .hasMessageContaining("Ошибка при получении издателя");
     }
 
     private Publisher createTestPublisher(int id) {

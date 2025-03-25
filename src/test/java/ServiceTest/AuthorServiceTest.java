@@ -55,6 +55,23 @@ class AuthorServiceTest {
     }
 
     @Test
+    void getAllAuthors_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        when(authorDAO.getAll()).thenThrow(new SQLException("DB error"));
+        assertThatThrownBy(() -> authorService.getAllAuthors())
+                .isInstanceOf(AuthorServiceException.class)
+                .hasMessageContaining("Ошибка при получении списка авторов");
+    }
+
+    @Test
+    void addAuthor_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        AuthorDTO dto = new AuthorDTO(new Author(0, "Иван", "Тургенев", "Россия", Set.of()));
+        doThrow(new SQLException("DB error")).when(authorDAO).create(any());
+        assertThatThrownBy(() -> authorService.addAuthor(dto))
+                .isInstanceOf(AuthorServiceException.class)
+                .hasMessageContaining("Ошибка при добавлении автора");
+    }
+
+    @Test
     void getAuthorById_WhenExists_ShouldReturnDTO() throws SQLException {
         // Arrange
         Author author = new Author(1, "Фёдор", "Достоевский", "Россия", new HashSet<>());
@@ -98,6 +115,32 @@ class AuthorServiceTest {
         // Assert
         verify(authorMapper).toModel(dto);
         verify(authorDAO).create(refEq(author, "id", "books"));
+    }
+
+    @Test
+    void getAuthorById_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        when(authorDAO.getById(1)).thenThrow(new SQLException("DB error"));
+        assertThatThrownBy(() -> authorService.getAuthorById(1))
+                .isInstanceOf(AuthorServiceException.class)
+                .hasMessageContaining("Ошибка при получении автора с ID 1");
+    }
+
+    @Test
+    void updateAuthor_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        AuthorDTO dto = new AuthorDTO(new Author(1, "Новое", "Имя", "Страна", Set.of()));
+        when(authorDAO.getById(1)).thenReturn(Optional.of(new Author()));
+        doThrow(new SQLException("DB error")).when(authorDAO).update(any());
+        assertThatThrownBy(() -> authorService.updateAuthor(1, dto))
+                .isInstanceOf(AuthorServiceException.class)
+                .hasMessageContaining("Ошибка при обновлении автора с ID 1");
+    }
+
+    @Test
+    void deleteAuthor_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        doThrow(new SQLException("DB error")).when(authorDAO).delete(1);
+        assertThatThrownBy(() -> authorService.deleteAuthor(1))
+                .isInstanceOf(AuthorServiceException.class)
+                .hasMessageContaining("Ошибка при удалении автора с ID 1");
     }
 
     @Test

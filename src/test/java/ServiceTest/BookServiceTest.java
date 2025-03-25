@@ -97,6 +97,31 @@ class BookServiceTest {
     }
 
     @Test
+    void getBookById_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        when(bookDAO.getById(1)).thenThrow(new SQLException("DB error"));
+        assertThatThrownBy(() -> bookService.getBookById(1))
+                .isInstanceOf(BookServiceException.class)
+                .hasMessageContaining("Ошибка при получении книги с ID 1");
+    }
+
+    @Test
+    void addBook_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        BookDTO dto = new BookDTO(createTestBook(0));
+        doThrow(new SQLException("DB error")).when(bookDAO).create(any());
+        assertThatThrownBy(() -> bookService.addBook(dto))
+                .isInstanceOf(BookServiceException.class)
+                .hasMessageContaining("Ошибка при добавлении книги");
+    }
+
+    @Test
+    void deleteBook_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        doThrow(new SQLException("DB error")).when(bookDAO).delete(1);
+        assertThatThrownBy(() -> bookService.deleteBook(1))
+                .isInstanceOf(BookServiceException.class)
+                .hasMessageContaining("Ошибка при удалении книги с ID 1");
+    }
+
+    @Test
     void addBook_ShouldMapAndSave() throws SQLException {
         // Arrange
         Book book = createTestBook(0);
@@ -129,6 +154,24 @@ class BookServiceTest {
         verify(bookDAO).update(argThat(b ->
                 b.getTitle().equals("Новое название")
         ));
+    }
+
+    @Test
+    void updateBook_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        BookDTO dto = new BookDTO(createTestBook(1));
+        when(bookDAO.getById(1)).thenReturn(Optional.of(createTestBook(1)));
+        doThrow(new SQLException("DB error")).when(bookDAO).update(any());
+        assertThatThrownBy(() -> bookService.updateBook(1, dto))
+                .isInstanceOf(BookServiceException.class)
+                .hasMessageContaining("Ошибка при обновлении книги");
+    }
+
+    @Test
+    void getAllBooks_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+        when(bookDAO.getAll()).thenThrow(new SQLException("DB error"));
+        assertThatThrownBy(() -> bookService.getAllBooks())
+                .isInstanceOf(BookServiceException.class)
+                .hasMessageContaining("Ошибка при получении списка книг");
     }
 
     @Test

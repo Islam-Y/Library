@@ -8,7 +8,6 @@ import com.library.mapper.AuthorMapper;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AuthorService {
     private final AuthorDAO authorDAO;
@@ -28,7 +27,7 @@ public class AuthorService {
         }
         return authors.stream()
                 .map(authorMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public AuthorDTO getAuthorById(int id) {

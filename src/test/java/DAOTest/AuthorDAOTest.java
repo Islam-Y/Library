@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -168,29 +169,28 @@ class AuthorDAOTest {
 
     @Test
     void shouldAddBooksToAuthor() throws SQLException {
-        // Создаем автора и книги
         Author author = new Author();
-        author.setName("Николай");
-        author.setSurname("Гоголь");
-        author.setCountry("Россия");
+        author.setName("Федор");
+        author.setSurname("Достоевский");
         authorDAO.create(author);
 
+        // Создаем книги
         Book book1 = new Book();
-        book1.setTitle("Мёртвые души");
+        book1.setTitle("Преступление и наказание");
         bookDAO.create(book1);
 
         Book book2 = new Book();
-        book2.setTitle("Ревизор");
+        book2.setTitle("Идиот");
         bookDAO.create(book2);
 
-        // Явное обновление связей: добавляем книги к существующей коллекции
-        author.getBooks().addAll(Set.of(book1, book2));
-        authorDAO.update(author); // ← важно вызвать update
+        author.setBooks(new HashSet<>(Arrays.asList(book1, book2)));
+        authorDAO.update(author); // Важно вызвать update для сохранения связей
 
-        // Проверка через DAO
-        Optional<Author> found = authorDAO.getById(author.getId());
-        assertThat(found).isPresent();
-        assertThat(found.get().getBooks()).hasSize(2);
+        Author retrieved = authorDAO.getById(author.getId()).orElseThrow();
+        assertThat(retrieved.getBooks())
+                .hasSize(2)
+                .extracting(Book::getTitle)
+                .containsExactlyInAnyOrder("Преступление и наказание", "Идиот");
     }
 
     @Test

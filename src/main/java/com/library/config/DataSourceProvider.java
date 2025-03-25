@@ -13,8 +13,13 @@ import java.util.Properties;
 public class DataSourceProvider {
     private static final String PROPERTIES_FILE = "application.properties";
     private static HikariDataSource dataSource;
+    static ClassLoader classLoader = DataSourceProvider.class.getClassLoader();
 
     private DataSourceProvider() {
+    }
+
+    public static String getPropertiesFileName() {
+        return PROPERTIES_FILE;
     }
 
     public static DataSource getDataSource() {
@@ -36,7 +41,7 @@ public class DataSourceProvider {
                 dataSource = new HikariDataSource(config);
                 return;
             }
-            try (InputStream input = DataSourceProvider.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
+            try (InputStream input = classLoader.getResourceAsStream(PROPERTIES_FILE)) {
                 if (input == null) {
                     throw new ConfigurationFileNotFoundException("Не найден файл конфигурации: " + PROPERTIES_FILE);
                 }
@@ -57,6 +62,11 @@ public class DataSourceProvider {
                 config.setMaxLifetime(1800000);
                 config.setConnectionTimeout(10000);
                 config.setPoolName("LibraryHikariPool");
+
+                String initTimeout = properties.getProperty("db.initializationFailTimeout");
+                if (initTimeout != null) {
+                    config.setInitializationFailTimeout(Long.parseLong(initTimeout));
+                }
 
                 dataSource = new HikariDataSource(config);
             } catch (IOException e) {

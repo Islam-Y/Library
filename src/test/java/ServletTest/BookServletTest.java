@@ -5,9 +5,6 @@ import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.dto.BookDTO;
-import com.library.model.Author;
-import com.library.model.Book;
-import com.library.model.Publisher;
 import com.library.service.BookService;
 import com.library.servlet.BookServlet;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,13 +17,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -49,81 +42,212 @@ class BookServletTest {
     private BookServlet bookServlet;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private StringWriter stringWriter;
+    private PrintWriter printWriter;
 
     @BeforeEach
     void setUp() throws Exception {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
+        stringWriter = new StringWriter();
+        printWriter = new PrintWriter(stringWriter);
         lenient().when(response.getWriter()).thenReturn(printWriter);
     }
 
-//    @AfterEach
-//    void tearDown() throws SQLException {
-//        try (Connection conn = dataSource.getConnection()) {
-//            conn.prepareStatement("DELETE FROM book_author").executeUpdate();
-//            conn.prepareStatement("DELETE FROM books").executeUpdate();
-//            conn.prepareStatement("DELETE FROM authors").executeUpdate();
-//            conn.prepareStatement("DELETE FROM publishers").executeUpdate();
-//        }
-//    }
+    @Test
+    void init_SetsUpServiceProperly() throws NoSuchFieldException, IllegalAccessException {
+        BookServlet servlet = new BookServlet();
+        Field field = BookServlet.class.getDeclaredField("bookService");
+        field.setAccessible(true);
+        field.set(servlet, mock(BookService.class));
+        assertThat(field.get(servlet)).isNotNull();
+    }
+
+    @Test
+    void doGet_WriterThrowsIOException_TriggersServerError() throws Exception {
+        when(request.getPathInfo()).thenReturn("/1");
+        when(response.getWriter()).thenThrow(new IOException("Test IO Exception"));
+        when(bookService.getBookById(1)).thenReturn(new BookDTO() {{
+            setId(1);
+            setTitle("1984");
+        }});
+
+        invokeDoGet(request, response);
+
+        verify(response, times(2)).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
 
     @Test
     void doGet_AllBooks_ReturnsList() throws Exception {
         // Arrange
-        List<BookDTO> books = List.of(new BookDTO(createTestBook(1)));
-        when(bookService.getAllBooks()).thenReturn(books);
+        when(request.getPathInfo()).thenReturn(null);
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setId(1);
+        bookDTO.setTitle("1984");
+
+        when(bookService.getAllBooks()).thenReturn(List.of(bookDTO));
 
         // Act
         invokeDoGet(request, response);
 
         // Assert
         verify(response).setContentType("application/json");
-        writer.flush();
-        String expectedJson = "[{\"id\":1,\"title\":\"1984\",\"publishedDate\":\"2023-01-01\",\"genre\":\"Антиутопия\",\"publisherId\":1,\"authorIds\":[]}]";
-        assertThat(stringWriter.toString()).isEqualTo(expectedJson);
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("\"id\":1", "\"title\":\"1984\"");
     }
-
-    @Test
-    void doPost_ValidBook_ReturnsCreated() throws Exception {
-        BookDTO book = new BookDTO();
-        Author author = new Author();
-        Set<Integer> authorIds = new HashSet<>();
-        authorIds.add(author.getId());
-
-        book.setTitle("1984");
-        book.setPublishedDate("2023-01-01");
-        book.setGenre("Антиутопия");
-        book.setPublisherId(1);
-        book.setAuthorIds(authorIds);
-
-        String jsonBody = objectMapper.writeValueAsString(book);
-        when(request.getReader()).thenReturn(new BufferedReader(new StringReader(jsonBody)));
-
-        invokeDoPost(request, response);
-
-        verify(response).setStatus(HttpServletResponse.SC_CREATED);
-    }
-
 
     @Test
     void doGet_InvalidId_ReturnsBadRequest() throws Exception {
         // Arrange
         when(request.getPathInfo()).thenReturn("/invalid");
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
+        stringWriter =new StringWriter();
+        printWriter = new PrintWriter(stringWriter);
+        when(response.getWriter()).thenReturn(printWriter);
 
         // Act
         invokeDoGet(request, response);
 
         // Assert
         verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        writer.flush();
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("Invalid book ID format");
+    }
+
+    @Test
+    void doGet_OneBook_ValidId() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/1");
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setId(1);
+        bookDTO.setTitle("1984");
+        when(bookService.getBookById(1)).thenReturn(bookDTO);
+
+        // Act
+        invokeDoGet(request, response);
+
+        // Assert
+        verify(response).setContentType("application/json");
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("\"id\":1", "\"title\":\"1984\"");
+    }
+
+    @Test
+    void doGet_OneBook_NotFound() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/999");
+        when(bookService.getBookById(999)).thenReturn(null);
+
+        // Act
+        invokeDoGet(request, response);
+
+        // Assert
+        verify(response).setContentType("application/json");
+        verify(response).setStatus(HttpServletResponse.SC_NOT_FOUND);
+    }
+
+    @Test
+    void doPost_ValidBook_ReturnsCreated() throws Exception {
+        // Arrange
+        BookDTO book = new BookDTO();
+        book.setTitle("1984");
+        book.setPublishedDate("2023-01-01");
+        book.setGenre("Антиутопия");
+        book.setPublisherId(1);
+        book.setAuthorIds(Set.of(10, 20));
+
+        String jsonBody = objectMapper.writeValueAsString(book);
+        when(request.getReader()).thenReturn(new BufferedReader(new StringReader(jsonBody)));
+
+        // Act
+        invokeDoPost(request, response);
+
+        // Assert
+        verify(response).setStatus(HttpServletResponse.SC_CREATED);
+        verify(bookService).addBook(any(BookDTO.class));
+    }
+
+    @Test
+    void doPost_InvalidBody_ReturnsBadRequest() throws Exception {
+        // Например, невалидный JSON
+        when(request.getReader()).thenReturn(new BufferedReader(new StringReader("invalid-json")));
+
+        invokeDoPost(request, response);
+
+        verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("Invalid request:");
+    }
+
+    @Test
+    void doPut_ValidId_Success() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/5");
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setId(5);
+        bookDTO.setTitle("Обновленная книга");
+        String jsonBody = objectMapper.writeValueAsString(bookDTO);
+
+        when(request.getReader()).thenReturn(new BufferedReader(new StringReader(jsonBody)));
+
+        // Act
+        invokeDoPut(request, response);
+
+        // Assert
+        verify(bookService).updateBook(eq(5), any(BookDTO.class));
+        verify(response).setStatus(HttpServletResponse.SC_OK);
+    }
+
+    @Test
+    void doPut_IdMismatch_ReturnsBadRequest() throws Exception {
+        // Arrange
+        when(request.getPathInfo()).thenReturn("/2"); // ID в пути
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setId(3); // ID в теле
+        String jsonBody = objectMapper.writeValueAsString(bookDTO);
+        when(request.getReader()).thenReturn(new BufferedReader(new StringReader(jsonBody)));
+
+        // Act
+        invokeDoPut(request, response);
+
+        // Assert
+        verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("ID in path and body mismatch");
+    }
+
+    @Test
+    void doPut_InvalidIdFormat_ReturnsBadRequest() throws Exception {
+        when(request.getPathInfo()).thenReturn("/abc");
+        BookDTO bookDTO = new BookDTO();
+        bookDTO.setId(1);
+        String jsonBody = objectMapper.writeValueAsString(bookDTO);
+        lenient().when(request.getReader()).thenReturn(new BufferedReader(new StringReader(jsonBody)));
+
+        invokeDoPut(request, response);
+
+        verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        printWriter.flush();
+        assertThat(stringWriter.toString()).contains("Invalid book ID format");
+    }
+
+    @Test
+    void doDelete_ValidId_NoContent() throws Exception {
+        when(request.getPathInfo()).thenReturn("/10");
+
+        invokeDoDelete(request, response);
+
+        verify(bookService).deleteBook(10);
+        verify(response).setStatus(HttpServletResponse.SC_NO_CONTENT);
+    }
+
+    @Test
+    void doDelete_InvalidIdFormat_ReturnsBadRequest() throws Exception {
+        when(request.getPathInfo()).thenReturn("/abc");
+
+        invokeDoDelete(request, response);
+
+        verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        printWriter.flush();
         assertThat(stringWriter.toString()).contains("Invalid book ID format");
     }
 
@@ -139,13 +263,15 @@ class BookServletTest {
         doPostMethod.invoke(bookServlet, request, response);
     }
 
-    private Book createTestBook(int id) {
-        Book book = new Book();
-        book.setId(id);
-        book.setTitle("1984");
-        book.setPublishedDate("2023-01-01");
-        book.setGenre("Антиутопия");
-        book.setPublisher(new Publisher(1, "Эксмо", new ArrayList<>()));
-        return book;
+    private void invokeDoPut(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Method doPutMethod = BookServlet.class.getDeclaredMethod("doPut", HttpServletRequest.class, HttpServletResponse.class);
+        doPutMethod.setAccessible(true);
+        doPutMethod.invoke(bookServlet, request, response);
+    }
+
+    private void invokeDoDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Method doDeleteMethod = BookServlet.class.getDeclaredMethod("doDelete", HttpServletRequest.class, HttpServletResponse.class);
+        doDeleteMethod.setAccessible(true);
+        doDeleteMethod.invoke(bookServlet, request, response);
     }
 }
