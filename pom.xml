@@ -67,10 +67,9 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>11.4.0</version>
                 <configuration>
-                    <driver>org.postgresql.Driver</driver>
-                    <url>${db.url}</url>
-                    <user>${db.user}</user>
-                    <password>${db.password}</password>
+                    <configFiles>
+                        <configFile>src/main/resources/flyway.properties</configFile>
+                    </configFiles>
                 </configuration>
                 <dependencies>
                     <dependency>
