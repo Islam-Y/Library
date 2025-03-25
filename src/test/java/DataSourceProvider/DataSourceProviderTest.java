@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import com.library.config.DataSourceProvider;
@@ -28,6 +30,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 @Disabled
 @Testcontainers
 @ExtendWith(MockitoExtension.class)
@@ -35,28 +38,28 @@ class DataSourceProviderTest {
 
     @Container
     private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
-//            .withDatabaseName("test_db")
-//            .withUsername("test")
-//            .withPassword("test")
-//            .withEnv("POSTGRES_HOST_AUTH_METHOD", "trust")
-//            .withEnv("POSTGRES_USER", "test")
-//            .withEnv("POSTGRES_PASSWORD", "test");
             .withDatabaseName("test_db")
-            .withUsername("test")
-            .withPassword("test");
-
+            .withUsername("test_user")
+            .withPassword("test_pass")
+            .withInitScript("init.sql");
 
     @BeforeAll
     static void setup() {
-        System.clearProperty("DB_URL");
-        System.clearProperty("DB_USER");
-        System.clearProperty("DB_PASS");
+        postgres.withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("POSTGRES")));
 
         System.setProperty("testing", "true");
         System.setProperty("DB_URL", postgres.getJdbcUrl());
         System.setProperty("DB_USER", postgres.getUsername());
         System.setProperty("DB_PASS", postgres.getPassword());
         System.setProperty("DB_DRIVER", "org.postgresql.Driver");
+
+        // Принудительная переинициализация
+        try {
+            setStaticField(DataSourceProvider.class, "dataSource", null);
+            setStaticField(DataSourceProvider.class, "classLoader", DataSourceProvider.class.getClassLoader());
+        } catch (Exception e) {
+            throw new RuntimeException("Init failed", e);
+        }
     }
 
     @AfterEach
@@ -72,11 +75,22 @@ class DataSourceProviderTest {
     @Test
     void shouldProvideWorkingDataSource() throws SQLException {
         DataSource dataSource = DataSourceProvider.getDataSource();
+
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            assertThat(connection.isValid(1)).isTrue();
-            statement.execute("CREATE TABLE IF NOT EXISTS test (id SERIAL PRIMARY KEY)");
-            assertThat(statement.executeUpdate("INSERT INTO test DEFAULT VALUES")).isEqualTo(1);
+
+            // Проверка создания временной таблицы
+            statement.execute("CREATE TEMPORARY TABLE test_temp (id INT)");
+
+            // Основной тест
+            statement.execute("""
+            CREATE TABLE IF NOT EXISTS test (
+                id SERIAL PRIMARY KEY,
+                created_at TIMESTAMP DEFAULT NOW()
+            )""");
+
+            assertThat(statement.executeUpdate("INSERT INTO test DEFAULT VALUES"))
+                    .isEqualTo(1);
         }
     }
 
