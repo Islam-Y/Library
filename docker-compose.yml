@@ -21,7 +21,7 @@ services:
       - app-network
 
   db:
-    image: postgres:15
+    image: postgres:17
     container_name: postgres_db
     environment:
       POSTGRES_DB: library_db

@@ -34,10 +34,10 @@ public class DataSourceProvider {
             String testing = System.getProperty("testing");
             if (testing != null && testing.equals("true")) {
                 HikariConfig config = new HikariConfig();
-                config.setJdbcUrl(System.getProperty("DB_URL"));
-                config.setUsername(System.getProperty("DB_USER"));
-                config.setPassword(System.getProperty("DB_PASS"));
-                config.setDriverClassName("org.postgresql.Driver");
+                config.setJdbcUrl(System.getProperty("db.url"));
+                config.setUsername(System.getProperty("db.user"));
+                config.setPassword(System.getProperty("db.password"));
+                config.setDriverClassName("db.driver");
                 dataSource = new HikariDataSource(config);
                 return;
             }
