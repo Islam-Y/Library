@@ -10,12 +10,17 @@ import com.library.model.Author;
 import com.library.model.Book;
 import com.library.repository.AuthorDAO;
 import com.library.service.AuthorService;
+import com.library.config.DataSourceProvider;
+import com.library.service.Fabric;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.sql.DataSource;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
@@ -31,8 +36,31 @@ class AuthorServiceTest {
     @Mock
     private AuthorMapper authorMapper;
 
+    @Mock
+    private DataSourceProvider dataSourceProvider;
+
+    @Mock
+    private DataSource dataSource;
+
     @InjectMocks
     private AuthorService authorService;
+
+    @BeforeEach
+    void init() {
+        // Настраиваем мок DataSourceProvider
+        when(dataSourceProvider.getDataSource()).thenReturn(dataSource);
+
+        authorDAO = new AuthorDAO();
+        authorService = Fabric.getAuthorService();
+
+        try {
+            Field authorDaoField = AuthorService.class.getDeclaredField("authorDAO");
+            authorDaoField.setAccessible(true);
+            authorDaoField.set(authorService, authorDAO);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to inject mock AuthorDAO", e);
+        }
+    }
 
     @Test
     void getAllAuthors_ShouldReturnList() throws SQLException {

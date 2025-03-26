@@ -13,9 +13,9 @@ public class PublisherService {
     private final PublisherDAO publisherDAO;
     private final PublisherMapper publisherMapper;
 
-    public PublisherService(PublisherDAO publisherDAO, PublisherMapper publisherMapper) {
-        this.publisherDAO = publisherDAO;
-        this.publisherMapper = publisherMapper;
+    PublisherService() {
+        this.publisherDAO = new PublisherDAO();
+        this.publisherMapper = PublisherMapper.INSTANCE;
     }
 
     public List<PublisherDTO> getAllPublishers() {

@@ -1,5 +1,6 @@
 package com.library.repository;
 
+import com.library.config.DataSourceProvider;
 import com.library.model.Author;
 import com.library.model.Book;
 import com.library.model.Publisher;
@@ -12,8 +13,8 @@ import javax.sql.DataSource;
 public class BookDAO {
     private final DataSource dataSource;
 
-    public BookDAO(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public BookDAO() {
+        this.dataSource = DataSourceProvider.getDataSource();
     }
 
     public Optional<Book> getById(int id) throws SQLException {

@@ -1,18 +1,17 @@
 package com.library.servlet;
 
-import com.library.config.DataSourceProvider;
 import com.library.dto.AuthorDTO;
 import com.library.repository.AuthorDAO;
 import com.library.mapper.AuthorMapper;
 import com.library.service.AuthorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.library.service.Fabric;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,14 +30,11 @@ public class AuthorServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        DataSource dataSource = DataSourceProvider.getDataSource();
-        AuthorDAO authorDAO = new AuthorDAO(dataSource);
-        AuthorMapper authorMapper = AuthorMapper.INSTANCE;
-        this.authorService = new AuthorService(authorDAO, authorMapper);
+        this.authorService = Fabric.getAuthorService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String pathInfo = req.getPathInfo();
         resp.setContentType("application/json");
 
@@ -82,7 +78,7 @@ public class AuthorServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp){
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) {
         try {
             String pathInfo = req.getPathInfo();
             if (pathInfo == null || pathInfo.equals("/")) {

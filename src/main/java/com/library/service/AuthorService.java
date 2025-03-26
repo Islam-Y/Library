@@ -13,9 +13,9 @@ public class AuthorService {
     private final AuthorDAO authorDAO;
     private final AuthorMapper authorMapper;
 
-    public AuthorService(AuthorDAO authorDAO, AuthorMapper authorMapper) {
-        this.authorDAO = authorDAO;
-        this.authorMapper = authorMapper;
+    AuthorService() {
+        this.authorMapper = AuthorMapper.INSTANCE;
+        this.authorDAO = new AuthorDAO();
     }
 
     public List<AuthorDTO> getAllAuthors() {

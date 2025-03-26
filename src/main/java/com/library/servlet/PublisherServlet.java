@@ -1,9 +1,9 @@
 package com.library.servlet;
 
-import com.library.config.DataSourceProvider;
 import com.library.dto.PublisherDTO;
 import com.library.mapper.PublisherMapper;
 import com.library.repository.PublisherDAO;
+import com.library.service.Fabric;
 import com.library.service.PublisherService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 
@@ -30,10 +29,7 @@ public class PublisherServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        DataSource dataSource = DataSourceProvider.getDataSource();
-        PublisherDAO publisherDAO = new PublisherDAO(dataSource);
-        PublisherMapper publisherMapper = PublisherMapper.INSTANCE;
-        this.publisherService = new PublisherService(publisherDAO, publisherMapper);
+        this.publisherService = Fabric.getPublisherService();
     }
 
     @Override

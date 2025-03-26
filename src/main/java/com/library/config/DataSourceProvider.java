@@ -37,7 +37,7 @@ public class DataSourceProvider {
                 config.setJdbcUrl(System.getProperty("db.url"));
                 config.setUsername(System.getProperty("db.user"));
                 config.setPassword(System.getProperty("db.password"));
-                config.setDriverClassName("db.driver");
+                config.setDriverClassName("org.postgresql.Driver");
                 dataSource = new HikariDataSource(config);
                 return;
             }

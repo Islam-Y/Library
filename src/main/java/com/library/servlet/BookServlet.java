@@ -1,18 +1,17 @@
 package com.library.servlet;
 
-import com.library.config.DataSourceProvider;
 import com.library.dto.BookDTO;
 import com.library.mapper.BookMapper;
 import com.library.repository.BookDAO;
 import com.library.service.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.library.service.Fabric;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -31,10 +30,7 @@ public class BookServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        DataSource dataSource = DataSourceProvider.getDataSource();
-        BookDAO bookDAO = new BookDAO(dataSource);
-        BookMapper bookMapper = BookMapper.INSTANCE;
-        this.bookService = new BookService(bookDAO, bookMapper);
+        this.bookService = Fabric.getBookService();
     }
 
     @Override

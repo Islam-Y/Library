@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <db.url>jdbc:postgresql://localhost:5432/library_db</db.url>
-        <db.user>postgres</db.user>
+        <db.user>library_app</db.user>
         <db.password>1395</db.password>
 
         <flyway.version>11.4.0</flyway.version>

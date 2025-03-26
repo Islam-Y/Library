@@ -78,13 +78,13 @@ class PublisherDAOTest {
         config.setJdbcUrl(postgres.getJdbcUrl());
         config.setUsername(postgres.getUsername());
         config.setPassword(postgres.getPassword());
-        config.setDriverClassName(postgres.getDriverClassName());
+        config.setDriverClassName("org.postgresql.Driver");
         config.setMaximumPoolSize(2);
         config.setConnectionTimeout(3000);
 
         this.dataSource = new HikariDataSource(config);
-        this.publisherDAO = new PublisherDAO(dataSource);
-        this.bookDAO = new BookDAO(dataSource);
+        this.publisherDAO = new PublisherDAO();
+        this.bookDAO = new BookDAO();
     }
 
     @AfterEach

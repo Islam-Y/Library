@@ -122,3 +122,396 @@
 2025-03-26 08:04:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Starting...
 2025-03-26 08:04:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection org.postgresql.jdbc.PgConnection@4873d4cb
 2025-03-26 08:04:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Start completed.
+2025-03-26 13:17:49 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 13:17:49 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 13:17:49 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 13:17:50 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 13:17:51 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 13:17:51 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 13:17:51 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 13:17:51 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Pulling docker image: testcontainers/ryuk:0.11.0. Please be patient; this may take some time but only needs to be done once.
+2025-03-26 13:17:57 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Starting to pull image
+2025-03-26 13:17:57 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Pulling image layers:  0 pending,  0 downloaded,  0 extracted, (0 bytes/0 bytes)
+2025-03-26 13:18:00 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Pulling image layers:  2 pending,  1 downloaded,  0 extracted, (1 MB/? MB)
+2025-03-26 13:18:03 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Pulling image layers:  1 pending,  2 downloaded,  0 extracted, (10 MB/? MB)
+2025-03-26 13:18:03 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Pulling image layers:  0 pending,  3 downloaded,  0 extracted, (10 MB/10 MB)
+2025-03-26 13:18:04 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Pulling image layers:  0 pending,  3 downloaded,  1 extracted, (10 MB/10 MB)
+2025-03-26 13:18:05 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Pulling image layers:  0 pending,  3 downloaded,  2 extracted, (10 MB/10 MB)
+2025-03-26 13:18:05 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Pulling image layers:  0 pending,  3 downloaded,  3 extracted, (10 MB/10 MB)
+2025-03-26 13:18:05 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Image testcontainers/ryuk:0.11.0 pull took PT13.7374889S
+2025-03-26 13:18:05 [docker-java-stream-1714078115] INFO  tc.testcontainers/ryuk:0.11.0 - Pull complete. 3 layers, pulled in 8s (downloaded 10 MB at 1 MB/s)
+2025-03-26 13:18:05 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 13:18:06 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: 0ef5d3ed2a2f25d9fc5c1d31b59381caec5f325b5b274d0a15c35c822d9fe952
+2025-03-26 13:18:07 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT1.9551199S
+2025-03-26 13:18:07 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 13:18:07 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 13:18:07 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 13:18:07 [main] INFO  tc.postgres:15 - Pulling docker image: postgres:15. Please be patient; this may take some time but only needs to be done once.
+2025-03-26 13:18:11 [docker-java-stream-538210680] INFO  tc.postgres:15 - Starting to pull image
+2025-03-26 13:18:11 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  0 pending,  0 downloaded,  0 extracted, (0 bytes/0 bytes)
+2025-03-26 13:18:13 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers: 13 pending,  1 downloaded,  0 extracted, (1 KB/? MB)
+2025-03-26 13:18:16 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers: 12 pending,  2 downloaded,  0 extracted, (7 MB/? MB)
+2025-03-26 13:18:21 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers: 11 pending,  3 downloaded,  0 extracted, (17 MB/? MB)
+2025-03-26 13:18:26 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers: 10 pending,  4 downloaded,  0 extracted, (28 MB/? MB)
+2025-03-26 13:18:27 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  9 pending,  5 downloaded,  0 extracted, (31 MB/? MB)
+2025-03-26 13:18:28 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  8 pending,  6 downloaded,  0 extracted, (32 MB/? MB)
+2025-03-26 13:18:28 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  7 pending,  7 downloaded,  0 extracted, (33 MB/? MB)
+2025-03-26 13:18:29 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  6 pending,  8 downloaded,  0 extracted, (35 MB/? MB)
+2025-03-26 13:18:32 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  5 pending,  9 downloaded,  0 extracted, (40 MB/? MB)
+2025-03-26 13:18:33 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  4 pending, 10 downloaded,  0 extracted, (44 MB/? MB)
+2025-03-26 13:18:33 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  3 pending, 11 downloaded,  0 extracted, (45 MB/? MB)
+2025-03-26 13:18:34 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  2 pending, 12 downloaded,  0 extracted, (46 MB/? MB)
+2025-03-26 13:18:35 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  0 extracted, (46 MB/? MB)
+2025-03-26 13:18:37 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  1 extracted, (52 MB/? MB)
+2025-03-26 13:18:37 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  2 extracted, (52 MB/? MB)
+2025-03-26 13:18:38 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  3 extracted, (53 MB/? MB)
+2025-03-26 13:18:38 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  4 extracted, (53 MB/? MB)
+2025-03-26 13:18:39 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  5 extracted, (56 MB/? MB)
+2025-03-26 13:18:39 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  6 extracted, (56 MB/? MB)
+2025-03-26 13:18:39 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  7 extracted, (56 MB/? MB)
+2025-03-26 13:18:40 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  1 pending, 13 downloaded,  8 extracted, (57 MB/? MB)
+2025-03-26 13:19:20 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  0 pending, 14 downloaded,  8 extracted, (145 MB/146 MB)
+2025-03-26 13:19:29 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  0 pending, 14 downloaded,  9 extracted, (146 MB/146 MB)
+2025-03-26 13:19:30 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  0 pending, 14 downloaded, 10 extracted, (146 MB/146 MB)
+2025-03-26 13:19:30 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  0 pending, 14 downloaded, 11 extracted, (146 MB/146 MB)
+2025-03-26 13:19:30 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  0 pending, 14 downloaded, 12 extracted, (146 MB/146 MB)
+2025-03-26 13:19:30 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  0 pending, 14 downloaded, 13 extracted, (146 MB/146 MB)
+2025-03-26 13:19:30 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pulling image layers:  0 pending, 14 downloaded, 14 extracted, (146 MB/146 MB)
+2025-03-26 13:19:30 [docker-java-stream-538210680] INFO  tc.postgres:15 - Pull complete. 14 layers, pulled in 79s (downloaded 146 MB at 1 MB/s)
+2025-03-26 13:19:30 [main] INFO  tc.postgres:15 - Image postgres:15 pull took PT1M22.8205819S
+2025-03-26 13:19:30 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 13:19:30 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 15af535cbbf04efc07f13bf632176125b993417da4012aa5bfd9031973b971e2
+2025-03-26 13:19:32 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.5765677S
+2025-03-26 13:19:32 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:2143/test?loggerLevel=OFF)
+2025-03-26 13:19:35 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:2143/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 13:19:35 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:19:35 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.004s)
+2025-03-26 13:19:35 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.068s)
+2025-03-26 13:19:35 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.042s)
+2025-03-26 13:19:35 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:19:35 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:19:35 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.280s)
+2025-03-26 13:19:35 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 13:19:35 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 13:19:35 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 13:19:36 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 13:19:36 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 13:19:36 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 13:19:36 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.057s)
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@74534564
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 13:19:36 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@1bf8ea44
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-26 13:19:36 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@3f6bfcbe
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-26 13:19:36 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@12dcfa6a
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+2025-03-26 13:19:36 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@7f6b3f4c
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+2025-03-26 13:19:36 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Starting...
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@63f1d374
+2025-03-26 13:19:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Start completed.
+2025-03-26 13:19:36 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:38 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 13:19:38 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: c3c6ae59d7d361f3f56cb9c09c28a6eb3841ac8cde61391ad4e28e126f5afd03
+2025-03-26 13:19:40 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.3671417S
+2025-03-26 13:19:40 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:2183/test?loggerLevel=OFF)
+2025-03-26 13:19:40 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:2183/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 13:19:40 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:19:40 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:19:40 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.034s)
+2025-03-26 13:19:40 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.024s)
+2025-03-26 13:19:40 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:19:40 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:19:40 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.008s)
+2025-03-26 13:19:40 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 13:19:40 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 13:19:40 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 13:19:40 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 13:19:40 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 13:19:40 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 13:19:40 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.037s)
+2025-03-26 13:19:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Starting...
+2025-03-26 13:19:40 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@635f4be1
+2025-03-26 13:19:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Start completed.
+2025-03-26 13:19:40 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Starting...
+2025-03-26 13:19:40 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-8 - Added connection org.postgresql.jdbc.PgConnection@22edca96
+2025-03-26 13:19:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Start completed.
+2025-03-26 13:19:40 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Starting...
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-9 - Added connection org.postgresql.jdbc.PgConnection@f64f47a
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Start completed.
+2025-03-26 13:19:41 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Starting...
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-10 - Added connection org.postgresql.jdbc.PgConnection@30c0993e
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Start completed.
+2025-03-26 13:19:41 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Starting...
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-11 - Added connection org.postgresql.jdbc.PgConnection@66008321
+2025-03-26 13:19:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Start completed.
+2025-03-26 13:19:41 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:42 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 13:19:42 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 3b42ec5977ef047c872e4076f97f2f42c9499e5aaaf4845c57e0b8b12e7f56ed
+2025-03-26 13:19:44 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.3595979S
+2025-03-26 13:19:44 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:2227/test?loggerLevel=OFF)
+2025-03-26 13:19:44 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:2227/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 13:19:44 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:19:44 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:19:44 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.026s)
+2025-03-26 13:19:44 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.023s)
+2025-03-26 13:19:44 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:19:44 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:19:44 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.006s)
+2025-03-26 13:19:44 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 13:19:44 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 13:19:44 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 13:19:44 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 13:19:44 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 13:19:44 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 13:19:44 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.030s)
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Starting...
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-12 - Added connection org.postgresql.jdbc.PgConnection@340b7fca
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Start completed.
+2025-03-26 13:19:44 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Starting...
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-13 - Added connection org.postgresql.jdbc.PgConnection@7c1a5092
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Start completed.
+2025-03-26 13:19:44 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-14 - Starting...
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-14 - Added connection org.postgresql.jdbc.PgConnection@5546a9e0
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-14 - Start completed.
+2025-03-26 13:19:44 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Starting...
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Added connection org.postgresql.jdbc.PgConnection@39e3da5a
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Start completed.
+2025-03-26 13:19:44 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Starting...
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection org.postgresql.jdbc.PgConnection@d7ce31c
+2025-03-26 13:19:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Start completed.
+2025-03-26 13:19:44 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:49 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:50 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:52 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:19:52 [main] ERROR com.zaxxer.hikari.HikariConfig - Failed to load driver class db.driver from HikariConfig class classloader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
+2025-03-26 13:57:18 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 13:57:18 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 13:57:18 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 13:57:19 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 13:57:20 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 13:57:20 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 13:57:20 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 13:57:20 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 13:57:22 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: a96b415000c9651c14444a494c5d2193af55ac18c11b82185264f1fb9c084bc2
+2025-03-26 13:57:23 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT3.1483396S
+2025-03-26 13:57:23 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 13:57:23 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 13:57:23 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 13:57:23 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 13:57:24 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 7a0c2d683d8819c5ced8ed44e99507f10ab9fecc6fff8838646f7b94b8650cad
+2025-03-26 13:57:28 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT4.3089015S
+2025-03-26 13:57:28 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:3997/test?loggerLevel=OFF)
+2025-03-26 13:57:29 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:3997/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 13:57:29 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:57:29 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.001s)
+2025-03-26 13:57:29 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.030s)
+2025-03-26 13:57:29 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.020s)
+2025-03-26 13:57:29 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:57:29 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:57:29 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.029s)
+2025-03-26 13:57:29 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 13:57:29 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 13:57:29 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 13:57:29 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 13:57:29 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 13:57:30 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 13:57:30 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.042s)
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@15db4dc
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 13:57:30 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-2 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@2715b3ea
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-26 13:57:30 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-4 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@67d8e214
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+2025-03-26 13:57:30 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-6 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Starting...
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@6d398593
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Start completed.
+2025-03-26 13:57:30 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-8 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Starting...
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-9 - Added connection org.postgresql.jdbc.PgConnection@40f88929
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Start completed.
+2025-03-26 13:57:30 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-10 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Starting...
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-11 - Added connection org.postgresql.jdbc.PgConnection@3c2b7322
+2025-03-26 13:57:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Start completed.
+2025-03-26 13:57:30 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-12 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:31 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 13:57:31 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: f6e09c10e368b89e044412013a4f371e5f917f8ebedf4b56ca14df90eba5a7f0
+2025-03-26 13:57:33 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.3329112S
+2025-03-26 13:57:33 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:4077/test?loggerLevel=OFF)
+2025-03-26 13:57:33 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:4077/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 13:57:33 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:57:33 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:57:34 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.023s)
+2025-03-26 13:57:34 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.018s)
+2025-03-26 13:57:34 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:57:34 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:57:34 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.005s)
+2025-03-26 13:57:34 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 13:57:34 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 13:57:34 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 13:57:34 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 13:57:34 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 13:57:34 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 13:57:34 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.027s)
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Starting...
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-13 - Added connection org.postgresql.jdbc.PgConnection@76a41af0
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Start completed.
+2025-03-26 13:57:34 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-14 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Starting...
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Added connection org.postgresql.jdbc.PgConnection@78f2cab9
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Start completed.
+2025-03-26 13:57:34 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-16 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-17 - Starting...
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-17 - Added connection org.postgresql.jdbc.PgConnection@536d153b
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-17 - Start completed.
+2025-03-26 13:57:34 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-18 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-19 - Starting...
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-19 - Added connection org.postgresql.jdbc.PgConnection@34949460
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-19 - Start completed.
+2025-03-26 13:57:34 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-20 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-21 - Starting...
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-21 - Added connection org.postgresql.jdbc.PgConnection@74a46f81
+2025-03-26 13:57:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-21 - Start completed.
+2025-03-26 13:57:34 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-22 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:35 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 13:57:35 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 302fb44af0164ee7c4f698930b160afe11edf286a60576836eb1bc07a01e9ed7
+2025-03-26 13:57:38 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT3.1439937S
+2025-03-26 13:57:38 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:4127/test?loggerLevel=OFF)
+2025-03-26 13:57:38 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:4127/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 13:57:38 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:57:38 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:57:38 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.024s)
+2025-03-26 13:57:38 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.019s)
+2025-03-26 13:57:38 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 13:57:38 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 13:57:38 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.006s)
+2025-03-26 13:57:38 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 13:57:38 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 13:57:38 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 13:57:38 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 13:57:38 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 13:57:38 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 13:57:38 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.027s)
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-23 - Starting...
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-23 - Added connection org.postgresql.jdbc.PgConnection@14fed48e
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-23 - Start completed.
+2025-03-26 13:57:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-24 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Starting...
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-25 - Added connection org.postgresql.jdbc.PgConnection@23c3f787
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Start completed.
+2025-03-26 13:57:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-26 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-27 - Starting...
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-27 - Added connection org.postgresql.jdbc.PgConnection@7cfc2a08
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-27 - Start completed.
+2025-03-26 13:57:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-28 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-29 - Starting...
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-29 - Added connection org.postgresql.jdbc.PgConnection@43b1fdb7
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-29 - Start completed.
+2025-03-26 13:57:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-30 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-31 - Starting...
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-31 - Added connection org.postgresql.jdbc.PgConnection@1aae50f9
+2025-03-26 13:57:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-31 - Start completed.
+2025-03-26 13:57:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-32 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-33 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-34 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-35 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-36 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-37 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-38 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-39 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-40 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-41 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-42 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-43 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-44 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-45 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-46 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-47 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-48 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-49 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-50 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-51 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-52 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-53 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:42 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-54 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-55 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-56 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-57 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-58 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-59 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-60 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-61 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-62 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-63 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-64 - jdbcUrl is required with driverClassName.
+2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-65 - jdbcUrl is required with driverClassName.

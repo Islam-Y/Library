@@ -3,20 +3,25 @@ package ServiceTest;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import com.library.config.DataSourceProvider;
 import com.library.dto.PublisherDTO;
 import com.library.exception.PublisherServiceException;
 import com.library.mapper.PublisherMapper;
 import com.library.model.Book;
 import com.library.model.Publisher;
-import com.library.repository.BookDAO;
 import com.library.repository.PublisherDAO;
+import com.library.service.AuthorService;
+import com.library.service.Fabric;
 import com.library.service.PublisherService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.sql.DataSource;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -27,13 +32,33 @@ class PublisherServiceTest {
     private PublisherDAO publisherDAO;
 
     @Mock
-    private BookDAO bookDAO;
+    private DataSourceProvider dataSourceProvider;
+
+    @Mock
+    private DataSource dataSource;
 
     @Mock
     private PublisherMapper publisherMapper;
 
     @InjectMocks
     private PublisherService publisherService;
+
+    @BeforeEach
+    void init() {
+        // Настраиваем мок DataSourceProvider
+        when(dataSourceProvider.getDataSource()).thenReturn(dataSource);
+
+        publisherDAO = new PublisherDAO();
+        publisherService = Fabric.getPublisherService();
+
+        try {
+            Field authorDaoField = AuthorService.class.getDeclaredField("authorDAO");
+            authorDaoField.setAccessible(true);
+            authorDaoField.set(publisherService, publisherDAO);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to inject mock AuthorDAO", e);
+        }
+    }
 
     @Test
     void getAllPublishers_ShouldReturnList() throws SQLException {

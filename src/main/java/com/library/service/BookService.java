@@ -13,9 +13,9 @@ public class BookService {
     private final BookDAO bookDAO;
     private final BookMapper bookMapper;
 
-    public BookService(BookDAO bookDAO, BookMapper bookMapper) {
-        this.bookDAO = bookDAO;
-        this.bookMapper = bookMapper;
+    BookService() {
+        this.bookMapper = BookMapper.INSTANCE;
+        this.bookDAO = new BookDAO();
     }
 
     public List<BookDTO> getAllBooks() {

@@ -84,14 +84,14 @@ class AuthorDAOTest {
         config.setJdbcUrl(postgres.getJdbcUrl());
         config.setUsername(postgres.getUsername());
         config.setPassword(postgres.getPassword());
-        config.setDriverClassName(postgres.getDriverClassName());
+        config.setDriverClassName("org.postgresql.Driver");
         config.setMaximumPoolSize(2);
         config.setConnectionTimeout(3000);
 
         // Создаем DataSource
         this.dataSource = new HikariDataSource(config);
-        this.authorDAO = new AuthorDAO(dataSource);
-        this.bookDAO = new BookDAO(dataSource); // Инициализация BookDAO для тестирования связей
+        this.authorDAO = new AuthorDAO();
+        this.bookDAO = new BookDAO();
     }
 
     @AfterEach

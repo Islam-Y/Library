@@ -3,22 +3,26 @@ package ServiceTest;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import com.library.config.DataSourceProvider;
 import com.library.dto.BookDTO;
 import com.library.exception.BookServiceException;
 import com.library.mapper.BookMapper;
 import com.library.model.Author;
 import com.library.model.Book;
 import com.library.model.Publisher;
-import com.library.repository.AuthorDAO;
 import com.library.repository.BookDAO;
-import com.library.repository.PublisherDAO;
+import com.library.service.AuthorService;
 import com.library.service.BookService;
+import com.library.service.Fabric;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.sql.DataSource;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
@@ -30,16 +34,33 @@ class BookServiceTest {
     private BookDAO bookDAO;
 
     @Mock
-    private AuthorDAO authorDAO;
+    private DataSourceProvider dataSourceProvider;
 
     @Mock
-    private PublisherDAO publisherDAO;
+    private DataSource dataSource;
 
     @Mock
     private BookMapper bookMapper;
 
     @InjectMocks
     private BookService bookService;
+
+    @BeforeEach
+    void init() {
+        // Настраиваем мок DataSourceProvider
+        when(dataSourceProvider.getDataSource()).thenReturn(dataSource);
+
+        bookDAO = new BookDAO();
+        bookService = Fabric.getBookService();
+
+        try {
+            Field authorDaoField = AuthorService.class.getDeclaredField("authorDAO");
+            authorDaoField.setAccessible(true);
+            authorDaoField.set(bookService, bookDAO);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to inject mock AuthorDAO", e);
+        }
+    }
 
     @Test
     void getAllBooks_ShouldReturnList() throws SQLException {
