@@ -18,6 +18,15 @@ public class BookService {
         this.bookDAO = new BookDAO();
     }
 
+    private BookService(BookDAO bookDAO, BookMapper mapper) {
+        this.bookDAO = bookDAO;
+        this.bookMapper = mapper;
+    }
+
+    public static BookService forTest(BookDAO bookDAO, BookMapper bookMapper) {
+        return new BookService(bookDAO, bookMapper);
+    }
+
     public List<BookDTO> getAllBooks() {
         try {
             return bookDAO.getAll().stream()
@@ -41,21 +50,27 @@ public class BookService {
     }
 
     public void addBook(BookDTO bookDTO) {
-        Book book = bookMapper.toModel(bookDTO);
         try {
+            if (bookDTO.getTitle() == null || bookDTO.getTitle().isEmpty()) {
+                throw new IllegalArgumentException("Название книги обязательно");
+            }
+
+            Book book = bookMapper.toModel(bookDTO);
             bookDAO.create(book);
         } catch (SQLException e) {
+            // Анализ кода ошибки SQL
+            if (e.getErrorCode() == 23503) {
+                throw new BookServiceException("Ошибка связей: автор или издатель не найден", e);
+            }
             throw new BookServiceException("Ошибка при добавлении книги", e);
-
         }
-
     }
 
     public void updateBook(int id, BookDTO bookDTO) {
         Book existingBook = null;
         try {
             existingBook = bookDAO.getById(id)
-                    .orElseThrow(() -> new RuntimeException("Книга не найдена"));
+                    .orElseThrow(() -> new BookServiceException("Книга не найдена", new RuntimeException()));
             existingBook.setTitle(bookDTO.getTitle());
             existingBook.setPublishedDate(bookDTO.getPublishedDate());
             bookDAO.update(existingBook);

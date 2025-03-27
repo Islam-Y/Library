@@ -31,76 +31,56 @@ class AuthorDAOTest {
 
     @Container
     private static PostgreSQLContainer<?> postgres =
-            new PostgreSQLContainer<>("postgres:15")
+            new PostgreSQLContainer<>("postgres:14")
                     .withDatabaseName("test")
                     .withUsername("test")
                     .withPassword("test")
+
                     .waitingFor(Wait.forLogMessage(".*database system is ready to accept connections.*\\n", 2))
                     .waitingFor(Wait.forListeningPort())
                     .withStartupTimeout(Duration.ofSeconds(60));
 
     private AuthorDAO authorDAO;
     private BookDAO bookDAO;
-    private DataSource dataSource;
+    private static DataSource dataSource;
 
     @BeforeAll
     static void setup() {
         postgres.start();
 
-        // 2. Диагностический вывод параметров подключения
-        System.out.println("JDBC URL: " + postgres.getJdbcUrl());
-        System.out.println("Username: " + postgres.getUsername());
-        System.out.println("Password: " + postgres.getPassword());
-
-        // 3. Настройка Flyway с явным указанием схемы
-        Flyway flyway = Flyway.configure()
-                .cleanDisabled(false)
-                .dataSource(
-                        postgres.getJdbcUrl(),
-                        postgres.getUsername(),
-                        postgres.getPassword()
-                )
-                .schemas("public") // Явное указание схемы
-                .locations("filesystem:src/main/resources/db/migration") // Абсолютный путь
-                .baselineOnMigrate(true)
-                .load();
-
-        // 4. Принудительная очистка и миграция
-        flyway.clean();
-        flyway.migrate();
-
-        System.setProperty("testing", "true");
-        System.setProperty("DB_URL", postgres.getJdbcUrl());
-        System.setProperty("DB_USER", postgres.getUsername());
-        System.setProperty("DB_PASS", postgres.getPassword());
-
-
-    }
-
-    @BeforeEach
-    void init() {
-        // Настройка HikariCP
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(postgres.getJdbcUrl());
         config.setUsername(postgres.getUsername());
         config.setPassword(postgres.getPassword());
-        config.setDriverClassName("org.postgresql.Driver");
+        config.setDriverClassName(postgres.getDriverClassName());
         config.setMaximumPoolSize(2);
         config.setConnectionTimeout(3000);
 
-        // Создаем DataSource
-        this.dataSource = new HikariDataSource(config);
-        this.authorDAO = new AuthorDAO();
-        this.bookDAO = new BookDAO();
+        dataSource = new HikariDataSource(config);
+
+        Flyway flyway = Flyway.configure()
+                .dataSource(dataSource)
+                .schemas("public")
+                .locations("filesystem:src/main/resources/db/migration")
+                .baselineOnMigrate(true)
+                .load();
+
+        flyway.repair();
+        flyway.migrate();
+    }
+
+    @BeforeEach
+    void init() {
+        this.authorDAO = AuthorDAO.forTests(dataSource);
+        this.bookDAO = BookDAO.forTests(dataSource);
     }
 
     @AfterEach
     void tearDown() throws SQLException {
-        // Очищаем данные после каждого теста
         try (Connection conn = dataSource.getConnection()) {
-            conn.prepareStatement("DELETE FROM book_author").executeUpdate(); // Очистка связей
-            conn.prepareStatement("DELETE FROM books").executeUpdate(); // Очистка книг
-            conn.prepareStatement("DELETE FROM authors").executeUpdate(); // Очистка авторов
+            conn.prepareStatement("DELETE FROM book_author").executeUpdate();
+            conn.prepareStatement("DELETE FROM books").executeUpdate();
+            conn.prepareStatement("DELETE FROM authors").executeUpdate();
         }
     }
 

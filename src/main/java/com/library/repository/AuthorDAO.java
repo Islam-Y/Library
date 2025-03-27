@@ -15,6 +15,14 @@ public class AuthorDAO {
         this.dataSource = DataSourceProvider.getDataSource();
     }
 
+    private AuthorDAO(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    public static AuthorDAO forTests(DataSource dataSource) {
+        return new AuthorDAO(dataSource);
+    }
+
     public Optional<Author> getById(int id) throws SQLException {
         String sql = "SELECT id, name, surname, country FROM authors WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
@@ -88,12 +96,10 @@ public class AuthorDAO {
             stmt.executeUpdate();
         }
 
-        // Обновление связей с книгами
         updateBookAuthors(author);
     }
 
-    private void updateBookAuthors(Author author) throws SQLException {
-        // Удаляем старые связи
+    public void updateBookAuthors(Author author) throws SQLException {
         String deleteSql = "DELETE FROM book_author WHERE author_id = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(deleteSql)) {

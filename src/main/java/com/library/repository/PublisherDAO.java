@@ -17,6 +17,14 @@ public class PublisherDAO {
         this.dataSource = DataSourceProvider.getDataSource();
     }
 
+    private PublisherDAO(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    public static PublisherDAO forTests(DataSource dataSource) {
+        return new PublisherDAO(dataSource);
+    }
+
     public Optional<Publisher> getById(int id) throws SQLException {
         String sql = "SELECT id, name FROM publishers WHERE id = ?";
         try (Connection conn = dataSource.getConnection();

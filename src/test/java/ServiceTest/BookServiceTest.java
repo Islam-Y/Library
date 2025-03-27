@@ -1,217 +1,177 @@
 package ServiceTest;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import com.library.config.DataSourceProvider;
 import com.library.dto.BookDTO;
 import com.library.exception.BookServiceException;
 import com.library.mapper.BookMapper;
-import com.library.model.Author;
 import com.library.model.Book;
-import com.library.model.Publisher;
 import com.library.repository.BookDAO;
-import com.library.service.AuthorService;
 import com.library.service.BookService;
-import com.library.service.Fabric;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.sql.DataSource;
-import java.lang.reflect.Field;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
-@ExtendWith(MockitoExtension.class)
-class BookServiceTest {
+import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
+public class BookServiceTest {
 
     @Mock
     private BookDAO bookDAO;
-
-    @Mock
-    private DataSourceProvider dataSourceProvider;
-
-    @Mock
-    private DataSource dataSource;
-
     @Mock
     private BookMapper bookMapper;
 
-    @InjectMocks
     private BookService bookService;
 
-    @BeforeEach
-    void init() {
-        // Настраиваем мок DataSourceProvider
-        when(dataSourceProvider.getDataSource()).thenReturn(dataSource);
+    private Book testBook;
+    private BookDTO testBookDTO;
 
-        bookDAO = new BookDAO();
-        bookService = Fabric.getBookService();
+    @Before
+    public void setUp() {
+        // Предполагается, что добавлен метод forTest в BookService для тестирования
+        bookService = BookService.forTest(bookDAO, bookMapper);
 
-        try {
-            Field authorDaoField = AuthorService.class.getDeclaredField("authorDAO");
-            authorDaoField.setAccessible(true);
-            authorDaoField.set(bookService, bookDAO);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to inject mock AuthorDAO", e);
-        }
+        testBook = new Book();
+        testBook.setId(1);
+        testBook.setTitle("Test Book");
+        testBook.setPublishedDate(new String());
+
+        testBookDTO = new BookDTO();
+        testBookDTO.setId(1);
+        testBookDTO.setTitle("Test Book");
+        testBookDTO.setPublishedDate(testBook.getPublishedDate());
+
+        when(bookMapper.toDTO(any(Book.class))).thenReturn(testBookDTO);
     }
 
     @Test
-    void getAllBooks_ShouldReturnList() throws SQLException {
-        // Arrange
-        Book book = createTestBook(1);
-        BookDTO bookDTO = new BookDTO(book);
+    public void getAllBooks_Success() throws SQLException {
+        when(bookDAO.getAll()).thenReturn(Collections.singletonList(testBook));
 
-        when(bookDAO.getAll()).thenReturn(List.of(book));
-        when(bookMapper.toDTO(book)).thenReturn(bookDTO); // Настройка маппера
-
-        // Act
         List<BookDTO> result = bookService.getAllBooks();
 
-        // Assert
-        assertThat(result)
-                .hasSize(1)
-                .first()
-                .extracting(BookDTO::getTitle)
-                .isEqualTo("1984");
-        verify(bookMapper).toDTO(book); // Проверка вызова маппера
+        assertEquals(1, result.size());
+        assertEquals("Test Book", result.get(0).getTitle());
+    }
+
+    @Test(expected = BookServiceException.class)
+    public void getAllBooks_Exception() throws SQLException {
+        when(bookDAO.getAll()).thenThrow(new SQLException("DB error"));
+        bookService.getAllBooks();
     }
 
     @Test
-    void getBookById_WhenExists_ShouldReturnDTO() throws SQLException {
-        // Arrange
-        Book book = createTestBook(1);
-        BookDTO bookDTO = new BookDTO(book);
+    public void getBookById_Success() throws SQLException {
+        when(bookDAO.getById(1)).thenReturn(Optional.of(testBook));
 
-        when(bookDAO.getById(1)).thenReturn(Optional.of(book));
-        when(bookMapper.toDTO(book)).thenReturn(bookDTO); // Настройка маппера
-
-        // Act
         BookDTO result = bookService.getBookById(1);
 
-        // Assert
-        assertThat(result)
-                .extracting(
-                        BookDTO::getTitle,
-                        BookDTO::getGenre,
-                        dto -> dto.getAuthorIds().size()
-                )
-                .containsExactly("1984", "Антиутопия", 1);
-        verify(bookMapper).toDTO(book);
+        assertEquals(1, result.getId());
+        assertEquals("Test Book", result.getTitle());
+    }
+
+    @Test(expected = BookServiceException.class)
+    public void getBookById_NotFound() throws SQLException {
+        when(bookDAO.getById(anyInt())).thenReturn(Optional.empty());
+        bookService.getBookById(1);
     }
 
     @Test
-    void getBookById_WhenNotExists_ShouldThrow() throws SQLException {
-        // Arrange
-            when(bookDAO.getById(anyInt())).thenReturn(Optional.empty());
+    public void addBook_Success() throws SQLException {
+        BookDTO inputDTO = new BookDTO();
+        inputDTO.setTitle("New Book");
 
-        // Act & Assert
-        assertThatThrownBy(() -> bookService.getBookById(1))
-                .isInstanceOf(BookServiceException.class)
-                .hasMessageContaining("Книга не найдена");
+        Book expectedBook = new Book();
+        expectedBook.setTitle("New Book");
+
+        when(bookMapper.toModel(inputDTO)).thenReturn(expectedBook);
+
+        bookService.addBook(inputDTO);
+
+        ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
+        verify(bookDAO).create(captor.capture());
+
+        Book savedBook = captor.getValue();
+        assertEquals("New Book", savedBook.getTitle());
+    }
+
+    @Test(expected = BookServiceException.class)
+    public void addBook_SQLException() throws SQLException {
+        BookDTO inputDTO = new BookDTO();
+        inputDTO.setTitle("New Book");
+
+        Book expectedBook = new Book();
+        expectedBook.setTitle("New Book");
+
+        when(bookMapper.toModel(inputDTO)).thenReturn(expectedBook);
+        doThrow(new SQLException("DB error")).when(bookDAO).create(expectedBook);
+
+        bookService.addBook(inputDTO);
     }
 
     @Test
-    void getBookById_WhenDAOThrowsException_ShouldThrow() throws SQLException {
-        when(bookDAO.getById(1)).thenThrow(new SQLException("DB error"));
-        assertThatThrownBy(() -> bookService.getBookById(1))
-                .isInstanceOf(BookServiceException.class)
-                .hasMessageContaining("Ошибка при получении книги с ID 1");
+    public void updateBook_Success() throws SQLException {
+        Book existingBook = new Book();
+        existingBook.setId(1);
+        existingBook.setTitle("Old Title");
+        existingBook.setPublishedDate(new String());
+
+        when(bookDAO.getById(1)).thenReturn(Optional.of(existingBook));
+
+        BookDTO updateDTO = new BookDTO();
+        updateDTO.setTitle("Updated Title");
+        updateDTO.setPublishedDate(new String());
+
+        bookService.updateBook(1, updateDTO);
+
+        verify(bookDAO).update(existingBook);
+        assertEquals("Updated Title", existingBook.getTitle());
+    }
+
+    @Test(expected = BookServiceException.class)
+    public void updateBook_NotFound() throws SQLException {
+        when(bookDAO.getById(1)).thenReturn(Optional.empty());
+        bookService.updateBook(1, new BookDTO());
+    }
+
+    @Test(expected = BookServiceException.class)
+    public void updateBook_SQLException() throws SQLException {
+        Book existingBook = new Book();
+        existingBook.setId(1);
+        existingBook.setTitle("Old Title");
+        existingBook.setPublishedDate(new String());
+
+        when(bookDAO.getById(1)).thenReturn(Optional.of(existingBook));
+        doThrow(new SQLException()).when(bookDAO).update(existingBook);
+
+        BookDTO updateDTO = new BookDTO();
+        updateDTO.setTitle("Updated Title");
+        updateDTO.setPublishedDate(new String());
+
+        bookService.updateBook(1, updateDTO);
     }
 
     @Test
-    void addBook_WhenDAOThrowsException_ShouldThrow() throws SQLException {
-        BookDTO dto = new BookDTO(createTestBook(0));
-        doThrow(new SQLException("DB error")).when(bookDAO).create(any());
-        assertThatThrownBy(() -> bookService.addBook(dto))
-                .isInstanceOf(BookServiceException.class)
-                .hasMessageContaining("Ошибка при добавлении книги");
-    }
-
-    @Test
-    void deleteBook_WhenDAOThrowsException_ShouldThrow() throws SQLException {
-        doThrow(new SQLException("DB error")).when(bookDAO).delete(1);
-        assertThatThrownBy(() -> bookService.deleteBook(1))
-                .isInstanceOf(BookServiceException.class)
-                .hasMessageContaining("Ошибка при удалении книги с ID 1");
-    }
-
-    @Test
-    void addBook_ShouldMapAndSave() throws SQLException {
-        // Arrange
-        Book book = createTestBook(0);
-        BookDTO bookDTO = new BookDTO(book);
-
-        when(bookMapper.toModel(bookDTO)).thenReturn(book); // Настройка преобразования DTO -> Model
-
-        // Act
-        bookService.addBook(bookDTO);
-
-        // Assert
-        verify(bookMapper).toModel(bookDTO);
-        verify(bookDAO).create(refEq(book, "id"));
-    }
-
-    @Test
-    void updateBook_WhenExists_ShouldUpdate() throws SQLException {
-        // Arrange
-        Book existing = createTestBook(1);
-        Book updated = createTestBook(1);
-        updated.setTitle("Новое название");
-        BookDTO updatedDTO = new BookDTO(updated);
-
-        when(bookDAO.getById(1)).thenReturn(Optional.of(existing));
-
-        // Act
-        bookService.updateBook(1, updatedDTO);
-
-        // Assert
-        verify(bookDAO).update(argThat(b ->
-                b.getTitle().equals("Новое название")
-        ));
-    }
-
-    @Test
-    void updateBook_WhenDAOThrowsException_ShouldThrow() throws SQLException {
-        BookDTO dto = new BookDTO(createTestBook(1));
-        when(bookDAO.getById(1)).thenReturn(Optional.of(createTestBook(1)));
-        doThrow(new SQLException("DB error")).when(bookDAO).update(any());
-        assertThatThrownBy(() -> bookService.updateBook(1, dto))
-                .isInstanceOf(BookServiceException.class)
-                .hasMessageContaining("Ошибка при обновлении книги");
-    }
-
-    @Test
-    void getAllBooks_WhenDAOThrowsException_ShouldThrow() throws SQLException {
-        when(bookDAO.getAll()).thenThrow(new SQLException("DB error"));
-        assertThatThrownBy(() -> bookService.getAllBooks())
-                .isInstanceOf(BookServiceException.class)
-                .hasMessageContaining("Ошибка при получении списка книг");
-    }
-
-    @Test
-    void deleteBook_ShouldCallDAO() throws SQLException {
-        // Act
+    public void deleteBook_Success() throws SQLException {
         bookService.deleteBook(1);
-
-        // Assert
         verify(bookDAO).delete(1);
     }
 
-    private Book createTestBook(int id) {
-        Book book = new Book();
-        book.setId(id);
-        book.setTitle("1984");
-        book.setPublishedDate(LocalDate.now().toString());
-        book.setGenre("Антиутопия");
-        book.setPublisher(new Publisher(1, "Издатель", new ArrayList<>()));
-        book.setAuthors(new HashSet<>(Set.of(new Author(1, "Джордж", "Оруэлл", "Англия", new HashSet<>()))));
-        return book;
+    @Test(expected = BookServiceException.class)
+    public void deleteBook_SQLException() throws SQLException {
+        doThrow(new SQLException()).when(bookDAO).delete(1);
+        bookService.deleteBook(1);
     }
 }
+

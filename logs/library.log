@@ -515,3 +515,1187 @@
 2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-63 - jdbcUrl is required with driverClassName.
 2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-64 - jdbcUrl is required with driverClassName.
 2025-03-26 13:57:43 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-65 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:04 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 16:40:04 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 16:40:04 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 16:40:04 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 16:40:05 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 16:40:05 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 16:40:05 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 16:40:05 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 16:40:07 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: 6d5f2be8ad4109826249df368089f7fe83aef8552e3a0b8c34f68ecefa1c61a8
+2025-03-26 16:40:09 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT3.0691096S
+2025-03-26 16:40:09 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 16:40:09 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 16:40:09 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 16:40:09 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 16:40:09 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 39d850b54cdf1a9d15fb4b3396c4c97147a4ea2f197adbbbeca9978a46215685
+2025-03-26 16:40:13 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT4.8077848S
+2025-03-26 16:40:13 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:27658/test?loggerLevel=OFF)
+2025-03-26 16:40:15 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:27658/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 16:40:15 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:40:15 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.002s)
+2025-03-26 16:40:15 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.044s)
+2025-03-26 16:40:15 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.028s)
+2025-03-26 16:40:15 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:40:15 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:40:15 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.047s)
+2025-03-26 16:40:15 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 16:40:15 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 16:40:15 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 16:40:15 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 16:40:15 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 16:40:15 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 16:40:15 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.056s)
+2025-03-26 16:40:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@15db4dc
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 16:40:16 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-2 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@2715b3ea
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-26 16:40:16 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-4 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@67d8e214
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+2025-03-26 16:40:16 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-6 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Starting...
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@6d398593
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Start completed.
+2025-03-26 16:40:16 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-8 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Starting...
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-9 - Added connection org.postgresql.jdbc.PgConnection@40f88929
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Start completed.
+2025-03-26 16:40:16 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-10 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Starting...
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-11 - Added connection org.postgresql.jdbc.PgConnection@3c2b7322
+2025-03-26 16:40:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Start completed.
+2025-03-26 16:40:16 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-12 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:17 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 16:40:17 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 08133ab8f7eda621306c92f175d17e17a5fb13ff9d30418c71242fb76d032320
+2025-03-26 16:40:19 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.2978818S
+2025-03-26 16:40:19 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:27696/test?loggerLevel=OFF)
+2025-03-26 16:40:19 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:27696/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 16:40:19 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:40:19 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:40:19 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.029s)
+2025-03-26 16:40:19 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.023s)
+2025-03-26 16:40:19 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:40:19 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:40:19 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.006s)
+2025-03-26 16:40:19 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 16:40:19 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 16:40:20 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 16:40:20 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 16:40:20 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 16:40:20 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 16:40:20 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.034s)
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Starting...
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-13 - Added connection org.postgresql.jdbc.PgConnection@76a41af0
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Start completed.
+2025-03-26 16:40:20 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-14 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Starting...
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Added connection org.postgresql.jdbc.PgConnection@78f2cab9
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Start completed.
+2025-03-26 16:40:20 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-16 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-17 - Starting...
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-17 - Added connection org.postgresql.jdbc.PgConnection@536d153b
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-17 - Start completed.
+2025-03-26 16:40:20 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-18 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-19 - Starting...
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-19 - Added connection org.postgresql.jdbc.PgConnection@34949460
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-19 - Start completed.
+2025-03-26 16:40:20 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-20 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-21 - Starting...
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-21 - Added connection org.postgresql.jdbc.PgConnection@74a46f81
+2025-03-26 16:40:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-21 - Start completed.
+2025-03-26 16:40:20 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-22 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:21 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-26 16:40:21 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: d386bd9daa94a1e287985508c26b4ef803afacd6ff222f6fce136919ef971368
+2025-03-26 16:40:23 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT1.927645S
+2025-03-26 16:40:23 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:27738/test?loggerLevel=OFF)
+2025-03-26 16:40:23 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:27738/test?loggerLevel=OFF (PostgreSQL 15.12)
+2025-03-26 16:40:23 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:40:23 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:40:23 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.026s)
+2025-03-26 16:40:23 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.020s)
+2025-03-26 16:40:23 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:40:23 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:40:23 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.006s)
+2025-03-26 16:40:23 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 16:40:23 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 16:40:23 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 16:40:23 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 16:40:23 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 16:40:23 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 16:40:23 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.029s)
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-23 - Starting...
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-23 - Added connection org.postgresql.jdbc.PgConnection@14fed48e
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-23 - Start completed.
+2025-03-26 16:40:23 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-24 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Starting...
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-25 - Added connection org.postgresql.jdbc.PgConnection@23c3f787
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Start completed.
+2025-03-26 16:40:23 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-26 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-27 - Starting...
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-27 - Added connection org.postgresql.jdbc.PgConnection@7cfc2a08
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-27 - Start completed.
+2025-03-26 16:40:23 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-28 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-29 - Starting...
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-29 - Added connection org.postgresql.jdbc.PgConnection@43b1fdb7
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-29 - Start completed.
+2025-03-26 16:40:23 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-30 - jdbcUrl is required with driverClassName.
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-31 - Starting...
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-31 - Added connection org.postgresql.jdbc.PgConnection@1aae50f9
+2025-03-26 16:40:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-31 - Start completed.
+2025-03-26 16:40:23 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-32 - jdbcUrl is required with driverClassName.
+2025-03-26 16:44:08 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 16:44:08 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 16:44:08 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 16:44:09 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 16:44:11 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 16:44:11 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 16:44:11 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 16:44:11 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 16:44:14 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: 5c756e8da56064cb9affe826f1ba414564698664854640fd721219b092300dfe
+2025-03-26 16:44:16 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT4.7447717S
+2025-03-26 16:44:16 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 16:44:16 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 16:44:16 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 16:44:16 [main] INFO  tc.postgres:14 - Pulling docker image: postgres:14. Please be patient; this may take some time but only needs to be done once.
+2025-03-26 16:44:20 [docker-java-stream-537024759] INFO  tc.postgres:14 - Starting to pull image
+2025-03-26 16:44:20 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  0 pending,  0 downloaded,  0 extracted, (0 bytes/0 bytes)
+2025-03-26 16:44:22 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers: 13 pending,  1 downloaded,  0 extracted, (1 KB/? MB)
+2025-03-26 16:44:22 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers: 13 pending,  1 downloaded,  1 extracted, (16 KB/? MB)
+2025-03-26 16:44:23 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers: 12 pending,  2 downloaded,  1 extracted, (1 MB/? MB)
+2025-03-26 16:44:25 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers: 11 pending,  3 downloaded,  1 extracted, (5 MB/? MB)
+2025-03-26 16:44:26 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers: 11 pending,  3 downloaded,  2 extracted, (7 MB/? MB)
+2025-03-26 16:44:26 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers: 10 pending,  4 downloaded,  2 extracted, (8 MB/? MB)
+2025-03-26 16:44:26 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers: 10 pending,  4 downloaded,  3 extracted, (8 MB/? MB)
+2025-03-26 16:44:26 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  9 pending,  5 downloaded,  3 extracted, (8 MB/? MB)
+2025-03-26 16:44:27 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  8 pending,  6 downloaded,  3 extracted, (10 MB/? MB)
+2025-03-26 16:44:29 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  7 pending,  7 downloaded,  3 extracted, (14 MB/? MB)
+2025-03-26 16:44:30 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  6 pending,  8 downloaded,  3 extracted, (17 MB/? MB)
+2025-03-26 16:44:32 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  5 pending,  9 downloaded,  3 extracted, (19 MB/? MB)
+2025-03-26 16:44:32 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  5 pending,  9 downloaded,  4 extracted, (19 MB/? MB)
+2025-03-26 16:44:32 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  4 pending, 10 downloaded,  4 extracted, (20 MB/? MB)
+2025-03-26 16:44:32 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  4 pending, 10 downloaded,  5 extracted, (21 MB/? MB)
+2025-03-26 16:44:32 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  4 pending, 10 downloaded,  6 extracted, (21 MB/? MB)
+2025-03-26 16:44:32 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  4 pending, 10 downloaded,  7 extracted, (21 MB/? MB)
+2025-03-26 16:44:33 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  3 pending, 11 downloaded,  7 extracted, (23 MB/? MB)
+2025-03-26 16:44:33 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  2 pending, 12 downloaded,  7 extracted, (23 MB/? MB)
+2025-03-26 16:45:23 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  1 pending, 13 downloaded,  7 extracted, (117 MB/? MB)
+2025-03-26 16:45:29 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  1 pending, 13 downloaded,  8 extracted, (118 MB/? MB)
+2025-03-26 16:45:29 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  1 pending, 13 downloaded,  9 extracted, (118 MB/? MB)
+2025-03-26 16:45:29 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  1 pending, 13 downloaded, 10 extracted, (118 MB/? MB)
+2025-03-26 16:45:29 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  1 pending, 13 downloaded, 11 extracted, (118 MB/? MB)
+2025-03-26 16:45:29 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  1 pending, 13 downloaded, 12 extracted, (118 MB/? MB)
+2025-03-26 16:45:29 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pulling image layers:  1 pending, 13 downloaded, 13 extracted, (118 MB/? MB)
+2025-03-26 16:45:29 [docker-java-stream-537024759] INFO  tc.postgres:14 - Pull complete. 14 layers, pulled in 69s (downloaded 118 MB at 1 MB/s)
+2025-03-26 16:45:29 [main] INFO  tc.postgres:14 - Image postgres:14 pull took PT1M12.7939568S
+2025-03-26 16:45:29 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 16:45:32 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 150eb8d059779d809dff8b71e0f66c3186f4191d7e4650cd87be2c37109e0bc4
+2025-03-26 16:45:35 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT6.0574186S
+2025-03-26 16:45:35 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:28274/test?loggerLevel=OFF)
+2025-03-26 16:45:37 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:28274/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 16:45:37 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:45:37 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.003s)
+2025-03-26 16:45:37 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.074s)
+2025-03-26 16:45:37 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.041s)
+2025-03-26 16:45:37 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:45:37 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:45:37 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.069s)
+2025-03-26 16:45:37 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 16:45:37 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 16:45:37 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 16:45:37 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 16:45:37 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 16:45:38 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 16:45:38 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.052s)
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3e6b08d4
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 16:45:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-2 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@1f6c0e8a
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-26 16:45:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-4 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@1f9009d3
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+2025-03-26 16:45:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-6 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Starting...
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@33f5d807
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-7 - Start completed.
+2025-03-26 16:45:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-8 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Starting...
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-9 - Added connection org.postgresql.jdbc.PgConnection@54ad9ff9
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-9 - Start completed.
+2025-03-26 16:45:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-10 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Starting...
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-11 - Added connection org.postgresql.jdbc.PgConnection@15c48119
+2025-03-26 16:45:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-11 - Start completed.
+2025-03-26 16:45:38 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-12 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:39 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 16:45:39 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 2b532d999aeb0a40ca4265b361cc7eadfee15b783dbda335b8f53c6682f06f1d
+2025-03-26 16:45:43 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT3.8680882S
+2025-03-26 16:45:43 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:28331/test?loggerLevel=OFF)
+2025-03-26 16:45:43 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:28331/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 16:45:43 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:45:43 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:45:43 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.030s)
+2025-03-26 16:45:43 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.024s)
+2025-03-26 16:45:43 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:45:43 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:45:43 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.006s)
+2025-03-26 16:45:43 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 16:45:43 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 16:45:43 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 16:45:43 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 16:45:43 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 16:45:44 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 16:45:44 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.040s)
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Starting...
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-13 - Added connection org.postgresql.jdbc.PgConnection@22edca96
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-13 - Start completed.
+2025-03-26 16:45:44 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-14 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Starting...
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-15 - Added connection org.postgresql.jdbc.PgConnection@548d9d87
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-15 - Start completed.
+2025-03-26 16:45:44 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-16 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-17 - Starting...
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-17 - Added connection org.postgresql.jdbc.PgConnection@12de62aa
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-17 - Start completed.
+2025-03-26 16:45:44 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-18 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-19 - Starting...
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-19 - Added connection org.postgresql.jdbc.PgConnection@66008321
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-19 - Start completed.
+2025-03-26 16:45:44 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-20 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-21 - Starting...
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-21 - Added connection org.postgresql.jdbc.PgConnection@574f89bf
+2025-03-26 16:45:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-21 - Start completed.
+2025-03-26 16:45:44 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-22 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:45 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 16:45:45 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 8f16ac9ea719db57feb1cd61fd1ceaeb36bd3d0614489510f760fdf924b39e5d
+2025-03-26 16:45:48 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT3.4897269S
+2025-03-26 16:45:48 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:28375/test?loggerLevel=OFF)
+2025-03-26 16:45:48 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:28375/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 16:45:49 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:45:49 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:45:49 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.028s)
+2025-03-26 16:45:49 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.022s)
+2025-03-26 16:45:49 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 16:45:49 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 16:45:49 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.006s)
+2025-03-26 16:45:49 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 16:45:49 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 16:45:49 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 16:45:49 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 16:45:49 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 16:45:49 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 16:45:49 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.032s)
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-23 - Starting...
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-23 - Added connection org.postgresql.jdbc.PgConnection@66032b8d
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-23 - Start completed.
+2025-03-26 16:45:49 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-24 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Starting...
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-25 - Added connection org.postgresql.jdbc.PgConnection@5546a9e0
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Start completed.
+2025-03-26 16:45:49 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-26 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-27 - Starting...
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-27 - Added connection org.postgresql.jdbc.PgConnection@39e3da5a
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-27 - Start completed.
+2025-03-26 16:45:49 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-28 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-29 - Starting...
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-29 - Added connection org.postgresql.jdbc.PgConnection@d7ce31c
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-29 - Start completed.
+2025-03-26 16:45:49 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-30 - jdbcUrl is required with driverClassName.
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-31 - Starting...
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-31 - Added connection org.postgresql.jdbc.PgConnection@2fad470b
+2025-03-26 16:45:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-31 - Start completed.
+2025-03-26 16:45:49 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-32 - jdbcUrl is required with driverClassName.
+2025-03-26 16:55:45 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 16:55:45 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 16:55:45 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 16:55:45 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 16:55:46 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 16:55:46 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 16:55:46 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 16:55:46 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 16:55:48 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: b1e54c4f88e7fc0b5e7b0674ebbd5aa711a7e853e335b5960cfc639a03573f24
+2025-03-26 16:55:50 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT3.1868617S
+2025-03-26 16:55:50 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 16:55:50 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 16:55:50 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 16:55:50 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 16:55:50 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 5942e5a1e6b60f0d15e89b26d019acbc237ae910c29ec3d1b9a44d9298ef7d69
+2025-03-26 16:55:55 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT5.7658695S
+2025-03-26 16:55:55 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:29085/test?loggerLevel=OFF)
+2025-03-26 16:55:55 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 16:55:56 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@573284a5
+2025-03-26 16:55:56 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 16:55:57 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:29085/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:11:41 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 17:11:41 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 17:11:41 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 17:11:42 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 17:11:43 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 17:11:43 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 17:11:43 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 17:11:43 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 17:11:46 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: f8eea1cc26d94ca1a2ef631b99473946b6676741c70d2f000886d41a91d549ab
+2025-03-26 17:11:48 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT4.4855048S
+2025-03-26 17:11:48 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 17:11:48 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 17:11:48 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 17:11:48 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:11:48 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 9b3ed007540a4c703dfb4a8454245fc4ca8f12f6a09b116093ef3db6a80cfde7
+2025-03-26 17:11:52 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT4.4245177S
+2025-03-26 17:11:52 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:29846/test?loggerLevel=OFF)
+2025-03-26 17:11:52 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 17:11:53 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@e1e2e5e
+2025-03-26 17:11:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 17:11:53 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:29846/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:13:08 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 17:13:08 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 17:13:08 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 17:13:08 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 17:13:10 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 17:13:10 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 17:13:10 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 17:13:10 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 17:13:11 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: a40fd428954cf93f4a360aa2526fb2eda67688a223adc48b3519fbde9b1f037b
+2025-03-26 17:13:12 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 17:13:12 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 17:13:12 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 17:13:12 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT2.7149407S
+2025-03-26 17:13:12 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 17:13:12 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 17:13:12 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 17:13:12 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:13:13 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 7442bc695e53af81519138b4ebad59536ce54df9b239fc604b668afe83d28c27
+2025-03-26 17:13:13 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 17:13:14 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 17:13:14 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 17:13:14 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 17:13:14 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 17:13:15 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: 6620c632bfb312343da1ddc33c40ccddfc68f4480e9ab2137a9802cd335fa545
+2025-03-26 17:13:16 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT1.584542S
+2025-03-26 17:13:16 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 17:13:16 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 17:13:16 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 17:13:16 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:13:16 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 537f156c0401ee00ce365825e766458ea39f3b041ecc80e4c6de6e9a0798cab4
+2025-03-26 17:13:18 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT5.9310542S
+2025-03-26 17:13:18 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:29949/test?loggerLevel=OFF)
+2025-03-26 17:13:18 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 17:13:19 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3b90a30a
+2025-03-26 17:13:19 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 17:13:20 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:29949/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:13:20 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-26 17:13:20 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:13:20 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.069s).
+2025-03-26 17:13:20 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:13:20 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.019s)
+2025-03-26 17:13:20 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:13:20 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:13:20 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:13:20 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:13:20 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:13:21 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:13:21 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.075s)
+2025-03-26 17:13:21 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT5.0502065S
+2025-03-26 17:13:21 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:29955/test?loggerLevel=OFF)
+2025-03-26 17:13:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 17:13:22 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@49a26d19
+2025-03-26 17:13:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 17:13:22 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:29955/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:13:22 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-26 17:13:22 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:13:22 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:13:22 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.065s).
+2025-03-26 17:13:22 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:13:22 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.015s)
+2025-03-26 17:13:22 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:13:22 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 8d2b76cefae2a4035ee1886937943236077746f73089e7aea3f543466f2c5812
+2025-03-26 17:13:23 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:13:23 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:13:23 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:13:23 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:13:23 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:13:23 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.081s)
+2025-03-26 17:13:25 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:13:25 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 61c48c9753faf1a99677774a74cb02a4d7711c8ce591212a56e7de51a2445bee
+2025-03-26 17:13:27 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT4.8895005S
+2025-03-26 17:13:27 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:29965/test?loggerLevel=OFF)
+2025-03-26 17:13:27 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:29965/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:13:27 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:13:27 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 17:13:27 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.061s)
+2025-03-26 17:13:27 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.038s)
+2025-03-26 17:13:27 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 17:13:28 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:13:28 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.012s)
+2025-03-26 17:13:28 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:13:28 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:13:28 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:13:28 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:13:28 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:13:28 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:13:28 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.392s)
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@f5cf29b
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-26 17:13:28 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-3 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@1a1cc163
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+2025-03-26 17:13:28 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-5 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Starting...
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@d2e6b0b
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Start completed.
+2025-03-26 17:13:28 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-7 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Starting...
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-8 - Added connection org.postgresql.jdbc.PgConnection@21a9a705
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-8 - Start completed.
+2025-03-26 17:13:28 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-9 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Starting...
+2025-03-26 17:13:29 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-10 - Added connection org.postgresql.jdbc.PgConnection@479b5066
+2025-03-26 17:13:29 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Start completed.
+2025-03-26 17:13:29 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-11 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:30 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:13:30 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 44862f9d33ad484d823d92480218225b98e41f22e02634e9494775da371e0354
+2025-03-26 17:13:34 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT4.302788S
+2025-03-26 17:13:34 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:30002/test?loggerLevel=OFF)
+2025-03-26 17:13:34 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:30002/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:13:34 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:13:34 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped pre-schema database level objects (execution time 00:00.000s)
+2025-03-26 17:13:35 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.037s)
+2025-03-26 17:13:35 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully cleaned schema "public" (execution time 00:00.031s)
+2025-03-26 17:13:35 [main] INFO  o.f.c.i.command.clean.CleanExecutor - Successfully dropped post-schema database level objects (execution time 00:00.000s)
+2025-03-26 17:13:35 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:13:35 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.010s)
+2025-03-26 17:13:35 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:13:35 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:13:35 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:13:35 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:13:35 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:13:35 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:13:35 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.049s)
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Starting...
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-12 - Added connection org.postgresql.jdbc.PgConnection@6d091cad
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-12 - Start completed.
+2025-03-26 17:13:35 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-13 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-14 - Starting...
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-14 - Added connection org.postgresql.jdbc.PgConnection@5f36c8e3
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-14 - Start completed.
+2025-03-26 17:13:35 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-15 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Starting...
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection org.postgresql.jdbc.PgConnection@3252747e
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Start completed.
+2025-03-26 17:13:35 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-17 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-18 - Starting...
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-18 - Added connection org.postgresql.jdbc.PgConnection@2577a95d
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-18 - Start completed.
+2025-03-26 17:13:35 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-19 - jdbcUrl is required with driverClassName.
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-20 - Starting...
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-20 - Added connection org.postgresql.jdbc.PgConnection@5a936e64
+2025-03-26 17:13:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-20 - Start completed.
+2025-03-26 17:13:35 [main] ERROR com.zaxxer.hikari.HikariConfig - HikariPool-21 - jdbcUrl is required with driverClassName.
+2025-03-26 17:23:27 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 17:23:27 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 17:23:27 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 17:23:28 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 17:23:31 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 17:23:31 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 17:23:31 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 17:23:31 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 17:23:33 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: e53b8423944c64f6fc41ee8591df58655cce07bd6f0774755db0617610e048c8
+2025-03-26 17:23:35 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT4.0908884S
+2025-03-26 17:23:35 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 17:23:35 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 17:23:35 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 17:23:35 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:23:35 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 434de5c3883071ede5874235f52e3cdcb1bb7262cd54861c4073c810fb9fbd61
+2025-03-26 17:23:42 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT6.4029703S
+2025-03-26 17:23:42 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:30502/test?loggerLevel=OFF)
+2025-03-26 17:23:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 17:23:43 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@24ce5d4c
+2025-03-26 17:23:43 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 17:23:44 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:30502/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:23:45 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-26 17:23:45 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:23:45 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.360s).
+2025-03-26 17:23:45 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:23:45 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.011s)
+2025-03-26 17:23:45 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:23:45 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:23:45 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:23:45 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:23:45 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:23:45 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:23:45 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.059s)
+2025-03-26 17:23:46 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:23:47 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: effb8bf9183f0d734679b51372bcb4ab98a40f4d60fae10e8e0f002b66920211
+2025-03-26 17:23:50 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT3.0979582S
+2025-03-26 17:23:50 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:30524/test?loggerLevel=OFF)
+2025-03-26 17:23:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-26 17:23:50 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@48446968
+2025-03-26 17:23:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-26 17:23:50 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:30524/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:23:50 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:23:50 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.010s)
+2025-03-26 17:23:50 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:23:50 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:23:50 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:23:50 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:23:50 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:23:50 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:23:50 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.048s)
+2025-03-26 17:23:51 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:23:51 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: e0847c4d70516ea3bf2c197288aabea8e40abfd43e86a2da302e476bccd3d332
+2025-03-26 17:23:56 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT4.7284677S
+2025-03-26 17:23:56 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:30529/test?loggerLevel=OFF)
+2025-03-26 17:23:56 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-26 17:23:56 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@13b012
+2025-03-26 17:23:56 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-26 17:23:56 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:30529/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:23:56 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:23:56 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.018s)
+2025-03-26 17:23:56 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:23:56 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:23:56 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:23:56 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:23:56 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:23:56 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:23:56 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.083s)
+2025-03-26 17:28:11 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-26 17:28:11 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-26 17:28:11 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-26 17:28:12 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-26 17:28:14 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-26 17:28:14 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-26 17:28:14 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-26 17:28:14 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-26 17:28:16 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: f192014698eee9fdcef0ee56e184866ab7b349c2f0d9fee24bc9d4f09cfef37d
+2025-03-26 17:28:18 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT3.939372S
+2025-03-26 17:28:18 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-26 17:28:18 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-26 17:28:18 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-26 17:28:18 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:28:18 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 384c2fedf7951274efd7268c455a5cc96633af41cff917729d3ba110f2de40ed
+2025-03-26 17:28:25 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT6.7532907S
+2025-03-26 17:28:25 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:59830/test?loggerLevel=OFF)
+2025-03-26 17:28:25 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-26 17:28:25 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7ba623d1
+2025-03-26 17:28:25 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-26 17:28:26 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:59830/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:28:26 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-26 17:28:26 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:28:26 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.053s).
+2025-03-26 17:28:26 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:28:26 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.022s)
+2025-03-26 17:28:26 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:28:27 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:28:27 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:28:27 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:28:27 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:28:27 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:28:27 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.055s)
+2025-03-26 17:28:28 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:28:28 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: d1ef2412de92af63224044a434581e32fa32297b21c7d65dfb14ea7b341ed964
+2025-03-26 17:28:32 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT4.001089S
+2025-03-26 17:28:32 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:59870/test?loggerLevel=OFF)
+2025-03-26 17:28:32 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-26 17:28:32 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@5f83b506
+2025-03-26 17:28:32 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-26 17:28:32 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:59870/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:28:32 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:28:32 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.009s)
+2025-03-26 17:28:32 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:28:32 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:28:32 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:28:32 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:28:32 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:28:32 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:28:32 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.042s)
+2025-03-26 17:28:33 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-26 17:28:33 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: cc39949dbdabb86fdbb3025b9af1944189c1749b976ed1069b0e6b5fea48bfb5
+2025-03-26 17:28:37 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT3.2469059S
+2025-03-26 17:28:37 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:59889/test?loggerLevel=OFF)
+2025-03-26 17:28:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-26 17:28:37 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@58cd7486
+2025-03-26 17:28:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-26 17:28:37 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:59889/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-26 17:28:37 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-26 17:28:37 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.009s)
+2025-03-26 17:28:37 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-26 17:28:37 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-26 17:28:37 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-26 17:28:37 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-26 17:28:37 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-26 17:28:37 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-26 17:28:37 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.041s)
+2025-03-26 17:28:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 17:28:41 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@1a4dd83f
+2025-03-26 17:28:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 17:35:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 17:35:39 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@84487f4
+2025-03-26 17:35:39 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 17:41:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 17:41:24 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@524a2ffb
+2025-03-26 17:41:24 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 17:45:17 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 17:45:17 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@21f459fc
+2025-03-26 17:45:17 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 18:09:39 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 18:09:39 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@5eed2d86
+2025-03-26 18:09:39 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 18:12:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 18:12:15 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@1dc76fa1
+2025-03-26 18:12:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 18:17:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 18:17:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@5eed2d86
+2025-03-26 18:17:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 18:23:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 18:23:54 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@84487f4
+2025-03-26 18:23:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 18:30:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 18:30:40 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@21f459fc
+2025-03-26 18:30:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-26 18:35:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-26 18:35:34 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@4d8286c4
+2025-03-26 18:35:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:11:53 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-27 17:11:53 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-27 17:11:53 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-27 17:11:54 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-27 17:11:55 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-27 17:11:55 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-27 17:11:55 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-27 17:11:55 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-27 17:11:57 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: 3748bb39fe85ee162fb4ae70b6fcc09d5efa2455a853211cb13c0b721a170c61
+2025-03-27 17:11:58 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT3.1632781S
+2025-03-27 17:11:58 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-27 17:11:58 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-27 17:11:58 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-27 17:11:58 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:11:59 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: b77711593e63678d6580fe2d157462ae8955484a5be59a298ed87de9af77dfbc
+2025-03-27 17:12:02 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT3.8187972S
+2025-03-27 17:12:02 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:6577/test?loggerLevel=OFF)
+2025-03-27 17:12:02 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-27 17:12:03 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3938ca86
+2025-03-27 17:12:03 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-27 17:12:04 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:6577/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:12:04 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-27 17:12:04 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:12:04 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.093s).
+2025-03-27 17:12:04 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:12:04 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.011s)
+2025-03-27 17:12:04 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:12:04 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:12:04 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:12:04 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:12:04 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:12:04 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:12:04 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.047s)
+2025-03-27 17:12:11 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:12:12 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 19f86e00ffa3c3a76b4b50f8d853140a47dc024f270916c903686df89a42d2b7
+2025-03-27 17:12:14 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT2.4379627S
+2025-03-27 17:12:14 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:6585/test?loggerLevel=OFF)
+2025-03-27 17:12:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-27 17:12:14 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@3827c8e9
+2025-03-27 17:12:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-27 17:12:14 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:6585/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:12:14 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:12:14 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.010s)
+2025-03-27 17:12:14 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:12:14 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:12:14 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:12:14 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:12:14 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:12:14 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:12:14 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.050s)
+2025-03-27 17:12:15 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:12:15 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: e3541f7bb33ec2261c45f693bba88e7187c600811e5ac249adee6397570724e4
+2025-03-27 17:12:17 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT2.2254263S
+2025-03-27 17:12:17 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:6593/test?loggerLevel=OFF)
+2025-03-27 17:12:17 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-27 17:12:17 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@14ddf7c0
+2025-03-27 17:12:17 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-27 17:12:17 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:6593/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:12:18 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:12:18 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.008s)
+2025-03-27 17:12:18 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:12:18 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:12:18 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:12:18 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:12:18 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:12:18 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:12:18 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.039s)
+2025-03-27 17:14:05 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-27 17:14:05 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-27 17:14:05 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-27 17:14:05 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-27 17:14:05 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-27 17:14:05 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-27 17:14:05 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-27 17:14:06 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-27 17:14:06 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: 0cef26d2fcf57885dd948aec35041e5c5b97895b80440dea271d7cc4c606e359
+2025-03-27 17:14:06 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT0.8584642S
+2025-03-27 17:14:06 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-27 17:14:06 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-27 17:14:06 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-27 17:14:06 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-27 17:14:07 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 5ed7317339f7e144b853d03c5d4532b6b41bf497511d79ca37ddd46618f4aef4
+2025-03-27 17:14:09 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.7311161S
+2025-03-27 17:14:09 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:6673/test_db?loggerLevel=OFF)
+2025-03-27 17:14:09 [main] INFO  org.testcontainers.ext.ScriptUtils - Executing database script from init.sql
+2025-03-27 17:14:09 [main] INFO  org.testcontainers.ext.ScriptUtils - Executed database script from init.sql in 212 ms.
+2025-03-27 17:14:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:14:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:14:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:14:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:14:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:14:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:14:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:14:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:14:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:14:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@61394494
+2025-03-27 17:14:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:14:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:14:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:14:40 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-27 17:14:40 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-27 17:14:41 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-27 17:14:41 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-27 17:14:42 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-27 17:14:42 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-27 17:14:42 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-27 17:14:42 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-27 17:14:43 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: 51bf1c02f569657e52e0f90c3a3d493f731ff8ea9095d1f9d9f4e5145fe926eb
+2025-03-27 17:14:44 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT1.6321774S
+2025-03-27 17:14:44 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-27 17:14:44 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-27 17:14:44 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-27 17:14:44 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:14:44 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 3ae2c816572fae114391da6d1d0a60ff24fdeb4f1b223ec5619ca817bf833356
+2025-03-27 17:14:47 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT3.1682142S
+2025-03-27 17:14:47 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:6719/test?loggerLevel=OFF)
+2025-03-27 17:14:47 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-27 17:14:48 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4d291aff
+2025-03-27 17:14:48 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-27 17:14:50 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:6719/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:14:50 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-27 17:14:50 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:14:50 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.076s).
+2025-03-27 17:14:50 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:14:50 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.011s)
+2025-03-27 17:14:50 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:14:50 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:14:50 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:14:50 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:14:51 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:14:51 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:14:51 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.057s)
+2025-03-27 17:14:58 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-27 17:14:58 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 56c0c8d16bfb6853b23bb52d70fafed8d5cbc88b89b2b8c36c7aaba7ac8c3155
+2025-03-27 17:15:01 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT3.0048376S
+2025-03-27 17:15:01 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:6724/test_db?loggerLevel=OFF)
+2025-03-27 17:15:01 [main] INFO  org.testcontainers.ext.ScriptUtils - Executing database script from init.sql
+2025-03-27 17:15:01 [main] INFO  org.testcontainers.ext.ScriptUtils - Executed database script from init.sql in 85 ms.
+2025-03-27 17:15:02 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:15:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:15:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:15:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:15:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:15:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:15:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:15:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:15:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:15:06 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@84d83bd
+2025-03-27 17:15:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:15:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:15:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:15:08 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:15:08 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 8f9d5e98fb5b3c84b9bc5bed96e5872d800ff6bc5b2668640f4a3f859fc03bec
+2025-03-27 17:15:10 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT2.2439154S
+2025-03-27 17:15:10 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:6729/test?loggerLevel=OFF)
+2025-03-27 17:15:10 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-27 17:15:10 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@1d5766c9
+2025-03-27 17:15:10 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-27 17:15:10 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:6729/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:15:10 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:15:10 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.008s)
+2025-03-27 17:15:10 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:15:10 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:15:10 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:15:10 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:15:10 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:15:10 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:15:10 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.033s)
+2025-03-27 17:15:11 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:15:11 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 44b73ec23f7083a7908e9ee58f8bec6d63b1aa44891942e74d953e46fc2b316c
+2025-03-27 17:15:13 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT2.2180115S
+2025-03-27 17:15:13 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:6734/test?loggerLevel=OFF)
+2025-03-27 17:15:13 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-27 17:15:13 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@5032c1cc
+2025-03-27 17:15:13 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-27 17:15:13 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:6734/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:15:13 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:15:13 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.008s)
+2025-03-27 17:15:13 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:15:13 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:15:14 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:15:14 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:15:14 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:15:14 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:15:14 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.038s)
+2025-03-27 17:28:30 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-27 17:28:30 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-27 17:28:30 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-27 17:28:31 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-27 17:28:32 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-27 17:28:32 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-27 17:28:32 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-27 17:28:32 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-27 17:28:33 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: c7ef45e286b922657ac61f2432f36963f87f8e90b307d8a1e36a9e108d1dcd9f
+2025-03-27 17:28:34 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT1.7885551S
+2025-03-27 17:28:34 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-27 17:28:34 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-27 17:28:34 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-27 17:28:34 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:28:34 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 33f8b9d8d38e00ac01187c1b6b30ea036c819fae2146ee456961e1cde33c5910
+2025-03-27 17:28:38 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT4.0679206S
+2025-03-27 17:28:38 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:7426/test?loggerLevel=OFF)
+2025-03-27 17:28:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-27 17:28:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@230fdc1a
+2025-03-27 17:28:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-27 17:28:39 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:7426/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:28:39 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-27 17:28:39 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:28:40 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.053s).
+2025-03-27 17:28:40 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:28:40 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.009s)
+2025-03-27 17:28:40 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:28:40 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:28:40 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:28:40 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:28:40 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:28:40 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:28:40 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.033s)
+2025-03-27 17:28:44 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-27 17:28:44 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 99ad7f69363a04db6328713d99094822b4ab89fd2c7ff806422498d69ba3bd3f
+2025-03-27 17:28:46 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.219284S
+2025-03-27 17:28:46 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:7444/test_db?loggerLevel=OFF)
+2025-03-27 17:28:46 [main] INFO  org.testcontainers.ext.ScriptUtils - Executing database script from init.sql
+2025-03-27 17:28:46 [main] INFO  org.testcontainers.ext.ScriptUtils - Executed database script from init.sql in 64 ms.
+2025-03-27 17:28:46 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:28:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:28:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:28:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:28:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:28:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:28:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:28:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:28:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:28:51 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@67a50df1
+2025-03-27 17:28:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:28:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:28:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:28:53 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:28:53 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 3e45f6d2a03fe20cb676d87132285da17203dc6a6a02d6249cc4ffbc8c2ede72
+2025-03-27 17:28:55 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT2.4484341S
+2025-03-27 17:28:55 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:7453/test?loggerLevel=OFF)
+2025-03-27 17:28:55 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-27 17:28:55 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@1bf167b6
+2025-03-27 17:28:55 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-27 17:28:55 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:7453/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:28:55 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:28:55 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.007s)
+2025-03-27 17:28:55 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:28:55 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:28:55 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:28:55 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:28:55 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:28:55 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:28:55 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.030s)
+2025-03-27 17:28:56 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:28:56 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 66fc390f7db57ae003cbc5e71f3a36d3da92773b06b5437f0bf21056c2acd42e
+2025-03-27 17:28:58 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT1.826433S
+2025-03-27 17:28:58 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:7460/test?loggerLevel=OFF)
+2025-03-27 17:28:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-27 17:28:58 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@487a45c8
+2025-03-27 17:28:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-27 17:28:58 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:7460/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:28:58 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:28:58 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.006s)
+2025-03-27 17:28:58 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:28:58 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:28:58 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:28:58 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:28:58 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:28:58 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:28:58 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.028s)
+2025-03-27 17:36:33 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-27 17:36:33 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-27 17:36:33 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-27 17:36:34 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-27 17:36:35 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-27 17:36:35 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-27 17:36:35 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-27 17:36:35 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-27 17:36:36 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: 033a77333d2cb5925442d90530936baabf57734f23040e57a491fb3db25133a6
+2025-03-27 17:36:37 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT1.6728729S
+2025-03-27 17:36:37 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-27 17:36:37 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-27 17:36:37 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-27 17:36:37 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:36:37 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 2dbaf3e0c6a0e621695634c53c85840afb6aae77fdcf84293d45db05d122f368
+2025-03-27 17:36:40 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT3.6527826S
+2025-03-27 17:36:40 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:7697/test?loggerLevel=OFF)
+2025-03-27 17:36:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-27 17:36:41 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5af1884e
+2025-03-27 17:36:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-27 17:36:42 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:7697/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:36:42 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-27 17:36:42 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:36:42 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.058s).
+2025-03-27 17:36:42 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:36:42 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.010s)
+2025-03-27 17:36:42 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:36:42 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:36:42 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:36:42 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:36:42 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:36:42 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:36:42 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.045s)
+2025-03-27 17:36:46 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-27 17:36:46 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 894cb76f584c7e503137d59a077a832de9aa679cd335d1ed6455097fd40a4274
+2025-03-27 17:36:49 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.2957498S
+2025-03-27 17:36:49 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:7711/test_db?loggerLevel=OFF)
+2025-03-27 17:36:49 [main] INFO  org.testcontainers.ext.ScriptUtils - Executing database script from init.sql
+2025-03-27 17:36:49 [main] INFO  org.testcontainers.ext.ScriptUtils - Executed database script from init.sql in 46 ms.
+2025-03-27 17:36:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:36:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:36:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:36:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:36:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:36:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:36:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:36:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:36:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:36:54 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@7639675f
+2025-03-27 17:36:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:36:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:36:54 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:36:55 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:36:55 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: b6c6a95db7133a213dbec618773e441777016dd294b39cfec55df00681161fd8
+2025-03-27 17:36:57 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT1.9306728S
+2025-03-27 17:36:57 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:7728/test?loggerLevel=OFF)
+2025-03-27 17:36:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-27 17:36:57 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@1a4e39a2
+2025-03-27 17:36:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-27 17:36:57 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:7728/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:36:57 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:36:57 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.007s)
+2025-03-27 17:36:57 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:36:57 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:36:57 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:36:57 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:36:57 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:36:57 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:36:57 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.034s)
+2025-03-27 17:36:58 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:36:58 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 708de58bc8935163661a929d69fc92c2131ea45c9acebad2e23749cf32cf11ca
+2025-03-27 17:37:00 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT2.188087S
+2025-03-27 17:37:00 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:7736/test?loggerLevel=OFF)
+2025-03-27 17:37:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-27 17:37:00 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@168eee05
+2025-03-27 17:37:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-27 17:37:00 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:7736/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:37:00 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:37:00 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.008s)
+2025-03-27 17:37:00 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:37:00 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:37:00 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:37:00 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:37:00 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:37:01 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:37:01 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.104s)
+2025-03-27 17:44:59 [main] INFO  o.testcontainers.images.PullPolicy - Image pull policy will be performed by: DefaultPullPolicy()
+2025-03-27 17:44:59 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2025-03-27 17:44:59 [main] INFO  o.testcontainers.DockerClientFactory - Testcontainers version: 1.20.6
+2025-03-27 17:45:00 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2025-03-27 17:45:01 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2025-03-27 17:45:01 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2025-03-27 17:45:01 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 28.0.1
+  API Version: 1.48
+  Operating System: Docker Desktop
+  Total Memory: 3836 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2025-03-27 17:45:01 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Creating container for image: testcontainers/ryuk:0.11.0
+2025-03-27 17:45:02 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 is starting: b4c2863ca9fcb056f01d857c2f378b7dc73c2046cad4815744001fbe998b43d6
+2025-03-27 17:45:03 [main] INFO  tc.testcontainers/ryuk:0.11.0 - Container testcontainers/ryuk:0.11.0 started in PT2.2498819S
+2025-03-27 17:45:03 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2025-03-27 17:45:03 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2025-03-27 17:45:03 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2025-03-27 17:45:03 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:45:03 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 3400f5eb43faeaf2ed991c1b1be0a40ca7fac5a5261ea85dc1a44caa8a9421bc
+2025-03-27 17:45:08 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT5.2369539S
+2025-03-27 17:45:08 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:8187/test?loggerLevel=OFF)
+2025-03-27 17:45:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-27 17:45:09 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@59dce234
+2025-03-27 17:45:09 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-27 17:45:10 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:8187/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:45:10 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Repair of failed migration in Schema History table "public"."flyway_schema_history" not necessary as table doesn't exist.
+2025-03-27 17:45:10 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:45:10 [main] INFO  o.f.core.internal.command.DbRepair - Successfully repaired schema history table "public"."flyway_schema_history" (execution time 00:00.043s).
+2025-03-27 17:45:10 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:45:10 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.008s)
+2025-03-27 17:45:10 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:45:10 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:45:10 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:45:10 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:45:10 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:45:10 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:45:10 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.035s)
+2025-03-27 17:45:14 [main] INFO  tc.postgres:15 - Creating container for image: postgres:15
+2025-03-27 17:45:14 [main] INFO  tc.postgres:15 - Container postgres:15 is starting: 475a219949ce6d7ba15417a12443f9573bdac978f63e8dc8bdee59b53bdcd6d1
+2025-03-27 17:45:16 [main] INFO  tc.postgres:15 - Container postgres:15 started in PT2.0461335S
+2025-03-27 17:45:16 [main] INFO  tc.postgres:15 - Container is started (JDBC URL: jdbc:postgresql://localhost:8192/test_db?loggerLevel=OFF)
+2025-03-27 17:45:16 [main] INFO  org.testcontainers.ext.ScriptUtils - Executing database script from init.sql
+2025-03-27 17:45:16 [main] INFO  org.testcontainers.ext.ScriptUtils - Executed database script from init.sql in 52 ms.
+2025-03-27 17:45:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:45:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:45:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:45:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:45:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:45:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:45:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:45:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:45:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:45:21 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@507daa2
+2025-03-27 17:45:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:45:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown initiated...
+2025-03-27 17:45:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Shutdown completed.
+2025-03-27 17:45:22 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:45:22 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: cae716447532738080d2d150eda3f8857cfce1f41cba86a429ccd2fe7afb11fd
+2025-03-27 17:45:24 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT1.8286655S
+2025-03-27 17:45:24 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:8240/test?loggerLevel=OFF)
+2025-03-27 17:45:24 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-03-27 17:45:24 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@78cf12ba
+2025-03-27 17:45:24 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-03-27 17:45:24 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:8240/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:45:24 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:45:24 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.010s)
+2025-03-27 17:45:24 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:45:24 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:45:24 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:45:24 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:45:24 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:45:24 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:45:24 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.033s)
+2025-03-27 17:45:25 [main] INFO  tc.postgres:14 - Creating container for image: postgres:14
+2025-03-27 17:45:25 [main] INFO  tc.postgres:14 - Container postgres:14 is starting: 0345c6616835ca067fc840d162b57618afbcd59eeec6bb2ba8477a778c9d5b5c
+2025-03-27 17:45:27 [main] INFO  tc.postgres:14 - Container postgres:14 started in PT1.7161326S
+2025-03-27 17:45:27 [main] INFO  tc.postgres:14 - Container is started (JDBC URL: jdbc:postgresql://localhost:8244/test?loggerLevel=OFF)
+2025-03-27 17:45:27 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-03-27 17:45:27 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@6c7a2766
+2025-03-27 17:45:27 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-03-27 17:45:27 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:8244/test?loggerLevel=OFF (PostgreSQL 14.17)
+2025-03-27 17:45:27 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+2025-03-27 17:45:27 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.006s)
+2025-03-27 17:45:27 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+2025-03-27 17:45:27 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+2025-03-27 17:45:27 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "1 - create publishers table"
+2025-03-27 17:45:27 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "2 - create authors table"
+2025-03-27 17:45:27 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "3 - create books table"
+2025-03-27 17:45:27 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "4 - create book author table"
+2025-03-27 17:45:27 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema "public", now at version v4 (execution time 00:00.028s)
+2025-03-27 17:45:29 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:45:29 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@33c1d9d6
+2025-03-27 17:45:29 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.
+2025-03-27 17:52:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Starting...
+2025-03-27 17:52:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - LibraryHikariPool - Added connection org.postgresql.jdbc.PgConnection@26837057
+2025-03-27 17:52:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - LibraryHikariPool - Start completed.

@@ -9,7 +9,7 @@
 #    depends_on:
 #      - db
 #    environment:
-#      DB_URL: jdbc:postgresql://db:5432/library_db
+#      DB_URL: jdbc:postgresql://app-network:5432/library_db
 #      DB_USER: library_app
 #      DB_PASSWORD: 1395
 #      DB_DRIVER: org.postgresql.Driver
@@ -17,8 +17,10 @@
 #      DB_POOL_MIN_IDLE: 2
 #    volumes:
 #      - ./.m2:/root/.m2
-#    networks:
-#      - app-network
+#    #    networks:
+#    #      - app-network
+#    links:
+#      - "db:app-network"
 #
 #  db:
 #    image: postgres:17
@@ -31,15 +33,15 @@
 #      - "5432:5432"
 #    volumes:
 #      - postgres_data:/var/lib/postgresql/data
-#    networks:
-#      - app-network
+##    networks:
+##      - app-network
 #
 #volumes:
 #  postgres_data:
 #
-#networks:
-#  app-network:
-#    driver: bridge
+##networks:
+##  app-network:
+##    driver: bridge
 
 version: '3.8'
 services:

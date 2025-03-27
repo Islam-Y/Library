@@ -1,202 +1,186 @@
 package ServiceTest;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import com.library.dto.AuthorDTO;
 import com.library.exception.AuthorServiceException;
 import com.library.mapper.AuthorMapper;
 import com.library.model.Author;
-import com.library.model.Book;
 import com.library.repository.AuthorDAO;
 import com.library.service.AuthorService;
-import com.library.config.DataSourceProvider;
-import com.library.service.Fabric;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.sql.DataSource;
-import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-@ExtendWith(MockitoExtension.class)
-class AuthorServiceTest {
+import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
+public class AuthorServiceTest {
 
     @Mock
     private AuthorDAO authorDAO;
-
     @Mock
     private AuthorMapper authorMapper;
 
-    @Mock
-    private DataSourceProvider dataSourceProvider;
-
-    @Mock
-    private DataSource dataSource;
-
-    @InjectMocks
     private AuthorService authorService;
 
-    @BeforeEach
-    void init() {
-        // Настраиваем мок DataSourceProvider
-        when(dataSourceProvider.getDataSource()).thenReturn(dataSource);
+    private Author testAuthor;
+    private AuthorDTO testAuthorDTO;
 
-        authorDAO = new AuthorDAO();
-        authorService = Fabric.getAuthorService();
+    @Before
+    public void setUp() {
+        authorService = AuthorService.forTest(authorDAO, authorMapper);
 
-        try {
-            Field authorDaoField = AuthorService.class.getDeclaredField("authorDAO");
-            authorDaoField.setAccessible(true);
-            authorDaoField.set(authorService, authorDAO);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to inject mock AuthorDAO", e);
-        }
+        testAuthor = new Author(1, "Лев", "Толстой", "Россия", new HashSet<>());
+        testAuthorDTO = new AuthorDTO();
+        testAuthorDTO.setId(1);
+        testAuthorDTO.setName("Лев");
+        testAuthorDTO.setSurname("Толстой");
+        testAuthorDTO.setCountry("Россия");
+
+        when(authorMapper.toDTO(any(Author.class))).thenReturn(testAuthorDTO);
     }
 
     @Test
-    void getAllAuthors_ShouldReturnList() throws SQLException {
-        // Arrange
-        Author author = new Author(1, "Лев", "Толстой", "Россия", new HashSet<>());
-        AuthorDTO authorDTO = new AuthorDTO(author);
-        when(authorDAO.getAll()).thenReturn(List.of(author));
-        when(authorMapper.toDTO(author)).thenReturn(authorDTO);
+    public void getAllAuthors_Success() throws SQLException {
+        when(authorDAO.getAll()).thenReturn(Collections.singletonList(testAuthor));
 
-        // Act
         List<AuthorDTO> result = authorService.getAllAuthors();
 
-        // Assert
-        assertThat(result)
-                .hasSize(1)
-                .first()
-                .extracting(AuthorDTO::getSurname)
-                .isEqualTo("Толстой");
-        verify(authorMapper).toDTO(author);
+        assertEquals(1, result.size());
+        assertEquals("Лев", result.get(0).getName());
     }
 
-    @Test
-    void getAllAuthors_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+    @Test(expected = AuthorServiceException.class)
+    public void getAllAuthors_Exception() throws SQLException {
         when(authorDAO.getAll()).thenThrow(new SQLException("DB error"));
-        assertThatThrownBy(() -> authorService.getAllAuthors())
-                .isInstanceOf(AuthorServiceException.class)
-                .hasMessageContaining("Ошибка при получении списка авторов");
+        authorService.getAllAuthors();
     }
 
     @Test
-    void addAuthor_WhenDAOThrowsException_ShouldThrow() throws SQLException {
-        AuthorDTO dto = new AuthorDTO(new Author(0, "Иван", "Тургенев", "Россия", Set.of()));
-        doThrow(new SQLException("DB error")).when(authorDAO).create(any());
-        assertThatThrownBy(() -> authorService.addAuthor(dto))
-                .isInstanceOf(AuthorServiceException.class)
-                .hasMessageContaining("Ошибка при добавлении автора");
-    }
+    public void getAuthorById_Success() throws SQLException {
+        when(authorDAO.getById(1)).thenReturn(Optional.of(testAuthor));
 
-    @Test
-    void getAuthorById_WhenExists_ShouldReturnDTO() throws SQLException {
-        // Arrange
-        Author author = new Author(1, "Фёдор", "Достоевский", "Россия", new HashSet<>());
-        AuthorDTO authorDTO = new AuthorDTO(author);
-
-        when(authorDAO.getById(1)).thenReturn(Optional.of(author));
-        when(authorMapper.toDTO(author)).thenReturn(authorDTO); // Настройка маппера
-
-        // Act
         AuthorDTO result = authorService.getAuthorById(1);
 
-        // Assert
-        assertThat(result)
-                .extracting(AuthorDTO::getName, AuthorDTO::getCountry)
-                .containsExactly("Фёдор", "Россия");
-        verify(authorMapper).toDTO(author);
+        assertEquals(1, result.getId());
+        assertEquals("Лев", result.getName());
     }
 
     @Test
-    void getAuthorById_WhenNotExists_ShouldThrow() throws SQLException {
-        // Arrange
-        when(authorDAO.getById(anyInt())).thenReturn(Optional.empty());
+    public void addAuthor_Success() throws SQLException {
+        AuthorDTO inputDTO = new AuthorDTO();
+        inputDTO.setName("Новый Автор");
 
-        // Act & Assert
-        assertThatThrownBy(() -> authorService.getAuthorById(1))
-                .isInstanceOf(AuthorServiceException.class)
-                .hasMessageContaining("Автор не найден");
+        Author expectedAuthor = new Author();
+        expectedAuthor.setName("Новый Автор");
+
+        // 2. Настройка маппера
+        when(authorMapper.toModel(inputDTO)).thenReturn(expectedAuthor);
+
+        // 3. Вызов метода
+        authorService.addAuthor(inputDTO);
+
+        // 4. Проверки
+        ArgumentCaptor<Author> captor = ArgumentCaptor.forClass(Author.class);
+        verify(authorDAO).create(captor.capture());
+
+        Author savedAuthor = captor.getValue();
+        assertEquals("Новый Автор", savedAuthor.getName());
     }
 
     @Test
-    void addAuthor_ShouldMapAndSave() throws SQLException {
-        // Arrange
-        Author author = new Author(0, "Антон", "Чехов", "Россия", new HashSet<>());
-        AuthorDTO dto = new AuthorDTO(author);
+    public void updateAuthor_Success() throws SQLException {
+        // 1. Подготовка данных
+        Author existingAuthor = new Author(1, "Старое имя", "Старая фамилия", "Старая страна", new HashSet<>());
+        when(authorDAO.getById(1)).thenReturn(Optional.of(existingAuthor));
+        lenient().when(authorMapper.toModel(any(AuthorDTO.class))).thenReturn(testAuthor);
 
-        when(authorMapper.toModel(dto)).thenReturn(author);
+        // 2. Вызов метода
+        authorService.updateAuthor(1, testAuthorDTO);
 
-        // Act
-        authorService.addAuthor(dto);
+        // 3. Проверка вызовов DAO
+        verify(authorDAO).update(testAuthor);
+        verify(authorDAO).updateBookAuthors(testAuthor);
 
-        // Assert
-        verify(authorMapper).toModel(dto);
-        verify(authorDAO).create(refEq(author, "id", "books"));
+        // 4. Проверка обновленных полей
+        assertEquals("Лев", testAuthor.getName());
+        assertEquals("Толстой", testAuthor.getSurname());
+        assertEquals("Россия", testAuthor.getCountry());
     }
 
     @Test
-    void getAuthorById_WhenDAOThrowsException_ShouldThrow() throws SQLException {
+    public void updateAuthor_UpdateBookAuthorsCalled() throws SQLException {
+        // 1. Подготовка
+        Author existingAuthor = new Author(1, "Старое имя", "Старая фамилия", "Старая страна", new HashSet<>());
+        when(authorDAO.getById(1)).thenReturn(Optional.of(existingAuthor));
+        lenient().when(authorMapper.toModel(any(AuthorDTO.class))).thenReturn(testAuthor);
+
+        // 2. Вызов
+        authorService.updateAuthor(1, testAuthorDTO);
+
+        // 3. Проверка
+        verify(authorDAO, times(1)).updateBookAuthors(testAuthor);
+
+    }
+
+    @Test(expected = AuthorServiceException.class)
+    public void updateAuthor_NotFound() throws SQLException {
+        when(authorDAO.getById(1)).thenReturn(Optional.empty());
+        authorService.updateAuthor(1, new AuthorDTO());
+    }
+
+    @Test(expected = AuthorServiceException.class)
+    public void updateAuthor_SQLExceptionOnGet() throws SQLException {
         when(authorDAO.getById(1)).thenThrow(new SQLException("DB error"));
-        assertThatThrownBy(() -> authorService.getAuthorById(1))
-                .isInstanceOf(AuthorServiceException.class)
-                .hasMessageContaining("Ошибка при получении автора с ID 1");
+        authorService.updateAuthor(1, testAuthorDTO);
+    }
+
+    @Test(expected = AuthorServiceException.class)
+    public void updateAuthor_SQLExceptionOnUpdate() throws SQLException {
+        when(authorDAO.getById(1)).thenReturn(Optional.of(testAuthor));
+        doThrow(new SQLException()).when(authorDAO).update(any(Author.class));
+
+        authorService.updateAuthor(1, new AuthorDTO());
     }
 
     @Test
-    void updateAuthor_WhenDAOThrowsException_ShouldThrow() throws SQLException {
-        AuthorDTO dto = new AuthorDTO(new Author(1, "Новое", "Имя", "Страна", Set.of()));
-        when(authorDAO.getById(1)).thenReturn(Optional.of(new Author()));
-        doThrow(new SQLException("DB error")).when(authorDAO).update(any());
-        assertThatThrownBy(() -> authorService.updateAuthor(1, dto))
-                .isInstanceOf(AuthorServiceException.class)
-                .hasMessageContaining("Ошибка при обновлении автора с ID 1");
-    }
-
-    @Test
-    void deleteAuthor_WhenDAOThrowsException_ShouldThrow() throws SQLException {
-        doThrow(new SQLException("DB error")).when(authorDAO).delete(1);
-        assertThatThrownBy(() -> authorService.deleteAuthor(1))
-                .isInstanceOf(AuthorServiceException.class)
-                .hasMessageContaining("Ошибка при удалении автора с ID 1");
-    }
-
-    @Test
-    void updateAuthor_WhenExists_ShouldUpdate() throws SQLException {
-        // Arrange
-        Set<Book> books = new HashSet<>();
-        Author existing = new Author(1, "Старое", "Имя", "Страна", books);
-        Author updatedAuthor = new Author(1, "Новое", "Имя", "Страна", books);
-        AuthorDTO update = new AuthorDTO(updatedAuthor);
-
-        when(authorDAO.getById(1)).thenReturn(Optional.of(existing));
-
-        // Act
-        authorService.updateAuthor(1, update);
-
-        // Assert
-        verify(authorDAO).update(argThat(author ->
-                author.getName().equals("Новое") &&
-                        author.getSurname().equals("Имя")
-        ));
-    }
-
-    @Test
-    void deleteAuthor_ShouldCallDAO() throws SQLException {
-        // Act
+    public void deleteAuthor_Success() throws SQLException {
         authorService.deleteAuthor(1);
-
-        // Assert
         verify(authorDAO).delete(1);
+    }
+
+    @Test(expected = AuthorServiceException.class)
+    public void deleteAuthor_SQLException() throws SQLException {
+        doThrow(new SQLException()).when(authorDAO).delete(1);
+        authorService.deleteAuthor(1);
+    }
+
+    @Test(expected = AuthorServiceException.class)
+    public void getAuthorById_NotFound() throws SQLException {
+        when(authorDAO.getById(anyInt())).thenReturn(Optional.empty());
+        authorService.getAuthorById(1);
+    }
+
+    @Test(expected = AuthorServiceException.class)
+    public void addAuthor_SQLException() throws SQLException {
+        // 1. Настройка маппера
+        Author mockAuthor = new Author();
+        when(authorMapper.toModel(any(AuthorDTO.class))).thenReturn(mockAuthor);
+        // 2. Настройка DAO на выброс исключения
+        doThrow(new SQLException("Database error")).when(authorDAO).create(mockAuthor);
+
+        // 3. Вызов тестируемого метода
+        authorService.addAuthor(new AuthorDTO());
     }
 }

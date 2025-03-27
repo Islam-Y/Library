@@ -13,9 +13,18 @@ public class AuthorService {
     private final AuthorDAO authorDAO;
     private final AuthorMapper authorMapper;
 
+    private AuthorService(AuthorDAO authorDAO, AuthorMapper mapper) {
+        this.authorDAO = authorDAO;
+        this.authorMapper = mapper;
+    }
+
     AuthorService() {
         this.authorMapper = AuthorMapper.INSTANCE;
         this.authorDAO = new AuthorDAO();
+    }
+
+    public static AuthorService forTest(AuthorDAO authorDAO, AuthorMapper authorMapper) {
+        return new AuthorService(authorDAO, authorMapper);
     }
 
     public List<AuthorDTO> getAllAuthors() {
@@ -50,16 +59,16 @@ public class AuthorService {
     }
 
     public void updateAuthor(int id, AuthorDTO authorDTO) {
-        Author existingAuthor = null;
         try {
-            existingAuthor = authorDAO.getById(id)
-                    .orElseThrow(() -> new RuntimeException("Автор не найден"));
+            Author existingAuthor = authorDAO.getById(id)
+                    .orElseThrow(() -> new AuthorServiceException("Автор не найден", new RuntimeException()));
 
             existingAuthor.setName(authorDTO.getName());
             existingAuthor.setSurname(authorDTO.getSurname());
             existingAuthor.setCountry(authorDTO.getCountry());
 
             authorDAO.update(existingAuthor);
+            authorDAO.updateBookAuthors(existingAuthor);
         } catch (SQLException e) {
             throw new AuthorServiceException("Ошибка при обновлении автора с ID " + id, e);
         }

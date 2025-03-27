@@ -18,6 +18,15 @@ public class PublisherService {
         this.publisherMapper = PublisherMapper.INSTANCE;
     }
 
+    private PublisherService(PublisherDAO publisherDAO, PublisherMapper mapper) {
+        this.publisherDAO = publisherDAO;
+        this.publisherMapper = mapper;
+    }
+
+    public static PublisherService forTest(PublisherDAO publisherDAO, PublisherMapper publisherMapper) {
+        return new PublisherService(publisherDAO, publisherMapper);
+    }
+
     public List<PublisherDTO> getAllPublishers() {
         try {
             return publisherDAO.getAll().stream()
@@ -51,7 +60,7 @@ public class PublisherService {
         Publisher existingPublisher = null;
         try {
             existingPublisher = publisherDAO.getById(id)
-                    .orElseThrow(() -> new RuntimeException("Издатель не найден"));
+                    .orElseThrow(() -> new PublisherServiceException("Издатель не найден", new RuntimeException()));
             existingPublisher.setName(publisherDTO.getName());
 
             publisherDAO.update(existingPublisher);

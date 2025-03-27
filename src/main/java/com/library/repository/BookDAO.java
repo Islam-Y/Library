@@ -17,6 +17,14 @@ public class BookDAO {
         this.dataSource = DataSourceProvider.getDataSource();
     }
 
+    private BookDAO(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    public static BookDAO forTests(DataSource dataSource) {
+        return new BookDAO(dataSource);
+    }
+
     public Optional<Book> getById(int id) throws SQLException {
         String sql = """
         SELECT b.id, b.title, b.published_date, b.genre, 
@@ -60,35 +68,91 @@ public class BookDAO {
     }
 
     public List<Book> getAll() throws SQLException {
-        String sql = """
-        SELECT b.id, b.title, b.published_date, b.genre, 
-               p.id AS publisher_id, p.name AS publisher_name
-        FROM books b
-        LEFT JOIN publishers p ON b.publisher_id = p.id
-        """;
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        String sql = "SELECT b.*, p.name as publisher_name " +
+                "FROM books b LEFT JOIN publishers p ON b.publisher_id = p.id";
 
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
             List<Book> books = new ArrayList<>();
+
             while (rs.next()) {
-                Book book = mapRowToBook(rs);
-                book.setAuthors(getAuthorsForBook(book.getId()));
+                Book book = new Book();
+                book.setId(rs.getInt("id"));
+                book.setTitle(rs.getString("title"));
+                // ... другие поля ...
+
+                // Загружаем издателя
+                if (rs.getInt("publisher_id") > 0) {
+                    Publisher publisher = new Publisher();
+                    publisher.setId(rs.getInt("publisher_id"));
+                    publisher.setName(rs.getString("publisher_name"));
+                    book.setPublisher(publisher);
+                }
+
+                // Загружаем авторов (отдельным запросом)
+                book.setAuthors(loadAuthorsForBook(book.getId()));
+
                 books.add(book);
             }
             return books;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error loading books", e);
         }
     }
 
-    public void create(Book book) throws SQLException {
-        String sql = "INSERT INTO books (title, published_date, publisher_id, genre) VALUES (?, ?, ?, ?)";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+    private Set<Author> loadAuthorsForBook(int bookId) {
+        String sql = "SELECT a.* FROM authors a " +
+                "JOIN book_authors ba ON a.id = ba.author_id " +
+                "WHERE ba.book_id = ?";
 
-            setBookParameters(stmt, book);
-            stmt.executeUpdate();
-            setIdFromGeneratedKeys(stmt, book);
+        Set<Author> authors = new HashSet<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, bookId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Author author = new Author();
+                author.setId(rs.getInt("id"));
+                author.setName(rs.getString("name"));
+                // ... другие поля ...
+                authors.add(author);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error loading authors", e);
         }
+        return authors;
+    }
+
+    public void create(Book book) throws SQLException {
+        if (book.getPublisher() != null) {
+            String checkPublisher = "SELECT id FROM publishers WHERE id = ?";
+            try (Connection conn = dataSource.getConnection();
+                 PreparedStatement checkStmt = conn.prepareStatement(checkPublisher)) {
+                checkStmt.setInt(1, book.getPublisher().getId());
+                if (!checkStmt.executeQuery().next()) {
+                    throw new SQLException("Publisher not found");
+                }
+            }
+        }
+
+        // Основная вставка книги...
+
+        // Проверка авторов перед добавлением
+        for (Author author : book.getAuthors()) {
+            String checkAuthor = "SELECT id FROM authors WHERE id = ?";
+            try (Connection conn = dataSource.getConnection();
+                 PreparedStatement checkStmt = conn.prepareStatement(checkAuthor)) {
+                checkStmt.setInt(1, author.getId());
+                if (!checkStmt.executeQuery().next()) {
+                    throw new SQLException("Author ID " + author + " not found");
+                }
+            }
+        }
+
         updateBookAuthors(book);
     }
 

@@ -1,6 +1,7 @@
 package com.library.servlet;
 
 import com.library.dto.BookDTO;
+import com.library.exception.BookServiceException;
 import com.library.mapper.BookMapper;
 import com.library.repository.BookDAO;
 import com.library.service.BookService;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
+
 
 @WebServlet("/books/*")
 public class BookServlet extends HttpServlet {
@@ -66,16 +69,36 @@ public class BookServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+//        try {
+//            BookDTO book = objectMapper.readValue(req.getReader(), BookDTO.class);
+//            // Убедитесь, что коллекции инициализированы
+//            if (book.getAuthorIds() == null) {
+//                book.setAuthorIds(new HashSet<>());
+//            }
+//            bookService.addBook(book);
+//            resp.setStatus(HttpServletResponse.SC_CREATED);
+//        } catch (Exception e) {
+//            handleError(resp, HttpServletResponse.SC_BAD_REQUEST, ERROR_INVALID_REQUEST + e.getMessage() + "\"}");
+//        }
+
         try {
             BookDTO book = objectMapper.readValue(req.getReader(), BookDTO.class);
-            // Убедитесь, что коллекции инициализированы
-            if (book.getAuthorIds() == null) {
-                book.setAuthorIds(new HashSet<>());
+
+            if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
+                handleError(resp, 400, "{\"error\": \"Title is required\"}");
+                return;
             }
+
             bookService.addBook(book);
-            resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.setStatus(201);
+        } catch (BookServiceException e) {
+            if (e.getCause() instanceof SQLException) {
+                handleError(resp, 404, "{\"error\": \"Author or Publisher not found\"}");
+            } else {
+                handleError(resp, 400, "{\"error\": \"" + e.getMessage() + "\"}");
+            }
         } catch (Exception e) {
-            handleError(resp, HttpServletResponse.SC_BAD_REQUEST, ERROR_INVALID_REQUEST + e.getMessage() + "\"}");
+            handleError(resp, 500, "{\"error\": \"Internal server error\"}");
         }
     }
 

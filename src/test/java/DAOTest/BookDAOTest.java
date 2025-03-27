@@ -34,62 +34,49 @@ class BookDAOTest {
 
     @Container
     private static PostgreSQLContainer<?> postgres =
-            new PostgreSQLContainer<>("postgres:15")
+            new PostgreSQLContainer<>("postgres:14")
                     .withDatabaseName("test")
                     .withUsername("test")
                     .withPassword("test")
                     .waitingFor(Wait.forLogMessage(".*database system is ready to accept connections.*\\n", 2))
-                    .waitingFor(Wait.forListeningPort())
                     .withStartupTimeout(Duration.ofSeconds(60));
 
+    private static DataSource dataSource;
     private BookDAO bookDAO;
     private AuthorDAO authorDAO;
     private PublisherDAO publisherDAO;
-    private DataSource dataSource;
 
     @BeforeAll
     static void setup() {
         postgres.start();
 
-        System.out.println("JDBC URL: " + postgres.getJdbcUrl());
-        System.out.println("Username: " + postgres.getUsername());
-        System.out.println("Password: " + postgres.getPassword());
-
-        Flyway flyway = Flyway.configure()
-                .cleanDisabled(false)
-                .dataSource(
-                        postgres.getJdbcUrl(),
-                        postgres.getUsername(),
-                        postgres.getPassword()
-                )
-                .schemas("public")
-                .locations("filesystem:src/main/resources/db/migration") // Абсолютный путь
-                .baselineOnMigrate(true)
-                .load();
-
-        flyway.clean();
-        flyway.migrate();
-
-        System.setProperty("testing", "true");
-        System.setProperty("DB_URL", postgres.getJdbcUrl());
-        System.setProperty("DB_USER", postgres.getUsername());
-        System.setProperty("DB_PASS", postgres.getPassword());
-    }
-
-    @BeforeEach
-    void init() {
+        // Настройка HikariCP
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(postgres.getJdbcUrl());
         config.setUsername(postgres.getUsername());
         config.setPassword(postgres.getPassword());
-        config.setDriverClassName("org.postgresql.Driver");
+        config.setDriverClassName(postgres.getDriverClassName());
         config.setMaximumPoolSize(2);
         config.setConnectionTimeout(3000);
 
-        this.dataSource = new HikariDataSource(config);
-        this.bookDAO = new BookDAO();
-        this.authorDAO = new AuthorDAO();
-        this.publisherDAO = new PublisherDAO();
+        dataSource = new HikariDataSource(config);
+
+        // Настройка Flyway без clean()
+        Flyway flyway = Flyway.configure()
+                .dataSource(dataSource)
+                .schemas("public")
+                .locations("filesystem:src/main/resources/db/migration")
+                .baselineOnMigrate(true)
+                .load();
+
+        flyway.migrate();
+    }
+
+    @BeforeEach
+    void init() {
+        this.bookDAO = BookDAO.forTests(dataSource);
+        this.authorDAO = AuthorDAO.forTests(dataSource);
+        this.publisherDAO = PublisherDAO.forTests(dataSource);
     }
 
     @AfterEach

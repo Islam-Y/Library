@@ -78,12 +78,14 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return id == author.id && Objects.equals(name, author.name) && Objects.equals(surname, author.surname) && Objects.equals(country, author.country) && Objects.equals(books, author.books);
-    }
+        return id == author.id &&
+                Objects.equals(name, author.name) &&
+                Objects.equals(surname, author.surname) &&
+                Objects.equals(country, author.country);    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, country, books);
+        return Objects.hash(id, name, surname, country);
     }
 
     @Override
