@@ -1,8 +1,6 @@
 package com.library.servlet;
 
 import com.library.dto.PublisherDTO;
-import com.library.mapper.PublisherMapper;
-import com.library.repository.PublisherDAO;
 import com.library.service.Fabric;
 import com.library.service.PublisherService;
 import com.fasterxml.jackson.databind.ObjectMapper;

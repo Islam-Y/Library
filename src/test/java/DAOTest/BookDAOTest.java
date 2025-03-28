@@ -91,10 +91,15 @@ class BookDAOTest {
 
     @Test
     void shouldCreateAndRetrieveBook() throws SQLException {
+        Publisher publisher = new Publisher();
+        publisher.setName("Test Publisher");
+        publisherDAO.create(publisher);
+
         Book book = new Book();
         book.setTitle("1984");
         book.setPublishedDate(LocalDate.now().toString());
         book.setGenre("Антиутопия");
+        book.setPublisher(publisher);
 
         bookDAO.create(book);
 
@@ -104,12 +109,18 @@ class BookDAOTest {
         Book retrievedBook = found.get();
         assertThat(retrievedBook.getTitle()).isEqualTo("1984");
         assertThat(retrievedBook.getGenre()).isEqualTo("Антиутопия");
+        assertThat(retrievedBook.getPublisher()).isNotNull();
     }
 
     @Test
     void shouldUpdateBook() throws SQLException {
+        Publisher publisher = new Publisher();
+        publisher.setName("Test Publisher");
+        publisherDAO.create(publisher);
+
         Book book = new Book();
         book.setTitle("Старик и море");
+        book.setPublisher(publisher);
         bookDAO.create(book);
 
         book.setTitle("Старик и море (обновлённое)");
@@ -123,8 +134,13 @@ class BookDAOTest {
 
     @Test
     void shouldDeleteBook() throws SQLException {
+        Publisher publisher = new Publisher();
+        publisher.setName("Test Publisher");
+        publisherDAO.create(publisher);
+
         Book book = new Book();
         book.setTitle("Мастер и Маргарита");
+        book.setPublisher(publisher);
         bookDAO.create(book);
 
         bookDAO.delete(book.getId());
@@ -134,6 +150,10 @@ class BookDAOTest {
 
     @Test
     void shouldHandleAuthorRelations() throws SQLException {
+        Publisher publisher = new Publisher();
+        publisher.setName("Test Publisher");
+        publisherDAO.create(publisher);
+
         Author author = new Author();
         author.setName("Джордж");
         author.setSurname("Оруэлл");
@@ -141,6 +161,7 @@ class BookDAOTest {
 
         Book book = new Book();
         book.setTitle("1984");
+        book.setPublisher(publisher);
         book.setAuthors(new HashSet<>(Collections.singleton(author)));
         bookDAO.create(book);
 

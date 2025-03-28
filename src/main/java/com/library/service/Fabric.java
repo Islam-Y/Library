@@ -1,7 +1,5 @@
 package com.library.service;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 public class Fabric {
     private static AuthorService authorService;
     private static BookService bookService;

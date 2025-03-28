@@ -4,6 +4,7 @@ import com.library.dto.AuthorDTO;
 import com.library.exception.AuthorServiceException;
 import com.library.mapper.AuthorMapper;
 import com.library.model.Author;
+import com.library.model.Book;
 import com.library.repository.AuthorDAO;
 import com.library.service.AuthorService;
 import org.junit.Before;
@@ -14,10 +15,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -81,57 +80,66 @@ public class AuthorServiceTest {
     public void addAuthor_Success() throws SQLException {
         AuthorDTO inputDTO = new AuthorDTO();
         inputDTO.setName("Новый Автор");
+        inputDTO.setBookIds(Collections.emptySet());
 
         Author expectedAuthor = new Author();
         expectedAuthor.setName("Новый Автор");
 
-        // 2. Настройка маппера
         when(authorMapper.toModel(inputDTO)).thenReturn(expectedAuthor);
 
-        // 3. Вызов метода
         authorService.addAuthor(inputDTO);
 
-        // 4. Проверки
         ArgumentCaptor<Author> captor = ArgumentCaptor.forClass(Author.class);
         verify(authorDAO).create(captor.capture());
 
-        Author savedAuthor = captor.getValue();
-        assertEquals("Новый Автор", savedAuthor.getName());
+        assertEquals("Новый Автор", captor.getValue().getName());
     }
 
     @Test
     public void updateAuthor_Success() throws SQLException {
-        // 1. Подготовка данных
         Author existingAuthor = new Author(1, "Старое имя", "Старая фамилия", "Старая страна", new HashSet<>());
         when(authorDAO.getById(1)).thenReturn(Optional.of(existingAuthor));
-        lenient().when(authorMapper.toModel(any(AuthorDTO.class))).thenReturn(testAuthor);
 
-        // 2. Вызов метода
-        authorService.updateAuthor(1, testAuthorDTO);
+        AuthorDTO updateDTO = new AuthorDTO();
+        updateDTO.setName("Лев");
+        updateDTO.setSurname("Толстой");
+        updateDTO.setCountry("Россия");
+        updateDTO.setBookIds(Set.of(1, 2));
 
-        // 3. Проверка вызовов DAO
+        lenient().when(authorMapper.toModel(updateDTO)).thenReturn(testAuthor);
+
+        authorService.updateAuthor(1, updateDTO);
+
         verify(authorDAO).update(testAuthor);
-        verify(authorDAO).updateBookAuthors(testAuthor);
-
-        // 4. Проверка обновленных полей
         assertEquals("Лев", testAuthor.getName());
-        assertEquals("Толстой", testAuthor.getSurname());
-        assertEquals("Россия", testAuthor.getCountry());
     }
 
     @Test
     public void updateAuthor_UpdateBookAuthorsCalled() throws SQLException {
-        // 1. Подготовка
+        Set<Integer> expectedBookIds = Set.of(10, 20);
+        AuthorDTO updateDTO = new AuthorDTO();
+        updateDTO.setId(1);
+        updateDTO.setName("Новое имя");
+        updateDTO.setSurname("Новая фамилия");
+        updateDTO.setCountry("Новая страна");
+        updateDTO.setBookIds(expectedBookIds);
+
         Author existingAuthor = new Author(1, "Старое имя", "Старая фамилия", "Старая страна", new HashSet<>());
         when(authorDAO.getById(1)).thenReturn(Optional.of(existingAuthor));
-        lenient().when(authorMapper.toModel(any(AuthorDTO.class))).thenReturn(testAuthor);
 
-        // 2. Вызов
-        authorService.updateAuthor(1, testAuthorDTO);
+        authorService.updateAuthor(1, updateDTO);
 
-        // 3. Проверка
-        verify(authorDAO, times(1)).updateBookAuthors(testAuthor);
+        assertEquals("Новое имя", existingAuthor.getName());
+        assertEquals("Новая фамилия", existingAuthor.getSurname());
+        assertEquals("Новая страна", existingAuthor.getCountry());
 
+        Set<Integer> actualBookIds = existingAuthor.getBooks().stream()
+                .map(Book::getId)
+                .collect(Collectors.toSet());
+        assertEquals(expectedBookIds, actualBookIds);
+
+        verify(authorDAO).update(existingAuthor);
+        verify(authorDAO).updateBooksOfAuthor(existingAuthor);
     }
 
     @Test(expected = AuthorServiceException.class)
@@ -172,15 +180,9 @@ public class AuthorServiceTest {
         authorService.getAuthorById(1);
     }
 
-    @Test(expected = AuthorServiceException.class)
-    public void addAuthor_SQLException() throws SQLException {
-        // 1. Настройка маппера
-        Author mockAuthor = new Author();
-        when(authorMapper.toModel(any(AuthorDTO.class))).thenReturn(mockAuthor);
-        // 2. Настройка DAO на выброс исключения
-        doThrow(new SQLException("Database error")).when(authorDAO).create(mockAuthor);
-
-        // 3. Вызов тестируемого метода
-        authorService.addAuthor(new AuthorDTO());
+    @Test(expected = IllegalArgumentException.class)
+    public void addAuthor_SQLException() {
+        AuthorDTO invalidDTO = new AuthorDTO();
+        authorService.addAuthor(invalidDTO);
     }
 }

@@ -19,7 +19,7 @@ public interface AuthorMapper {
     @Mapping(target = "bookIds", source = "books", qualifiedByName = "mapBooksToBookIds")
     AuthorDTO toDTO(Author author);
 
-    @Mapping(target = "books", ignore = true)
+    @Mapping(target = "books", source = "bookIds", qualifiedByName = "mapBookIdsToBooks")
     Author toModel(AuthorDTO authorDTO);
 
     @Named("mapBooksToBookIds")
@@ -29,6 +29,20 @@ public interface AuthorMapper {
         }
         return books.stream()
                 .map(Book::getId)
+                .collect(Collectors.toSet());
+    }
+
+    @Named("mapBookIdsToBooks")
+    static Set<Book> mapBookIdsToBooks(Set<Integer> bookIds) {
+        if (bookIds == null) {
+            return new HashSet<>();
+        }
+        return bookIds.stream()
+                .map(id -> {
+                    Book book = new Book();
+                    book.setId(id);
+                    return book;
+                })
                 .collect(Collectors.toSet());
     }
 }

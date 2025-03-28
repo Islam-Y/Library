@@ -4,6 +4,8 @@ import com.library.config.DataSourceProvider;
 import com.library.model.Author;
 import com.library.model.Book;
 import com.library.model.Publisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.sql.Date;
@@ -12,6 +14,8 @@ import javax.sql.DataSource;
 
 public class BookDAO {
     private final DataSource dataSource;
+
+    private static final Logger logger = LoggerFactory.getLogger(BookDAO.class);
 
     public BookDAO() {
         this.dataSource = DataSourceProvider.getDataSource();
@@ -39,7 +43,7 @@ public class BookDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Book book = mapRowToBook(rs);
-                    book.setAuthors(getAuthorsForBook(id)); // Загрузка авторов
+                    book.setAuthors(getAuthorsForBook(id));
                     return Optional.of(book);
                 }
                 return Optional.empty();
@@ -68,92 +72,41 @@ public class BookDAO {
     }
 
     public List<Book> getAll() throws SQLException {
-        String sql = "SELECT b.*, p.name as publisher_name " +
-                "FROM books b LEFT JOIN publishers p ON b.publisher_id = p.id";
-
+        String sql = """
+        SELECT b.id, b.title, b.published_date, b.genre, 
+               p.id AS publisher_id, p.name AS publisher_name
+        FROM books b
+        LEFT JOIN publishers p ON b.publisher_id = p.id
+        """;
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-            ResultSet rs = stmt.executeQuery();
             List<Book> books = new ArrayList<>();
-
             while (rs.next()) {
-                Book book = new Book();
-                book.setId(rs.getInt("id"));
-                book.setTitle(rs.getString("title"));
-                // ... другие поля ...
-
-                // Загружаем издателя
-                if (rs.getInt("publisher_id") > 0) {
-                    Publisher publisher = new Publisher();
-                    publisher.setId(rs.getInt("publisher_id"));
-                    publisher.setName(rs.getString("publisher_name"));
-                    book.setPublisher(publisher);
-                }
-
-                // Загружаем авторов (отдельным запросом)
-                book.setAuthors(loadAuthorsForBook(book.getId()));
-
+                Book book = mapRowToBook(rs);
+                book.setAuthors(getAuthorsForBook(book.getId()));
                 books.add(book);
             }
             return books;
-        } catch (SQLException e) {
-            throw new RuntimeException("Error loading books", e);
         }
-    }
-
-    private Set<Author> loadAuthorsForBook(int bookId) {
-        String sql = "SELECT a.* FROM authors a " +
-                "JOIN book_authors ba ON a.id = ba.author_id " +
-                "WHERE ba.book_id = ?";
-
-        Set<Author> authors = new HashSet<>();
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, bookId);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Author author = new Author();
-                author.setId(rs.getInt("id"));
-                author.setName(rs.getString("name"));
-                // ... другие поля ...
-                authors.add(author);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error loading authors", e);
-        }
-        return authors;
     }
 
     public void create(Book book) throws SQLException {
-        if (book.getPublisher() != null) {
-            String checkPublisher = "SELECT id FROM publishers WHERE id = ?";
-            try (Connection conn = dataSource.getConnection();
-                 PreparedStatement checkStmt = conn.prepareStatement(checkPublisher)) {
-                checkStmt.setInt(1, book.getPublisher().getId());
-                if (!checkStmt.executeQuery().next()) {
-                    throw new SQLException("Publisher not found");
-                }
-            }
+        logger.info("Inserting book into DB: title={}, publisherId={}, authors={}",
+                book.getTitle(), book.getPublisher().getId(),
+                book.getAuthors().stream().map(Author::getId).toList());
+
+        String sql = "INSERT INTO books (title, published_date, publisher_id, genre) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            setBookParameters(stmt, book);
+            stmt.executeUpdate();
+            setIdFromGeneratedKeys(stmt, book);
         }
-
-        // Основная вставка книги...
-
-        // Проверка авторов перед добавлением
-        for (Author author : book.getAuthors()) {
-            String checkAuthor = "SELECT id FROM authors WHERE id = ?";
-            try (Connection conn = dataSource.getConnection();
-                 PreparedStatement checkStmt = conn.prepareStatement(checkAuthor)) {
-                checkStmt.setInt(1, author.getId());
-                if (!checkStmt.executeQuery().next()) {
-                    throw new SQLException("Author ID " + author + " not found");
-                }
-            }
-        }
-
-        updateBookAuthors(book);
+        updateAuthorsOnBook(book);
     }
 
     public void update(Book book) throws SQLException {
@@ -165,7 +118,7 @@ public class BookDAO {
             stmt.setInt(5, book.getId());
             stmt.executeUpdate();
         }
-        updateBookAuthors(book);
+        updateAuthorsOnBook(book);
     }
 
     public void delete(int id) throws SQLException {
@@ -199,12 +152,18 @@ public class BookDAO {
         }
     }
 
-    private void updateBookAuthors(Book book) throws SQLException {
+    private void updateAuthorsOnBook(Book book) throws SQLException {
         if (book.getId() < 0) return;
 
+        logger.info("Updating authors for book ID {}. Removing old authors...", book.getId());
         removeAllAuthorsFromBook(book.getId());
+
         if (book.getAuthors() != null && !book.getAuthors().isEmpty()) {
+            logger.info("Adding authors {} to book ID {}",
+                    book.getAuthors().stream().map(Author::getId).toList(), book.getId());
             addAuthorsToBook(book.getId(), book.getAuthors());
+        } else {
+            logger.info("No authors to add for book ID {}", book.getId());
         }
     }
 
@@ -245,11 +204,12 @@ public class BookDAO {
             stmt.setInt(1, bookId);
 
             for (Author author : authors) {
-
                 stmt.setInt(2, author.getId());
                 stmt.addBatch();
+                logger.info("Linking book ID {} with author ID {}", bookId, author.getId());
             }
             stmt.executeBatch();
+            logger.info("Authors successfully linked to book ID {}", bookId);
         }
     }
 

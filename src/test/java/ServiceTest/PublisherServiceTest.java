@@ -126,11 +126,13 @@ public class PublisherServiceTest {
 
         PublisherDTO updateDTO = new PublisherDTO();
         updateDTO.setName("Updated Publisher");
+        updateDTO.setBookIds(List.of(1, 2));
 
         publisherService.updatePublisher(1, updateDTO);
 
         verify(publisherDAO).update(existingPublisher);
         assertEquals("Updated Publisher", existingPublisher.getName());
+        assertEquals(2, existingPublisher.getBooks().size());
     }
 
     @Test(expected = PublisherServiceException.class)
@@ -150,6 +152,7 @@ public class PublisherServiceTest {
 
         PublisherDTO updateDTO = new PublisherDTO();
         updateDTO.setName("Updated Publisher");
+        updateDTO.setBookIds(Collections.emptyList());
 
         publisherService.updatePublisher(1, updateDTO);
     }

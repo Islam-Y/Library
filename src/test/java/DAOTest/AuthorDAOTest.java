@@ -5,13 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import javax.sql.DataSource;
 
+import com.library.model.Publisher;
+import com.library.repository.PublisherDAO;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
@@ -149,22 +148,28 @@ class AuthorDAOTest {
 
     @Test
     void shouldAddBooksToAuthor() throws SQLException {
+        Publisher publisher = new Publisher();
+        publisher.setName("Эксмо");
+        PublisherDAO publisherDAO = PublisherDAO.forTests(dataSource);
+        publisherDAO.create(publisher);
+
         Author author = new Author();
         author.setName("Федор");
         author.setSurname("Достоевский");
         authorDAO.create(author);
 
-        // Создаем книги
         Book book1 = new Book();
         book1.setTitle("Преступление и наказание");
+        book1.setPublisher(publisher);
         bookDAO.create(book1);
 
         Book book2 = new Book();
         book2.setTitle("Идиот");
+        book2.setPublisher(publisher);
         bookDAO.create(book2);
 
         author.setBooks(new HashSet<>(Arrays.asList(book1, book2)));
-        authorDAO.update(author); // Важно вызвать update для сохранения связей
+        authorDAO.update(author);
 
         Author retrieved = authorDAO.getById(author.getId()).orElseThrow();
         assertThat(retrieved.getBooks())
@@ -175,22 +180,28 @@ class AuthorDAOTest {
 
     @Test
     void shouldRemoveBooksFromAuthor() throws SQLException {
-        // Создаем автора
+        Publisher publisher = new Publisher();
+        publisher.setName("АСТ");
+        PublisherDAO publisherDAO = PublisherDAO.forTests(dataSource);
+        publisherDAO.create(publisher);
+
         Author author = new Author();
         author.setName("Иван");
         author.setSurname("Тургенев");
         author.setCountry("Россия");
         authorDAO.create(author);
 
-        // Создаем книгу
         Book book = new Book();
         book.setTitle("Отцы и дети");
+        book.setPublisher(publisher);
         bookDAO.create(book);
 
-        // Добавляем книгу к автору
         Set<Book> books = new HashSet<>();
         books.add(book);
         author.setBooks(books);
+        authorDAO.update(author);
+
+        author.setBooks(new HashSet<>(Collections.singleton(book)));
         authorDAO.update(author);
 
         // Удаляем книгу у автора
@@ -199,11 +210,9 @@ class AuthorDAOTest {
 
         // Получаем автора
         Optional<Author> found = authorDAO.getById(author.getId());
-        assertThat(found).isPresent();
 
-        // Проверяем, что у автора нет книг
-        Author retrievedAuthor = found.get();
-        assertThat(retrievedAuthor.getBooks()).isEmpty();
+        assertThat(found).isPresent();
+        assertThat(found.get().getBooks()).isEmpty();
     }
 
     @Test

@@ -1,8 +1,7 @@
 package com.library.servlet;
 
 import com.library.dto.AuthorDTO;
-import com.library.repository.AuthorDAO;
-import com.library.mapper.AuthorMapper;
+import com.library.exception.BookServiceException;
 import com.library.service.AuthorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.service.Fabric;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/authors/*")
@@ -22,7 +22,6 @@ public class AuthorServlet extends HttpServlet {
     private static final String ERROR_SERVER_PREFIX = "{\"error\":\"Server error: ";
     private static final String ERROR_SERVER_SUFFIX = "\"}";
     private static final String ERROR_ID_MISMATCH = "{\"error\":\"ID in path and body mismatch\"}";
-    private static final String ERROR_INVALID_REQUEST = "{\"error\":\"Invalid request: ";
 
     private AuthorService authorService;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -70,10 +69,21 @@ public class AuthorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
             AuthorDTO author = objectMapper.readValue(req.getReader(), AuthorDTO.class);
+
+            if (author.getName() == null || author.getName().trim().isEmpty()) {
+                handleError(resp, 400, "{\"error\": \"Name is required\"}");
+                return;
+            }
             authorService.addAuthor(author);
             resp.setStatus(HttpServletResponse.SC_CREATED);
+        } catch (BookServiceException e) {
+            if (e.getCause() instanceof SQLException) {
+                handleError(resp, 404, "{\"error\": \"Book not found\"}");
+            } else {
+                handleError(resp, 400, "{\"error\": \"" + e.getMessage() + "\"}");
+            }
         } catch (Exception e) {
-            handleError(resp, HttpServletResponse.SC_BAD_REQUEST, ERROR_INVALID_REQUEST + e.getMessage() + "\"}");
+            handleError(resp, 500, "{\"error\": \"Internal server error\"}");
         }
     }
 

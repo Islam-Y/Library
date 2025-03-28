@@ -20,7 +20,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.library.model.Book;
 import com.library.model.Publisher;
-import com.library.repository.AuthorDAO;
 import com.library.repository.BookDAO;
 import com.library.repository.PublisherDAO;
 

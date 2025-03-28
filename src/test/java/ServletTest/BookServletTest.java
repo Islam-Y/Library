@@ -8,7 +8,6 @@ import com.library.dto.BookDTO;
 import com.library.service.BookService;
 import com.library.servlet.BookServlet;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -169,14 +168,23 @@ class BookServletTest {
 
     @Test
     void doPost_InvalidBody_ReturnsBadRequest() throws Exception {
-        // Например, невалидный JSON
-        when(request.getReader()).thenReturn(new BufferedReader(new StringReader("invalid-json")));
+        // Arrange
+        String invalidJson = "{\"title\": \"\"}";
+        BufferedReader reader = new BufferedReader(new StringReader(invalidJson));
 
+        stringWriter = new StringWriter();
+        printWriter = new PrintWriter(stringWriter);
+
+        when(request.getReader()).thenReturn(reader);
+        when(response.getWriter()).thenReturn(printWriter);
+
+        // Act
         invokeDoPost(request, response);
+        printWriter.flush(); // Обеспечиваем запись данных
 
-        verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        printWriter.flush();
-        assertThat(stringWriter.toString()).contains("Invalid request:");
+        // Assert
+        verify(response).setStatus(400);
+        assertThat(stringWriter.toString()).hasToString("{\"error\": \"Title is required\"}");
     }
 
     @Test

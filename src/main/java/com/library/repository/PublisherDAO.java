@@ -80,6 +80,19 @@ public class PublisherDAO {
         }
     }
 
+    public void updatePublisherBooks(int publisherId, List<Integer> bookIds) throws SQLException {
+        String sql = "UPDATE books SET publisher_id = ? WHERE id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, publisherId);
+            for (Integer bookId : bookIds) {
+                stmt.setInt(2, bookId);
+                stmt.addBatch();
+            }
+            stmt.executeBatch();
+        }
+    }
+
     public void delete(int id) throws SQLException {
         // Обнуляем publisher_id у связанных книг
         String updateSql = "UPDATE books SET publisher_id = NULL WHERE publisher_id = ?";

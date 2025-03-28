@@ -3,7 +3,9 @@ package ServiceTest;
 import com.library.dto.BookDTO;
 import com.library.exception.BookServiceException;
 import com.library.mapper.BookMapper;
+import com.library.model.Author;
 import com.library.model.Book;
+import com.library.model.Publisher;
 import com.library.repository.BookDAO;
 import com.library.service.BookService;
 import org.junit.Before;
@@ -14,10 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -39,7 +38,6 @@ public class BookServiceTest {
 
     @Before
     public void setUp() {
-        // Предполагается, что добавлен метод forTest в BookService для тестирования
         bookService = BookService.forTest(bookDAO, bookMapper);
 
         testBook = new Book();
@@ -91,31 +89,51 @@ public class BookServiceTest {
     public void addBook_Success() throws SQLException {
         BookDTO inputDTO = new BookDTO();
         inputDTO.setTitle("New Book");
+        inputDTO.setPublisherId(1);
+        inputDTO.setAuthorIds(Set.of(1, 2));
+
+        Author author1 = createTestAuthor(1);
+        Author author2 = createTestAuthor(2);
+        Set<Author> authors = new HashSet<>(Arrays.asList(author1, author2));
 
         Book expectedBook = new Book();
         expectedBook.setTitle("New Book");
+        expectedBook.setPublisher(createTestPublisher(1));
+        expectedBook.setAuthors(authors);
 
         when(bookMapper.toModel(inputDTO)).thenReturn(expectedBook);
 
+        doAnswer(invocation -> {
+            Book book = invocation.getArgument(0);
+            book.setId(1);
+            book.setAuthors(authors);
+            return null;
+        }).when(bookDAO).create(any(Book.class));
+
+        // Act
         bookService.addBook(inputDTO);
 
+        // Assert
         ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
         verify(bookDAO).create(captor.capture());
 
         Book savedBook = captor.getValue();
         assertEquals("New Book", savedBook.getTitle());
+        assertEquals(2, savedBook.getAuthors().size()); // Проверка количества авторов
     }
 
     @Test(expected = BookServiceException.class)
     public void addBook_SQLException() throws SQLException {
         BookDTO inputDTO = new BookDTO();
         inputDTO.setTitle("New Book");
+        inputDTO.setPublisherId(1);
+        inputDTO.setAuthorIds(Collections.emptySet());
 
         Book expectedBook = new Book();
         expectedBook.setTitle("New Book");
 
         when(bookMapper.toModel(inputDTO)).thenReturn(expectedBook);
-        doThrow(new SQLException("DB error")).when(bookDAO).create(expectedBook);
+        doThrow(new SQLException("DB error")).when(bookDAO).create(any(Book.class));
 
         bookService.addBook(inputDTO);
     }
@@ -125,24 +143,32 @@ public class BookServiceTest {
         Book existingBook = new Book();
         existingBook.setId(1);
         existingBook.setTitle("Old Title");
-        existingBook.setPublishedDate(new String());
+        existingBook.setPublisher(new Publisher());
 
         when(bookDAO.getById(1)).thenReturn(Optional.of(existingBook));
 
         BookDTO updateDTO = new BookDTO();
         updateDTO.setTitle("Updated Title");
-        updateDTO.setPublishedDate(new String());
+        updateDTO.setPublisherId(2); // Добавлено
+        updateDTO.setAuthorIds(Set.of(3)); // Добавлено
 
         bookService.updateBook(1, updateDTO);
 
         verify(bookDAO).update(existingBook);
         assertEquals("Updated Title", existingBook.getTitle());
+        assertEquals(2, existingBook.getPublisher().getId()); // Проверка publisher
     }
 
     @Test(expected = BookServiceException.class)
     public void updateBook_NotFound() throws SQLException {
+        BookDTO updateDTO = new BookDTO();
+        updateDTO.setTitle("Updated Title");
+        updateDTO.setPublisherId(1); // Добавляем publisherId
+        updateDTO.setAuthorIds(Set.of(1));
+
         when(bookDAO.getById(1)).thenReturn(Optional.empty());
-        bookService.updateBook(1, new BookDTO());
+
+        bookService.updateBook(1, updateDTO);
     }
 
     @Test(expected = BookServiceException.class)
@@ -150,14 +176,14 @@ public class BookServiceTest {
         Book existingBook = new Book();
         existingBook.setId(1);
         existingBook.setTitle("Old Title");
-        existingBook.setPublishedDate(new String());
+        existingBook.setPublisher(new Publisher()); // Добавлено
 
         when(bookDAO.getById(1)).thenReturn(Optional.of(existingBook));
-        doThrow(new SQLException()).when(bookDAO).update(existingBook);
+        doThrow(new SQLException()).when(bookDAO).update(any(Book.class));
 
         BookDTO updateDTO = new BookDTO();
         updateDTO.setTitle("Updated Title");
-        updateDTO.setPublishedDate(new String());
+        updateDTO.setPublisherId(2);
 
         bookService.updateBook(1, updateDTO);
     }
@@ -172,6 +198,42 @@ public class BookServiceTest {
     public void deleteBook_SQLException() throws SQLException {
         doThrow(new SQLException()).when(bookDAO).delete(1);
         bookService.deleteBook(1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addBook_WithoutTitle_ThrowsException() {
+        BookDTO invalidDTO = new BookDTO();
+        invalidDTO.setPublisherId(1);
+        invalidDTO.setAuthorIds(Set.of(1));
+
+        bookService.addBook(invalidDTO);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void updateBook_WithoutPublisher_ThrowsException() {
+        BookDTO invalidDTO = new BookDTO();
+        invalidDTO.setTitle("Title");
+        invalidDTO.setAuthorIds(Collections.emptySet());
+
+        bookService.updateBook(1, invalidDTO);
+    }
+
+    private Author createTestAuthor(int id) {
+        Author author = new Author();
+        author.setId(id);
+        author.setName("Test Name");
+        author.setSurname("Test Surname");
+        author.setCountry("Test Country");
+        author.setBooks(Set.of(testBook));
+        return author;
+    }
+
+    private Publisher createTestPublisher(int id) {
+        Publisher publisher = new Publisher();
+        publisher.setId(id);
+        publisher.setName("Test Publisher");
+        publisher.setBooks(List.of(testBook));
+        return publisher;
     }
 }
 
