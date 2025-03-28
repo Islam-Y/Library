@@ -14,11 +14,9 @@
         </encoder>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
-    </root>
-    <root level="debug">
-        <appender-ref ref="FILE" />
+    <!-- Логирование на уровне DEBUG везде -->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
     </root>
 </configuration>

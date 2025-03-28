@@ -6,6 +6,7 @@ import com.library.mapper.BookMapper;
 import com.library.model.Author;
 import com.library.model.Book;
 import com.library.model.Publisher;
+import com.library.repository.AuthorDAO;
 import com.library.repository.BookDAO;
 import com.library.service.BookService;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.MockedConstruction;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.SQLException;
@@ -94,32 +96,30 @@ public class BookServiceTest {
 
         Author author1 = createTestAuthor(1);
         Author author2 = createTestAuthor(2);
-        Set<Author> authors = new HashSet<>(Arrays.asList(author1, author2));
+        Publisher publisher = createTestPublisher(1);
 
-        Book expectedBook = new Book();
-        expectedBook.setTitle("New Book");
-        expectedBook.setPublisher(createTestPublisher(1));
-        expectedBook.setAuthors(authors);
+        try (MockedConstruction<AuthorDAO> mockedAuthorDAO = mockConstruction(
+                AuthorDAO.class,
+                (mock, context) -> {
+                    when(mock.getById(1)).thenReturn(Optional.of(author1));
+                    when(mock.getById(2)).thenReturn(Optional.of(author2));
+                }
+        )) {
+            Book expectedBook = new Book();
+            expectedBook.setTitle("New Book");
+            expectedBook.setPublisher(publisher);
 
-        when(bookMapper.toModel(inputDTO)).thenReturn(expectedBook);
+            when(bookMapper.toModel(any(BookDTO.class))).thenReturn(expectedBook);
 
-        doAnswer(invocation -> {
-            Book book = invocation.getArgument(0);
-            book.setId(1);
-            book.setAuthors(authors);
-            return null;
-        }).when(bookDAO).create(any(Book.class));
+            bookService.addBook(inputDTO);
 
-        // Act
-        bookService.addBook(inputDTO);
+            ArgumentCaptor<Book> bookCaptor = ArgumentCaptor.forClass(Book.class);
+            verify(bookDAO).create(bookCaptor.capture());
 
-        // Assert
-        ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
-        verify(bookDAO).create(captor.capture());
-
-        Book savedBook = captor.getValue();
-        assertEquals("New Book", savedBook.getTitle());
-        assertEquals(2, savedBook.getAuthors().size()); // Проверка количества авторов
+            Book savedBook = bookCaptor.getValue();
+            assertEquals("New Book", savedBook.getTitle());
+            assertEquals(2, savedBook.getAuthors().size());
+        }
     }
 
     @Test(expected = BookServiceException.class)
